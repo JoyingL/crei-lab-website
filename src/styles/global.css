@@ -545,3 +545,11 @@ p {
     padding-inline: 0.7rem;
   }
 }
+
+/* Official white university and departmental marks, without distortion. */
+.inst-links { align-items: center; gap: 0.75rem 1.5rem; min-width: 0; max-width: 100%; }
+.inst-links a { display: inline-flex; align-items: center; min-height: 44px; max-width: 100%; }
+.inst-links img { display: block; height: auto; }
+.institution-logo { width: 5.75rem; }
+.department-logo { width: 18.25rem; }
+.inst-inner { padding-block: 0.75rem; }

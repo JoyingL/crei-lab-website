@@ -46,8 +46,8 @@ const pageTitle = title.includes(LAB_SHORT) ? title : `${title} · ${LAB_SHORT}`
     <div class="inst-bar">
       <div class="wrap inst-inner">
         <nav class="inst-links" aria-label="Institution">
-          <a href={TUFTS_URL}>Tufts</a>
-          <a href={CEE_URL}>Tufts CEE</a>
+          <a class="institution-logo" href={TUFTS_URL}><img src={sitePath('/brand/tufts-white.png')} alt="Tufts University" width="394" height="169" /></a>
+          <a class="department-logo" href={CEE_URL}><img src={sitePath('/brand/tufts-cee-white.png')} alt="Tufts Civil and Environmental Engineering" width="1459" height="139" /></a>
         </nav>
         <form class="inst-search" action={sitePath('/search')} method="get" role="search">
           <label class="visually-hidden" for="q">Search this site</label>

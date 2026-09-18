@@ -31,3 +31,5 @@ Internal links and public assets use `src/lib/paths.ts` for the
 `/crei-lab-website` deployment base.
 
 The decorative world map uses public-domain Natural Earth 1:110m land geometry (https://www.naturalearthdata.com/). It illustrates geography only, not project coverage.
+
+Institutional marks are supplied Tufts University and Civil and Environmental Engineering white logo assets. Only transparent outer canvas was trimmed; artwork and proportions are preserved.
