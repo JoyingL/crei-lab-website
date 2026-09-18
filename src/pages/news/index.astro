@@ -10,12 +10,11 @@ const items = (await getCollection('news')).sort((a, b) => b.data.date.valueOf()
     <div class="wrap">
       <h1>News</h1>
       <p class="lede">
-        Public announcements, research coverage, and commentary from the lab and its partners.
-        Items link to the original publisher so dates and context remain auditable.
+        Research news, media coverage, and commentary from Tufts and other outlets.
       </p>
       {
         items.length === 0 ? (
-          <p class="empty">News items are being collected from Tufts and partner outlets.</p>
+          <p class="empty">News will be added here.</p>
         ) : (
           items.map((item) => (
             <article class="pub-item">
@@ -25,7 +24,7 @@ const items = (await getCollection('news')).sort((a, b) => b.data.date.valueOf()
                 {item.data.source ? ` · ${item.data.source}` : ''}
               </p>
               <p>{item.data.excerpt}</p>
-              {item.data.url && <p><a href={item.data.url}>Read</a></p>}
+              {item.data.url && <p><a href={item.data.url}>Read the article</a></p>}
             </article>
           ))
         )

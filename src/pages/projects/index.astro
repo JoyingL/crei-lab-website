@@ -13,8 +13,8 @@ const projects = (await getCollection('projects')).sort(
     <div class="wrap">
       <h1>Projects</h1>
       <p class="lede">
-        Current and completed work on climate-loaded infrastructure, geohazards, and environmental
-        justice. Each entry links to a public project or award record when one is available.
+        We study how floods, wildfires, and other climate hazards affect infrastructure and
+        communities. Projects include levee monitoring, coastal erosion, and access to wildfire shelters.
       </p>
       <div class="project-summary" aria-label="Project summary">
         <p><strong>{projects.filter((p) => p.data.status === 'current').length}</strong> current projects</p>

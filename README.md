@@ -29,3 +29,5 @@ Run `npm run check` and `npm run build` before publishing an updated `dist/` to 
 
 Internal links and public assets use `src/lib/paths.ts` for the
 `/crei-lab-website` deployment base.
+
+The decorative world map uses public-domain Natural Earth 1:110m land geometry (https://www.naturalearthdata.com/). It illustrates geography only, not project coverage.

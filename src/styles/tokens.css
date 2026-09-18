@@ -1,7 +1,4 @@
-/* Brand type: FF Meta Serif (display) + Proxima Nova (body) via Adobe Fonts,
-   to be swapped in when the lab has a licensed kit. Until then, Source Serif 4
-   and Source Sans 3 are the shippable open substitutes. Do not use Quicksand,
-   Nunito, Poppins, or Inter as the brand face. */
+/* Source Serif 4 headings with a neutral Arial body. */
 
 :root {
   --color-jumbo: #002e6d;
@@ -27,7 +24,7 @@
   --color-focus: var(--color-tufts-blue);
 
   --font-display: "Source Serif 4", Georgia, serif;
-  --font-body: "Source Sans 3", Arial, sans-serif;
+  --font-body: Arial, Helvetica, sans-serif;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;

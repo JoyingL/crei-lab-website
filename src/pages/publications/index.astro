@@ -15,14 +15,13 @@ const years = [...new Set(pubs.map((p) => p.data.year))];
     <div class="wrap">
       <h1>Publications</h1>
       <p class="lede">
-        Journal articles and selected conference papers from the lab and its collaborators,
-        listed by publication year. Use the DOI, PDF, or code links on each record to continue to
-        the original source.
+        Journal articles and selected conference papers on geotechnical engineering, climate hazards,
+        and infrastructure equity, listed by year.
       </p>
-      <p class="pub-count">{pubs.length} publications in this working list.</p>
+      <p class="pub-count">{pubs.length} publications listed.</p>
       {
         pubs.length === 0 ? (
-          <p class="empty">No publication records are available yet.</p>
+          <p class="empty">Publications will be added here.</p>
         ) : (
           years.map((year) => (
             <section aria-labelledby={`year-${year}`}>

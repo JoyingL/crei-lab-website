@@ -13,50 +13,41 @@ const pi = (await getCollection('people')).find((p) => p.data.role === 'pi');
     <div class="wrap" style="max-width: var(--measure-narrow);">
       <h1>About</h1>
       <p class="lede">
-        A geotechnical lab at Tufts CEE working on climate-resilient and equitable infrastructure.
-        The lab combines fundamental soil mechanics with applied work alongside communities and
-        infrastructure partners.
+        We study how climate extremes affect earthen infrastructure and the communities it serves.
+        Our research at Tufts University combines soil mechanics, infrastructure resilience, and
+        environmental justice.
       </p>
 
       <h2>Challenge</h2>
       <p>
-        Climate is changing the loading on infrastructure faster than much of that infrastructure
-        was designed to accept. Drought, flooding, wildfire, and compound or cascading sequences
-        do not stay in the atmosphere. They wet, dry, heat, and weaken the soils that hold slopes,
-        dams, and levees, then cascade into the communities those systems are meant to protect.
-        The people most exposed are often the least represented in the original design. Treating
-        climate as a new load case while leaving equity to another chapter misses both the
-        mechanics and the harm.
+        Drought, flooding, and wildfire change the moisture and temperature conditions that
+        influence soil behavior. These changes can affect the stability of slopes, dams, and
+        levees. Compound and cascading hazards add to this risk, with consequences for the
+        communities that depend on these systems.
       </p>
 
       <h2>Contribution</h2>
       <p>
-        The lab works at the interface of civil and geotechnical engineering with climate change,
-        resilient infrastructure, and environmental justice. The focus is the resilience and
-        adaptation of critical infrastructure to extreme events in a changing climate, with
-        particular attention to disadvantaged communities. That is a lab problem, not a personal
-        brand: show how wetting, drying, and heat change the performance of earthen systems, and
-        keep who sits behind those systems inside the analysis. Support has included NSF, USDA,
-        NOAA, NASA, and DOD, among others.
+        We investigate the resilience and adaptation of critical infrastructure to extreme
+        events in a changing climate. Our work connects geotechnical engineering with
+        environmental justice, with particular attention to risks facing disadvantaged
+        communities.
       </p>
 
       <h2>Approach</h2>
       <p>
-        Fundamental work starts from variably saturated soils and earthen structures under
-        multi-physics processes: flow, heat, and stress kept in one analysis rather than added
-        later as a correction. Applied work takes the same mechanics to climate-loaded slopes,
-        dams, and levees. Collaboration with climate science, hydrology, geosciences, social
-        science, remote sensing, and data science is part of the method because the failure
-        sequence does not stay inside one department. The lab sits in Civil and Environmental
-        Engineering at Tufts.
+        We use analytical and numerical methods to study water flow, heat transfer, and stress
+        in variably saturated soils. We apply this understanding to assess slopes, dams, and
+        levees under changing climate conditions. Our research draws on climate science,
+        hydrology, geosciences, social science, remote sensing, and data science.
       </p>
 
       <h2>Principal investigator</h2>
       <p>
         Farshid Vahedifard is Professor of Civil and Environmental Engineering at Tufts and the
-        Louis Berger Chair. His research sits at the interface of geotechnical engineering,
-        climate, and environmental justice, with emphasis on how extreme events affect
-        infrastructure and disadvantaged communities. Full profile:{' '}
+        Louis Berger Chair. His research examines how
+        climate extremes affect infrastructure and disadvantaged communities. Read his full
+        profile at{' '}
         <a href={CEE_PROFILE_URL}>Tufts CEE</a>
         {' · '}
         <a href={FACULTY_PROFILE_URL}>facultyprofiles.tufts.edu</a>.
@@ -64,8 +55,8 @@ const pi = (await getCollection('people')).find((p) => p.data.role === 'pi');
       {pi && <PersonCard person={pi} />}
 
       <p class="about-actions">
-        Interested in the lab's work? Read the <a href={sitePath('/projects')}>project list</a>, review
-        <a href={sitePath('/publications')}>publications</a>, or <a href={sitePath('/contact')}>contact the lab</a>.
+        Explore our <a href={sitePath('/projects')}>projects</a> and
+        <a href={sitePath('/publications')}>publications</a>, or <a href={sitePath('/contact')}>contact us</a>.
       </p>
     </div>
   </section>

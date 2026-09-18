@@ -11,8 +11,8 @@ const courses = (await getCollection('teaching')).sort((a, b) => (b.data.year ??
     <div class="wrap">
       <h1>Teaching</h1>
       <p class="lede">
-        Courses connect soil mechanics and infrastructure risk with the climate and equity
-        questions that shape real decisions. The catalog below is the current public teaching list.
+        Graduate teaching examines infrastructure risk, resilience, and equity.
+        Course information is being updated.
       </p>
       {
         courses.length === 0 ? (
@@ -31,9 +31,8 @@ const courses = (await getCollection('teaching')).sort((a, b) => (b.data.year ??
       }
       <h2>For students and collaborators</h2>
       <p>
-        The lab welcomes conversations about graduate research, course projects, and methods for
-        climate-resilient infrastructure. <a href={sitePath('/join')}>See how to get in touch</a> with a
-        focused inquiry.
+        For questions about graduate research or course projects,
+        <a href={sitePath('/join')}>contact the lab</a>.
       </p>
     </div>
   </section>

@@ -16,7 +16,7 @@ body {
   color: var(--color-text);
   background: var(--color-surface);
   font-family: var(--font-body);
-  font-size: 1.0625rem;
+  font-size: 0.9375rem;
   line-height: 1.55;
   text-rendering: optimizeLegibility;
   overflow-wrap: anywhere;
@@ -128,7 +128,7 @@ p {
 .lede {
   max-width: 40rem;
   color: var(--color-text-muted);
-  font-size: 1.15rem;
+  font-size: 1rem;
 }
 
 .grid {
@@ -391,9 +391,9 @@ p {
 
 .copyright {
   margin-top: var(--space-6);
-  max-width: 46rem;
+  max-width: none;
   color: color-mix(in srgb, var(--color-white) 82%, transparent);
-  font-size: 0.9rem;
+  font-size: 0.75rem;
 }
 
 .footer-list {
@@ -403,12 +403,13 @@ p {
 }
 
 .footer-list li + li {
-  margin-top: var(--space-2);
+  margin-top: 0;
 }
 
 .footer-list a {
   display: inline-flex;
-  min-height: 44px;
+  min-height: 28px;
+  font-size: 0.875rem;
   align-items: center;
 }
 
@@ -419,18 +420,44 @@ p {
 }
 
 .hero {
-  padding-block: clamp(4.5rem, 12vw, 9rem) clamp(3.5rem, 8vw, 6rem);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(4rem, 8vw, 7rem);
   background: var(--color-sky);
   border-bottom: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.hero-map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.13;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .hero-name {
-  max-width: 18ch;
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
-  line-height: 1.03;
+  max-width: none;
+  font-size: clamp(1.75rem, 4.25vw, 3.4rem);
+  line-height: 1.16;
+  margin-bottom: 1.5rem;
 }
 
-.hero .lede { max-width: 34rem; font-size: clamp(1.15rem, 2.4vw, 1.45rem); }
+.hero-name span { display: block; }
+.hero .lede {
+  max-width: 43rem;
+  margin: 0 auto 1.5rem;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+.hero .btn { font-size: 0.875rem; }
+.site-footer { font-size: 0.8125rem; }
+.site-footer .kicker { font-size: 0.6875rem; margin-bottom: 0.625rem; }
+.site-footer .copyright { margin-bottom: 0; line-height: 1.6; }
 
 .contact-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--space-8); align-items: start; }
 .contact-card h2 { font-family: var(--font-body); font-size: 1rem; margin-top: var(--space-5); }
@@ -484,7 +511,8 @@ p {
     min-width: 0;
   }
 
-  .hero-name { font-size: clamp(2.5rem, 14vw, 4rem); }
+  .hero-name { font-size: clamp(1.75rem, 5.4vw, 2.5rem); }
+  .hero .lede { font-size: 0.9375rem; }
   .section { padding-block: 3.5rem; }
   .contact-layout { grid-template-columns: 1fr; gap: var(--space-5); }
 }

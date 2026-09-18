@@ -23,9 +23,9 @@ const pubs = (await getCollection('publications'))
   description="Climate Resilient and Equitable Infrastructure Lab at Tufts University School of Engineering."
 >
   <section class="hero">
+    <img class="hero-map" src={sitePath('/world-map.svg')} alt="" aria-hidden="true" width="1440" height="600" />
     <div class="wrap">
-      <p class="kicker">Tufts University · Civil and Environmental Engineering</p>
-      <h1 class="hero-name">{LAB_NAME}</h1>
+      <h1 class="hero-name"><span>Climate Resilient and Equitable</span>{' '}<span>Infrastructure Lab</span></h1>
       <p class="lede">{HOME_SUBTITLE}</p>
       <a class="btn" href={sitePath('/about')}>About the lab</a>
     </div>

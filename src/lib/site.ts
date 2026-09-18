@@ -29,26 +29,26 @@ export const PRIMARY_NAV = [
 export const RESEARCH_AREAS = [
   {
     title: 'Climate Extremes',
-    hover: 'Drought, flood, wildfire, and what follows.',
-    body: 'Extreme events in a changing climate, including compound and cascading sequences, reshape both communities and the infrastructure they rely on. We study those impacts at the point where climate loading meets earthen systems.',
+    hover: 'Drought, flooding, wildfire, and cascading hazards.',
+    body: 'We study how drought, flooding, and wildfire affect earthen infrastructure and nearby communities. We examine compound and cascading hazards to understand how one event changes the impacts of another.',
     chips: ['drought', 'flood', 'wildfire', 'cascading hazards'],
   },
   {
     title: 'Earthen Infrastructure',
-    hover: 'Slopes, dams, and levees under nonstationary climate.',
-    body: 'Critical earthen infrastructure is a first-order climate asset, not a background geotechnical detail. We analyze how slopes, dams, and levees lose performance as wetting, drying, and heat accumulate.',
+    hover: 'Slopes, dams, and levees in a changing climate.',
+    body: 'We analyze how changes in moisture and temperature affect the performance of slopes, dams, and levees. This work informs the assessment and adaptation of earthen infrastructure under changing climate conditions.',
     chips: ['slopes', 'dams', 'levees', 'climate adaptation'],
   },
   {
     title: 'Equitable Infrastructure',
-    hover: 'Who is behind the levee is part of the problem.',
-    body: 'Resilience work that does not name disadvantaged communities is incomplete. We frame climate adaptation so that equity is a design constraint, not a separate outreach paragraph.',
+    hover: 'Infrastructure risk and environmental justice.',
+    body: 'We examine how infrastructure risks affect disadvantaged communities. Our research connects climate adaptation with environmental justice, considering who is exposed to hazards and who benefits from infrastructure protection.',
     chips: ['environmental justice', 'equity', 'communities'],
   },
   {
     title: 'Unsaturated Mechanics',
-    hover: 'Variably saturated soils under multi-physics processes.',
-    body: 'The lab’s fundamental geotechnical work is unsaturated soil mechanics and multi-physics processes in soils, closed with analytical and numerical methods. That is the method stack behind the climate and equity questions above.',
+    hover: 'Water, heat, and stress in unsaturated soils.',
+    body: 'Water flow, heat transfer, and stress jointly influence soil behavior and the stability of earthen structures. We study these coupled processes in unsaturated soils using analytical and numerical methods.',
     chips: ['unsaturated soils', 'multi-physics', 'analytical methods'],
   },
 ] as const;
