@@ -553,28 +553,3 @@ p {
 .institution-logo { width: 5.75rem; }
 .department-logo { width: 18.25rem; }
 .inst-inner { padding-block: 0.75rem; }
-
-/* Research themes: image-led editorial panels, separate from project cards. */
-.research-area-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 3rem 2.5rem;
-}
-.research-area { min-width: 0; }
-.research-area-image {
-  display: block;
-  width: 100%;
-  aspect-ratio: 8 / 5;
-  object-fit: cover;
-}
-.research-area-copy { padding: 1.25rem 0.5rem 0; text-align: center; }
-.research-area h3 { font-size: 1.4rem; margin-bottom: 0.625rem; }
-.research-area p { max-width: 40ch; margin: 0 auto; color: var(--color-text-muted); line-height: 1.65; }
-@media (max-width: 640px) {
-  .research-area-grid { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
-  .research-area-copy { padding-top: 1rem; }
-}
-
-.photo-credits { margin-top: 1.75rem; font-size: 0.75rem; color: var(--color-text-muted); }
-.photo-credits summary { cursor: pointer; width: fit-content; min-height: 28px; }
-.photo-credits li + li { margin-top: 0.5rem; }

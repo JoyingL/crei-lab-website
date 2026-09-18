@@ -30,22 +30,13 @@ const pubs = (await getCollection('publications'))
   <section class="section" aria-labelledby="areas-heading">
     <div class="wrap">
       <h2 id="areas-heading">Research areas</h2>
-      <div class="research-area-grid">
+      <div class="grid grid-3">
         {
           RESEARCH_AREAS.map((area) => (
-            <AreaCard title={area.title} body={area.body} image={area.image} imageAlt={area.imageAlt} />
+            <AreaCard title={area.title} body={area.body} hover={area.hover} chips={area.chips} />
           ))
         }
       </div>
-      <details class="photo-credits">
-        <summary>Photo credits</summary>
-        <ul>
-          <li>Climate Extremes: <a href="https://commons.wikimedia.org/wiki/File:Aerial_photographs_of_2019_Abukuma_River_flood_by_GSI_469.jpg">Abukuma River flood, Japan</a> — Geospatial Information Authority of Japan, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Resized and cropped for display.</li>
-          <li>Earthen Infrastructure: <a href="https://commons.wikimedia.org/wiki/File:Hydroseeding_a_River_Park_neighborhood_levee_section_(15210766763).jpg">Sacramento River levee</a> — Todd Plain / USACE, public domain.</li>
-          <li>Equitable Infrastructure: <a href="https://commons.wikimedia.org/wiki/File:FEMA_-_40348_-_Aerial_of_a_flooded_Fargo,_North_Dakota_neighborhood.jpg">Fargo neighborhood flood barrier</a> — Patsy Lynch / FEMA, public domain.</li>
-          <li>Unsaturated Mechanics: <a href="https://commons.wikimedia.org/wiki/File:Laboratory_soil_hydrometer_test.jpg">Soil hydrometer test</a> — Maame1Yaa, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</li>
-        </ul>
-      </details>
     </div>
   </section>
 

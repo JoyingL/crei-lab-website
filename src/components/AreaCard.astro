@@ -1,18 +1,25 @@
 ---
-import { sitePath } from '../lib/paths';
 interface Props {
   title: string;
   body: string;
-  image?: string;
-  imageAlt?: string;
+  hover?: string;
+  chips?: readonly string[];
 }
-const { title, body, image, imageAlt = '' } = Astro.props;
+
+const { title, body, hover, chips = [] } = Astro.props;
 ---
 
-<article class="research-area">
-  {image && <img class="research-area-image" src={sitePath(image)} alt={imageAlt} width="960" height="600" loading="lazy" decoding="async" />}
-  <div class="research-area-copy">
-    <h3>{title}</h3>
-    <p>{body}</p>
-  </div>
+<article class="card">
+  {hover && <p class="kicker">{hover}</p>}
+  <h3>{title}</h3>
+  <p>{body}</p>
+  {
+    chips.length > 0 && (
+      <p class="chips">
+        {chips.map((chip) => (
+          <span class="chip">{chip}</span>
+        ))}
+      </p>
+    )
+  }
 </article>
