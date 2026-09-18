@@ -126,7 +126,9 @@ p {
 }
 
 .lede {
-  max-width: 40rem;
+  max-width: 52rem;
+  font-family: var(--font-display);
+  font-weight: 400;
   color: var(--color-text-muted);
   font-size: 1rem;
 }
@@ -449,7 +451,7 @@ p {
 
 .hero-name span { display: block; }
 .hero .lede {
-  max-width: 43rem;
+  max-width: 48rem;
   margin: 0 auto 1.5rem;
   font-size: 1rem;
   line-height: 1.65;

@@ -49,7 +49,7 @@ const pubs = (await getCollection('publications'))
       <h2 id="projects-heading">Highlighted projects</h2>
       {
         projects.length === 0 ? (
-          <p class="empty">Highlighted projects are being selected from the public project list.</p>
+          <p class="empty">Explore our research on the Projects page.</p>
         ) : (
           <div class="grid grid-3">
             {projects.map((project) => (
@@ -68,8 +68,7 @@ const pubs = (await getCollection('publications'))
       {
         people.length === 0 ? (
           <p class="empty">
-            The public people list is being updated. Confirmed profiles will appear here as they
-            are available.
+            For research inquiries, contact Farshid Vahedifard.
           </p>
         ) : (
           <div class="grid grid-people">
@@ -86,7 +85,7 @@ const pubs = (await getCollection('publications'))
       <h2 id="pubs-heading">Highlighted publications</h2>
       {
         pubs.length === 0 ? (
-          <p class="empty">Highlighted publications are being selected from the publication list.</p>
+          <p class="empty">Explore our research on the Publications page.</p>
         ) : (
           pubs.map((pub) => <PubItem pub={pub} />)
         )

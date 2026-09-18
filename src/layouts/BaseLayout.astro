@@ -34,7 +34,7 @@ const pageTitle = title.includes(LAB_SHORT) ? title : `${title} · ${LAB_SHORT}`
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap"
       rel="stylesheet"
     />
     <link rel="sitemap" href={sitePath('/sitemap-index.xml')} />
@@ -147,3 +147,35 @@ const pageTitle = title.includes(LAB_SHORT) ? title : `${title} · ${LAB_SHORT}`
     border: 0;
   }
 </style>
+
+<script>
+  // Content stays visible without JavaScript. Animate once on entry, without moving focus.
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const running = new Map<Element, Animation>();
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        observer.unobserve(entry.target);
+        if (reducedMotion.matches || entry.target.contains(document.activeElement)) continue;
+        const animation = entry.target.animate(
+          [{ transform: 'translateY(22px)', opacity: 0.45 }, { transform: 'translateY(0)', opacity: 1 }],
+          { duration: 520, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+        );
+        running.set(entry.target, animation);
+        animation.onfinish = () => running.delete(entry.target);
+      }
+    }, { threshold: 0, rootMargin: '0px 0px -24px 0px' });
+    document.querySelectorAll('.section > .wrap').forEach((section) => observer.observe(section));
+    reducedMotion.addEventListener('change', () => {
+      if (reducedMotion.matches) { running.forEach((animation) => animation.cancel()); running.clear(); }
+    });
+    document.addEventListener('focusin', (event) => {
+      for (const [element, animation] of running) {
+        if (event.target instanceof Node && element.contains(event.target)) {
+          animation.cancel(); running.delete(element);
+        }
+      }
+    });
+  }
+</script>

@@ -21,7 +21,7 @@ const years = [...new Set(pubs.map((p) => p.data.year))];
       <p class="pub-count">{pubs.length} publications listed.</p>
       {
         pubs.length === 0 ? (
-          <p class="empty">Publications will be added here.</p>
+          <p class="empty">Browse Farshid Vahedifard’s publications on Google Scholar.</p>
         ) : (
           years.map((year) => (
             <section aria-labelledby={`year-${year}`}>

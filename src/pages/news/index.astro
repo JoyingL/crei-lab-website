@@ -14,7 +14,7 @@ const items = (await getCollection('news')).sort((a, b) => b.data.date.valueOf()
       </p>
       {
         items.length === 0 ? (
-          <p class="empty">News will be added here.</p>
+          <p class="empty">For research news, visit Tufts Now.</p>
         ) : (
           items.map((item) => (
             <article class="pub-item">

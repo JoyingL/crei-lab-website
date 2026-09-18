@@ -21,7 +21,7 @@ const rest = people.filter((p) => p.data.role !== 'pi');
       <h2>Principal investigator</h2>
       {
         pi.length === 0 ? (
-          <p class="empty">The principal investigator profile is being prepared.</p>
+          <p class="empty">For research inquiries, contact Farshid Vahedifard.</p>
         ) : (
           <div class="grid grid-people">
             {pi.map((person) => <PersonCard person={person} />)}
@@ -29,20 +29,14 @@ const rest = people.filter((p) => p.data.role !== 'pi');
         )
       }
 
-      <h2>Lab members</h2>
-      {
-        rest.length === 0 ? (
-          <p class="empty">
-            Student and collaborator profiles will be added as their details are confirmed.
-          </p>
-        ) : (
+      {rest.length > 0 && (
+        <section aria-labelledby="members-heading">
+          <h2 id="members-heading">Lab members</h2>
           <div class="grid grid-people">
-            {rest.map((person) => (
-              <PersonCard person={person} />
-            ))}
+            {rest.map((person) => <PersonCard person={person} />)}
           </div>
-        )
-      }
+        </section>
+      )}
       <p>
         Interested in working with the lab? See <a href={sitePath('/join')}>Opportunities</a>.
       </p>
