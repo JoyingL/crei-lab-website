@@ -1,0 +1,149 @@
+---
+import { sitePath, localPath } from '../lib/paths';
+import '../styles/global.css';
+import {
+  ADDRESS,
+  CEE_URL,
+  EMAIL,
+  LAB_NAME,
+  LAB_SHORT,
+  MAPS_URL,
+  PRIMARY_NAV,
+  SCHOLAR_URL,
+  TUFTS_URL,
+  isCurrentPath,
+} from '../lib/site';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = `${LAB_NAME} at Tufts University.` } = Astro.props;
+const path = localPath(Astro.url.pathname);
+const pageTitle = title.includes(LAB_SHORT) ? title : `${title} · ${LAB_SHORT}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" href={sitePath('/favicon.svg')} type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="sitemap" href={sitePath('/sitemap-index.xml')} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <div class="inst-bar">
+      <div class="wrap inst-inner">
+        <nav class="inst-links" aria-label="Institution">
+          <a href={TUFTS_URL}>Tufts</a>
+          <a href={CEE_URL}>Tufts CEE</a>
+        </nav>
+        <form class="inst-search" action={sitePath('/search')} method="get" role="search">
+          <label class="visually-hidden" for="q">Search this site</label>
+          <input id="q" name="q" type="search" placeholder="Search this site" />
+          <button type="submit" aria-label="Search this site">Search</button>
+        </form>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="wrap lab-bar">
+        <a class="wordmark" href={sitePath('/')}>
+          {LAB_NAME}
+          <span>Tufts University · Civil and Environmental Engineering</span>
+        </a>
+        <nav aria-label="Primary navigation">
+          <ul class="lab-nav">
+            {
+              PRIMARY_NAV.map((item) => (
+                <li>
+                  <a
+                    href={sitePath(item.href)}
+                    aria-current={isCurrentPath(path, item.href) ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-grid">
+        <div>
+          <a class="footer-brand" href={TUFTS_URL}>Tufts</a>
+          <p>
+            {LAB_NAME} ({LAB_SHORT})<br />
+            School of Engineering<br />
+            Civil and Environmental Engineering
+          </p>
+        </div>
+        <div>
+          <h2 class="kicker" style="color: var(--color-white);">Visit Us</h2>
+          <p>
+            <a href={MAPS_URL}>{ADDRESS}</a>
+          </p>
+        </div>
+        <div>
+          <h2 class="kicker" style="color: var(--color-white);">In this site</h2>
+          <ul class="footer-list">
+            {
+              PRIMARY_NAV.map((item) => (
+                <li>
+                  <a href={sitePath(item.href)}>{item.label}</a>
+                </li>
+              ))
+            }
+            <li><a href={sitePath('/join')}>Opportunities</a></li>
+            <li><a href={sitePath('/contact')}>Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="kicker" style="color: var(--color-white);">Follow</h2>
+          <ul class="footer-list">
+            <li><a href={SCHOLAR_URL}>Google Scholar</a></li>
+            <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="wrap">
+        <p class="copyright">
+          © 2026 Climate Resilient and Equitable Infrastructure Lab, Department of Civil and
+          Environmental Engineering, Tufts University.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

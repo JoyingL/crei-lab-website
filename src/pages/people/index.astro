@@ -1,0 +1,52 @@
+---
+import { sitePath } from '../../lib/paths';
+import { getCollection } from 'astro:content';
+import PersonCard from '../../components/PersonCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const people = (await getCollection('people')).sort((a, b) => a.data.order - b.data.order);
+const pi = people.filter((p) => p.data.role === 'pi');
+const rest = people.filter((p) => p.data.role !== 'pi');
+---
+
+<BaseLayout title="People" description="People of the Climate Resilient and Equitable Infrastructure Lab at Tufts.">
+  <section class="section">
+    <div class="wrap">
+      <h1>People</h1>
+      <p class="lede">
+        The lab brings together geotechnical engineers, climate scientists, and community partners
+        working on resilient and equitable infrastructure.
+      </p>
+
+      <h2>Principal investigator</h2>
+      {
+        pi.length === 0 ? (
+          <p class="empty">The principal investigator profile is being prepared.</p>
+        ) : (
+          <div class="grid grid-people">
+            {pi.map((person) => <PersonCard person={person} />)}
+          </div>
+        )
+      }
+
+      <h2>Lab members</h2>
+      {
+        rest.length === 0 ? (
+          <p class="empty">
+            The current public roster is being updated. Students and collaborators will appear here
+            once their profiles and preferred contact details are confirmed.
+          </p>
+        ) : (
+          <div class="grid grid-people">
+            {rest.map((person) => (
+              <PersonCard person={person} />
+            ))}
+          </div>
+        )
+      }
+      <p>
+        Interested in working with the lab? See <a href={sitePath('/join')}>openings and inquiry guidance</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

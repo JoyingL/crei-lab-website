@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, summary, status, year, funder, url } = project.data;
+---
+
+<article class="card">
+  <p class="kicker">{status}{year ? ` · ${year}` : ''}{funder ? ` · ${funder}` : ''}</p>
+  <h3>{title}</h3>
+  <p>{summary}</p>
+  {url && (
+    <p>
+      <a href={url}>Project page</a>
+    </p>
+  )}
+</article>

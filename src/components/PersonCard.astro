@@ -1,0 +1,36 @@
+---
+import { sitePath } from '../lib/paths';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  person: CollectionEntry<'people'>;
+}
+
+const { person } = Astro.props;
+const { name, title, affiliation, email, scholar, photo } = person.data;
+---
+
+<article class="card">
+  {
+    photo && (
+      <img class="person-photo" src={sitePath(photo)} alt={name} width="320" height="400" />
+    )
+  }
+  <h3 class="person-name">{name}</h3>
+  <p class="person-meta">{title}</p>
+  <p class="person-meta">{affiliation}</p>
+  {
+    email && (
+      <p>
+        <a href={`mailto:${email}`}>{email}</a>
+      </p>
+    )
+  }
+  {
+    scholar && (
+      <p>
+        <a href={scholar}>Google Scholar</a>
+      </p>
+    )
+  }
+</article>

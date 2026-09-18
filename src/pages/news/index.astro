@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const items = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="News" description="News from the Climate Resilient and Equitable Infrastructure Lab.">
+  <section class="section">
+    <div class="wrap">
+      <h1>News</h1>
+      <p class="lede">
+        Public announcements, research coverage, and commentary from the lab and its partners.
+        Items link to the original publisher so dates and context remain auditable.
+      </p>
+      {
+        items.length === 0 ? (
+          <p class="empty">News items are being collected from Tufts and partner outlets.</p>
+        ) : (
+          items.map((item) => (
+            <article class="pub-item">
+              <h2>{item.data.title}</h2>
+              <p class="pub-meta">
+                {item.data.date.toISOString().slice(0, 10)}
+                {item.data.source ? ` · ${item.data.source}` : ''}
+              </p>
+              <p>{item.data.excerpt}</p>
+              {item.data.url && <p><a href={item.data.url}>Read</a></p>}
+            </article>
+          ))
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

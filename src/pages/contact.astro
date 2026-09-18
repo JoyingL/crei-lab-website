@@ -1,0 +1,25 @@
+---
+import { sitePath } from '../lib/paths';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ADDRESS, EMAIL, MAPS_URL, LAB_NAME } from '../lib/site';
+---
+
+<BaseLayout title="Contact" description={`Contact the ${LAB_NAME} at Tufts University.`}>
+  <section class="section">
+    <div class="wrap contact-layout">
+      <div>
+        <p class="kicker">Start a conversation</p>
+        <h1>Contact</h1>
+        <p class="lede">Questions about research, collaboration, teaching, or joining the lab can start here.</p>
+      </div>
+      <div class="card contact-card">
+        <h2>Write to the lab</h2>
+        <p><a class="contact-email" href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
+        <p>For openings and collaboration inquiries, see <a href={sitePath('/join')}>Opportunities</a> for
+          what to include in a first message.</p>
+        <h2>Visit Tufts CEE</h2>
+        <p><a href={MAPS_URL} rel="noreferrer">{ADDRESS}</a></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

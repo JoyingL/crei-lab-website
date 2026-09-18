@@ -1,0 +1,97 @@
+---
+import { sitePath } from '../lib/paths';
+import { getCollection } from 'astro:content';
+import AreaCard from '../components/AreaCard.astro';
+import PersonCard from '../components/PersonCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PubItem from '../components/PubItem.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { HOME_SUBTITLE, LAB_NAME, RESEARCH_AREAS } from '../lib/site';
+
+const people = (await getCollection('people')).sort((a, b) => a.data.order - b.data.order);
+const projectOrder = ['nsf-2552816', 'nasa-geohazards-equity', 'nsf-2401545'];
+const projects = (await getCollection('projects'))
+  .filter((p) => p.data.highlight)
+  .sort((a, b) => projectOrder.indexOf(a.id) - projectOrder.indexOf(b.id));
+const pubs = (await getCollection('publications'))
+  .filter((p) => p.data.highlight)
+  .sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout
+  title={LAB_NAME}
+  description="Climate Resilient and Equitable Infrastructure Lab at Tufts University School of Engineering."
+>
+  <section class="hero">
+    <div class="wrap">
+      <p class="kicker">Tufts University · Civil and Environmental Engineering</p>
+      <h1 class="hero-name">{LAB_NAME}</h1>
+      <p class="lede">{HOME_SUBTITLE}</p>
+      <a class="btn" href={sitePath('/about')}>About the lab</a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="areas-heading">
+    <div class="wrap">
+      <h2 id="areas-heading">Research areas</h2>
+      <div class="grid grid-3">
+        {
+          RESEARCH_AREAS.map((area) => (
+            <AreaCard title={area.title} body={area.body} hover={area.hover} chips={area.chips} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-band" aria-labelledby="projects-heading">
+    <div class="wrap">
+      <h2 id="projects-heading">Highlighted projects</h2>
+      {
+        projects.length === 0 ? (
+          <p class="empty">Highlighted projects are being selected from the public project list.</p>
+        ) : (
+          <div class="grid grid-3">
+            {projects.map((project) => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        )
+      }
+      <p><a href={sitePath('/projects')}>All projects</a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="people-heading">
+    <div class="wrap">
+      <h2 id="people-heading">People</h2>
+      {
+        people.length === 0 ? (
+          <p class="empty">
+            The public people list is being updated. Confirmed profiles will appear here as they
+            are available.
+          </p>
+        ) : (
+          <div class="grid grid-people">
+            {people.map((person) => <PersonCard person={person} />)}
+          </div>
+        )
+      }
+      <p><a href={sitePath('/people')}>Lab members</a></p>
+    </div>
+  </section>
+
+  <section class="section section-band" aria-labelledby="pubs-heading">
+    <div class="wrap">
+      <h2 id="pubs-heading">Highlighted publications</h2>
+      {
+        pubs.length === 0 ? (
+          <p class="empty">Highlighted publications are being selected from the publication list.</p>
+        ) : (
+          pubs.map((pub) => <PubItem pub={pub} />)
+        )
+      }
+      <p><a href={sitePath('/publications')}>View more publications</a></p>
+    </div>
+  </section>
+</BaseLayout>

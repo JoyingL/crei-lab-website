@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import PubItem from '../../components/PubItem.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pubs = (await getCollection('publications')).sort((a, b) => b.data.year - a.data.year);
+const years = [...new Set(pubs.map((p) => p.data.year))];
+---
+
+<BaseLayout
+  title="Publications"
+  description="Publications from the Climate Resilient and Equitable Infrastructure Lab."
+>
+  <section class="section">
+    <div class="wrap">
+      <h1>Publications</h1>
+      <p class="lede">
+        Journal articles and selected conference papers from the lab and its collaborators,
+        listed by publication year. Use the DOI, PDF, or code links on each record to continue to
+        the original source.
+      </p>
+      <p class="pub-count">{pubs.length} publications in this working list.</p>
+      {
+        pubs.length === 0 ? (
+          <p class="empty">No publication records are available yet.</p>
+        ) : (
+          years.map((year) => (
+            <section aria-labelledby={`year-${year}`}>
+              <h2 class="year-heading" id={`year-${year}`}>
+                {year}
+              </h2>
+              {pubs
+                .filter((p) => p.data.year === year)
+                .map((pub) => (
+                  <PubItem pub={pub} />
+                ))}
+            </section>
+          ))
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

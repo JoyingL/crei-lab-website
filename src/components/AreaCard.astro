@@ -1,0 +1,25 @@
+---
+interface Props {
+  title: string;
+  body: string;
+  hover?: string;
+  chips?: readonly string[];
+}
+
+const { title, body, hover, chips = [] } = Astro.props;
+---
+
+<article class="card">
+  {hover && <p class="kicker">{hover}</p>}
+  <h3>{title}</h3>
+  <p>{body}</p>
+  {
+    chips.length > 0 && (
+      <p class="chips">
+        {chips.map((chip) => (
+          <span class="chip">{chip}</span>
+        ))}
+      </p>
+    )
+  }
+</article>

@@ -1,0 +1,142 @@
+---
+import { sitePath } from '../lib/paths';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const [people, projects, publications, news, teaching] = await Promise.all([
+  getCollection('people'),
+  getCollection('projects'),
+  getCollection('publications'),
+  getCollection('news'),
+  getCollection('teaching'),
+]);
+
+const index = [
+  { href: sitePath('/'), title: 'Home', kind: 'Page', text: 'climate resilient equitable infrastructure' },
+  { href: sitePath('/about'), title: 'About', kind: 'Page', text: 'challenge contribution approach climate extremes earthen infrastructure' },
+  { href: sitePath('/people'), title: 'People', kind: 'Page', text: 'principal investigator' },
+  { href: sitePath('/projects'), title: 'Projects', kind: 'Page', text: '' },
+  { href: sitePath('/publications'), title: 'Publications', kind: 'Page', text: '' },
+  { href: sitePath('/teaching'), title: 'Teaching', kind: 'Page', text: '' },
+  { href: sitePath('/news'), title: 'News', kind: 'Page', text: '' },
+  { href: sitePath('/join'), title: 'Join', kind: 'Page', text: 'openings' },
+  ...people.map((p) => ({
+    href: sitePath('/people'),
+    title: p.data.name,
+    kind: 'People',
+    text: `${p.data.title} ${p.data.affiliation}`,
+  })),
+  ...projects.map((p) => ({
+    href: sitePath('/projects'),
+    title: p.data.title,
+    kind: 'Projects',
+    text: p.data.summary,
+  })),
+  ...publications.map((p) => ({
+    href: sitePath('/publications'),
+    title: p.data.title,
+    kind: 'Publications',
+    text: `${p.data.authors.join(' ')} ${p.data.venue}`,
+  })),
+  ...news.map((p) => ({
+    href: sitePath('/news'),
+    title: p.data.title,
+    kind: 'News',
+    text: p.data.excerpt,
+  })),
+  ...teaching.map((p) => ({
+    href: sitePath('/teaching'),
+    title: p.data.title,
+    kind: 'Teaching',
+    text: `${p.data.code ?? ''} ${p.data.description ?? ''}`,
+  })),
+];
+---
+
+<BaseLayout title="Search" description="Search the Climate Resilient and Equitable Infrastructure Lab site.">
+  <section class="section">
+    <div class="wrap">
+      <h1>Search</h1>
+      <p class="lede">In-site filter of pages and collections. Not Google CSE.</p>
+      <form class="page-search" action={sitePath('/search')} method="get" role="search">
+        <label class="visually-hidden" for="q-page">Search this site</label>
+        <input id="q-page" name="q" type="search" placeholder="Search this site" />
+        <button type="submit">Search</button>
+      </form>
+      <p id="search-status" class="empty" role="status" aria-live="polite">Enter a term.</p>
+      <ul id="search-results" class="search-results footer-list"></ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline define:vars={{ index }}>
+  const params = new URLSearchParams(window.location.search);
+  const q = (params.get('q') || '').trim().toLowerCase();
+  const input = document.getElementById('q-page');
+  const status = document.getElementById('search-status');
+  const list = document.getElementById('search-results');
+  if (input) input.value = params.get('q') || '';
+  if (!q) {
+    status.textContent = 'Enter a term.';
+  } else {
+    const hits = index.filter((item) =>
+      `${item.title} ${item.kind} ${item.text}`.toLowerCase().includes(q),
+    );
+    if (hits.length === 0) {
+      status.textContent = `No matches for “${q}”.`;
+    } else {
+      status.textContent = `${hits.length} match${hits.length === 1 ? '' : 'es'}.`;
+      // Build links with DOM APIs so collection content can never be interpreted as HTML.
+      hits.forEach((hit) => {
+        const item = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = hit.href;
+        link.textContent = `${hit.kind}: ${hit.title}`;
+        item.append(link);
+        list.append(item);
+      });
+    }
+  }
+</script>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .page-search {
+    display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .page-search input {
+    min-height: 44px;
+    min-width: 10rem;
+    flex: 1;
+    padding: 0 var(--space-3);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+  }
+
+  .page-search button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 var(--space-3);
+    border: 1px solid var(--color-primary);
+    background: transparent;
+    color: var(--color-primary);
+    font: inherit;
+    cursor: pointer;
+  }
+</style>

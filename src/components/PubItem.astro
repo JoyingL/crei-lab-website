@@ -1,0 +1,45 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { isInGroupAuthor } from '../lib/site';
+
+interface Props {
+  pub: CollectionEntry<'publications'>;
+}
+
+const { pub } = Astro.props;
+const { title, authors, year, venue, doi, pdf, code } = pub.data;
+
+function authorClass(name: string) {
+  return isInGroupAuthor(name) ? 'author-ingroup' : undefined;
+}
+---
+
+<article class="pub-item">
+  <h3>{title}</h3>
+  <p class="pub-meta">
+    {
+      authors.map((name, i) => (
+        <>
+          {i > 0 && ', '}
+          <span class={authorClass(name)}>{name}</span>
+        </>
+      ))
+    }
+    {' '}({year}). <em>{venue}</em>
+  </p>
+  <p>
+    {doi && <a href={`https://doi.org/${doi}`}>DOI</a>}
+    {pdf && (
+      <>
+        {' '}
+        <a href={pdf}>PDF</a>
+      </>
+    )}
+    {code && (
+      <>
+        {' '}
+        <a href={code}>Code</a>
+      </>
+    )}
+  </p>
+</article>

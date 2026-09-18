@@ -1,0 +1,40 @@
+---
+import { sitePath } from '../../lib/paths';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const courses = (await getCollection('teaching')).sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
+---
+
+<BaseLayout title="Teaching" description="Teaching at the Climate Resilient and Equitable Infrastructure Lab.">
+  <section class="section">
+    <div class="wrap">
+      <h1>Teaching</h1>
+      <p class="lede">
+        Courses connect soil mechanics and infrastructure risk with the climate and equity
+        questions that shape real decisions. The catalog below is the current public teaching list.
+      </p>
+      {
+        courses.length === 0 ? (
+          <p class="empty">Course information is being updated from the Tufts catalog.</p>
+        ) : (
+          courses.map((course) => (
+            <article class="pub-item">
+              <h2>{course.data.code ? `${course.data.code}: ${course.data.title}` : course.data.title}</h2>
+              <p class="pub-meta">
+                {[course.data.term, course.data.year].filter(Boolean).join(' ')}
+              </p>
+              {course.data.description && <p>{course.data.description}</p>}
+            </article>
+          ))
+        )
+      }
+      <h2>For students and collaborators</h2>
+      <p>
+        The lab welcomes conversations about graduate research, course projects, and methods for
+        climate-resilient infrastructure. <a href={sitePath('/join')}>See how to get in touch</a> with a
+        focused inquiry.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

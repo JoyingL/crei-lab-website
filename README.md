@@ -1,0 +1,31 @@
+# CREI lab website
+
+Static Astro site for the Climate Resilient and Equitable Infrastructure Lab (CREI), Department of Civil and Environmental Engineering, Tufts University. Working name until Farshid confirms the official English name.
+
+Research notes for this project (`task_plan.md`, `findings.md`, `data/`, `docs/`, `scripts/`) live in the same folder and are not the site app.
+
+## Develop
+
+```bash
+npm install
+npm run dev
+```
+
+Open http://localhost:4321. Build with `npm run build`; preview the `dist/` output with `npm run preview`.
+
+## Content
+
+Edit Markdown in `src/content/` (people, projects, publications, teaching, news). Empty collections render as “Content forthcoming.” Do not invent a student roster or fake citations.
+## Review deployment
+
+Live draft: https://joyingl.github.io/crei-lab-website/
+
+The `main` branch contains website source only. The `gh-pages` branch contains the
+built static site and is published by GitHub Pages. Internal research material and
+working notes are excluded from this public repository.
+
+Run `npm run check` and `npm run build` before publishing an updated `dist/` to the
+`gh-pages` branch. Source changes alone do not update the live website.
+
+Internal links and public assets use `src/lib/paths.ts` for the
+`/crei-lab-website` deployment base.
