@@ -1,0 +1,21 @@
+<div class="project-placeholders">
+  {[1, 2, 3].map((number) => (
+    <article class="project-placeholder" aria-label={`Research project placeholder ${number}`}>
+      <div class="project-placeholder-image" aria-hidden="true"><span>Project image</span></div>
+      <div class="project-placeholder-copy">
+        <h3>Project title</h3>
+        <p>Research question and approach</p>
+      </div>
+    </article>
+  ))}
+</div>
+
+<style>
+  .project-placeholders { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+  .project-placeholder { min-width: 0; background: var(--color-white); }
+  .project-placeholder-image { aspect-ratio: 6 / 5; display: grid; place-items: center; background: #edf1f4; color: var(--color-text-muted); font-size: 0.8125rem; }
+  .project-placeholder-copy { padding: 1.5rem 1rem 2rem; text-align: center; }
+  .project-placeholder-copy h3 { font-size: 1.25rem; }
+  .project-placeholder-copy p { color: var(--color-text-muted); font-size: 0.875rem; margin-bottom: 0; }
+  @media (max-width: 640px) { .project-placeholders { grid-template-columns: minmax(0, 1fr); } }
+</style>

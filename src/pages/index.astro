@@ -3,16 +3,12 @@ import { sitePath } from '../lib/paths';
 import { getCollection } from 'astro:content';
 import AreaCard from '../components/AreaCard.astro';
 import PersonCard from '../components/PersonCard.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import ProjectPlaceholders from '../components/ProjectPlaceholders.astro';
 import PubItem from '../components/PubItem.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { HOME_SUBTITLE, LAB_NAME, RESEARCH_AREAS } from '../lib/site';
 
 const people = (await getCollection('people')).sort((a, b) => a.data.order - b.data.order);
-const projectOrder = ['nsf-2552816', 'nasa-geohazards-equity', 'nsf-2401545'];
-const projects = (await getCollection('projects'))
-  .filter((p) => p.data.highlight)
-  .sort((a, b) => projectOrder.indexOf(a.id) - projectOrder.indexOf(b.id));
 const pubs = (await getCollection('publications'))
   .filter((p) => p.data.highlight)
   .sort((a, b) => b.data.year - a.data.year);
@@ -34,30 +30,29 @@ const pubs = (await getCollection('publications'))
   <section class="section" aria-labelledby="areas-heading">
     <div class="wrap">
       <h2 id="areas-heading">Research areas</h2>
-      <div class="grid grid-3">
+      <div class="research-area-grid">
         {
           RESEARCH_AREAS.map((area) => (
-            <AreaCard title={area.title} body={area.body} hover={area.hover} chips={area.chips} />
+            <AreaCard title={area.title} body={area.body} image={area.image} imageAlt={area.imageAlt} />
           ))
         }
       </div>
+      <details class="photo-credits">
+        <summary>Photo credits</summary>
+        <ul>
+          <li>Climate Extremes: <a href="https://commons.wikimedia.org/wiki/File:Aerial_photographs_of_2019_Abukuma_River_flood_by_GSI_469.jpg">Abukuma River flood, Japan</a> — Geospatial Information Authority of Japan, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Resized and cropped for display.</li>
+          <li>Earthen Infrastructure: <a href="https://commons.wikimedia.org/wiki/File:Hydroseeding_a_River_Park_neighborhood_levee_section_(15210766763).jpg">Sacramento River levee</a> — Todd Plain / USACE, public domain.</li>
+          <li>Equitable Infrastructure: <a href="https://commons.wikimedia.org/wiki/File:FEMA_-_40348_-_Aerial_of_a_flooded_Fargo,_North_Dakota_neighborhood.jpg">Fargo neighborhood flood barrier</a> — Patsy Lynch / FEMA, public domain.</li>
+          <li>Unsaturated Mechanics: <a href="https://commons.wikimedia.org/wiki/File:Laboratory_soil_hydrometer_test.jpg">Soil hydrometer test</a> — Maame1Yaa, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</li>
+        </ul>
+      </details>
     </div>
   </section>
 
   <section class="section section-band" aria-labelledby="projects-heading">
     <div class="wrap">
       <h2 id="projects-heading">Highlighted projects</h2>
-      {
-        projects.length === 0 ? (
-          <p class="empty">Explore our research on the Projects page.</p>
-        ) : (
-          <div class="grid grid-3">
-            {projects.map((project) => (
-              <ProjectCard project={project} />
-            ))}
-          </div>
-        )
-      }
+      <ProjectPlaceholders />
       <p><a href={sitePath('/projects')}>All projects</a></p>
     </div>
   </section>

@@ -33,3 +33,5 @@ Internal links and public assets use `src/lib/paths.ts` for the
 The decorative world map uses public-domain Natural Earth 1:110m land geometry (https://www.naturalearthdata.com/). It illustrates geography only, not project coverage.
 
 Institutional marks are supplied Tufts University and Civil and Environmental Engineering white logo assets. Only transparent outer canvas was trimmed; artwork and proportions are preserved.
+
+Research-area photos are illustrative external photographs; sources and licenses are linked in the homepage Photo credits. The soil image shows a hydrometer characterization test, not a CREI experiment. Projects currently uses three editorial placeholders; funding records are excluded from public project listings and site search.

@@ -3,9 +3,8 @@ import { sitePath } from '../lib/paths';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const [people, projects, publications, news, teaching] = await Promise.all([
+const [people, publications, news, teaching] = await Promise.all([
   getCollection('people'),
-  getCollection('projects'),
   getCollection('publications'),
   getCollection('news'),
   getCollection('teaching'),
@@ -25,12 +24,6 @@ const index = [
     title: p.data.name,
     kind: 'People',
     text: `${p.data.title} ${p.data.affiliation}`,
-  })),
-  ...projects.map((p) => ({
-    href: sitePath('/projects'),
-    title: p.data.title,
-    kind: 'Projects',
-    text: p.data.summary,
   })),
   ...publications.map((p) => ({
     href: sitePath('/publications'),

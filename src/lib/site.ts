@@ -29,27 +29,27 @@ export const PRIMARY_NAV = [
 export const RESEARCH_AREAS = [
   {
     title: 'Climate Extremes',
-    hover: 'Drought, flooding, wildfire, and cascading hazards.',
-    body: 'We study how drought, flooding, and wildfire affect earthen infrastructure and nearby communities. We examine compound and cascading hazards to understand how one event changes the impacts of another.',
-    chips: ['drought', 'flood', 'wildfire', 'cascading hazards'],
+    image: '/research/climate-extremes.webp',
+    imageAlt: 'Aerial view of the Abukuma River and flooded neighborhoods in Japan in 2019.',
+    body: 'How drought, floods, and wildfire interact and affect infrastructure and communities.',
   },
   {
     title: 'Earthen Infrastructure',
-    hover: 'Slopes, dams, and levees in a changing climate.',
-    body: 'We analyze how changes in moisture and temperature affect the performance of slopes, dams, and levees. This work informs the assessment and adaptation of earthen infrastructure under changing climate conditions.',
-    chips: ['slopes', 'dams', 'levees', 'climate adaptation'],
+    image: '/research/earthen-infrastructure.webp',
+    imageAlt: 'A crew hydroseeds the earth slope of a Sacramento River levee.',
+    body: 'The performance and adaptation of slopes, dams, and levees under changing climate conditions.',
   },
   {
     title: 'Equitable Infrastructure',
-    hover: 'Infrastructure risk and environmental justice.',
-    body: 'We examine how infrastructure risks affect disadvantaged communities. Our research connects climate adaptation with environmental justice, considering who is exposed to hazards and who benefits from infrastructure protection.',
-    chips: ['environmental justice', 'equity', 'communities'],
+    image: '/research/equitable-infrastructure.webp',
+    imageAlt: 'Aerial view of Fargo homes and roads behind a temporary earth levee beside floodwater.',
+    body: 'Who is exposed to infrastructure risks, and who benefits from protection and adaptation.',
   },
   {
     title: 'Unsaturated Mechanics',
-    hover: 'Water, heat, and stress in unsaturated soils.',
-    body: 'Water flow, heat transfer, and stress jointly influence soil behavior and the stability of earthen structures. We study these coupled processes in unsaturated soils using analytical and numerical methods.',
-    chips: ['unsaturated soils', 'multi-physics', 'analytical methods'],
+    image: '/research/unsaturated-mechanics.webp',
+    imageAlt: 'A hydrometer in a graduated cylinder of soil suspension on a laboratory bench.',
+    body: 'How water, heat, and stress interact in unsaturated soils and influence their behavior.',
   },
 ] as const;
 

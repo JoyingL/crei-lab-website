@@ -1,40 +1,13 @@
 ---
-import { getCollection } from 'astro:content';
-import ProjectCard from '../../components/ProjectCard.astro';
+import ProjectPlaceholders from '../../components/ProjectPlaceholders.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-
-const projects = (await getCollection('projects')).sort(
-  (a, b) => (b.data.year ?? 0) - (a.data.year ?? 0),
-);
 ---
 
 <BaseLayout title="Projects" description="Research projects at the Climate Resilient and Equitable Infrastructure Lab.">
   <section class="section">
     <div class="wrap">
       <h1>Projects</h1>
-      <p class="lede">
-        We study how floods, wildfires, and other climate hazards affect infrastructure and
-        communities. Projects include levee monitoring, coastal erosion, and access to wildfire shelters.
-      </p>
-      <div class="project-summary" aria-label="Project summary">
-        <p><strong>{projects.filter((p) => p.data.status === 'current').length}</strong> current projects</p>
-        <p><strong>{projects.filter((p) => p.data.status === 'completed').length}</strong> completed projects</p>
-      </div>
-      {
-        projects.length === 0 ? (
-          <p class="empty">No public project records are available yet.</p>
-        ) : (
-          <div class="grid grid-3">
-            {projects.map((project) => <ProjectCard project={project} />)}
-          </div>
-        )
-      }
+      <ProjectPlaceholders />
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .project-summary { display: flex; gap: var(--space-6); margin: var(--space-5) 0 var(--space-6); }
-  .project-summary p { margin: 0; color: var(--color-text-muted); }
-  .project-summary strong { color: var(--color-text); font-size: 1.25rem; margin-right: .35rem; }
-</style>
