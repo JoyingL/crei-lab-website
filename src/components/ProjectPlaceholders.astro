@@ -1,21 +1,102 @@
-<div class="project-placeholders">
-  {[1, 2, 3].map((number) => (
-    <article class="project-placeholder" aria-label={`Research project placeholder ${number}`}>
-      <div class="project-placeholder-image" aria-hidden="true"><span>Project image</span></div>
-      <div class="project-placeholder-copy">
-        <h3>Project title</h3>
-        <p>Research question and approach</p>
+---
+// Placeholder project cards. Swap `image` for a figure path in /public once Joy supplies figures.
+const projects = [
+  { title: 'Project title', summary: 'Research question and approach', image: undefined },
+  { title: 'Project title', summary: 'Research question and approach', image: undefined },
+  { title: 'Project title', summary: 'Research question and approach', image: undefined },
+] as { title: string; summary: string; image?: string }[];
+---
+
+<div class="project-cards">
+  {projects.map((project, index) => (
+    <article class="project-card" aria-label={`Research project placeholder ${index + 1}`}>
+      <div class="project-media" aria-hidden={project.image ? undefined : 'true'}>
+        {project.image ? (
+          <img src={project.image} alt="" loading="lazy" />
+        ) : (
+          <span class="project-media-label">Figure</span>
+        )}
+      </div>
+      <div class="project-copy">
+        <span class="placeholder-label">Placeholder</span>
+        <h3>{project.title}</h3>
+        <p>{project.summary}</p>
       </div>
     </article>
   ))}
 </div>
 
 <style>
-  .project-placeholders { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
-  .project-placeholder { min-width: 0; background: var(--color-white); }
-  .project-placeholder-image { aspect-ratio: 6 / 5; display: grid; place-items: center; background: #edf1f4; color: var(--color-text-muted); font-size: 0.8125rem; }
-  .project-placeholder-copy { padding: 1.5rem 1rem 2rem; text-align: center; }
-  .project-placeholder-copy h3 { font-size: 1.25rem; }
-  .project-placeholder-copy p { color: var(--color-text-muted); font-size: 0.875rem; margin-bottom: 0; }
-  @media (max-width: 640px) { .project-placeholders { grid-template-columns: minmax(0, 1fr); } }
+  .project-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.75rem;
+  }
+
+  .project-card {
+    min-width: 0;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform var(--dur) var(--ease-out),
+      box-shadow var(--dur) var(--ease-out);
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .project-media {
+    position: relative;
+    aspect-ratio: 6 / 5;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    /* Faint survey-grid backdrop in brand blues until real figures arrive. */
+    background:
+      linear-gradient(rgb(0 46 109 / 0.06) 1px, transparent 1px) 0 0 / 24px 24px,
+      linear-gradient(90deg, rgb(0 46 109 / 0.06) 1px, transparent 1px) 0 0 / 24px 24px,
+      linear-gradient(140deg, #e8f2fb 0%, #f7f9fc 55%, #eef3f8 100%);
+  }
+
+  .project-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms var(--ease-out);
+  }
+
+  .project-card:hover .project-media img {
+    transform: scale(1.04);
+  }
+
+  .project-media-label {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .project-copy {
+    padding: 1.5rem 1.25rem 2rem;
+    text-align: center;
+  }
+
+  .project-copy h3 {
+    font-size: 1.25rem;
+  }
+
+  .project-copy p {
+    margin-bottom: 0;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 800px) {
+    .project-cards { grid-template-columns: minmax(0, 1fr); max-width: 28rem; margin-inline: auto; }
+  }
 </style>
