@@ -53,25 +53,27 @@ const pageAnimation = {
     <a class="skip-link" href="#main">Skip to main content</a>
 
     <div class="inst-bar">
-      <div class="wrap inst-inner">
+      <div class="wrap-wide inst-inner">
         <nav class="inst-links" aria-label="Institution">
           <a class="institution-logo" href={TUFTS_URL}><img src={sitePath('/brand/tufts-white.png')} alt="Tufts University" width="394" height="169" /></a>
           <a class="department-logo" href={CEE_URL}><img src={sitePath('/brand/cee-department-white.png')} alt="Tufts Civil and Environmental Engineering" width="1086" height="122" /></a>
         </nav>
-        <form class="inst-search" action={sitePath('/search')} method="get" role="search">
+        <form class="inst-search" action={sitePath('/search')} method="get" role="search" data-search>
           <label class="visually-hidden" for="q">Search this site</label>
-          <input id="q" name="q" type="search" placeholder="Search this site" />
-          <button type="submit" aria-label="Search this site">Search</button>
+          <input id="q" name="q" type="search" placeholder="Search this site" autocomplete="off" />
+          <button type="submit" aria-label="Search this site">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+              <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2" />
+              <path d="M15.5 15.5 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </button>
         </form>
       </div>
     </div>
 
     <header class="site-header">
-      <div class="wrap lab-bar">
-        <a class="wordmark" href={sitePath('/')}>
-          {LAB_NAME}
-          <span>Tufts University · Civil and Environmental Engineering</span>
-        </a>
+      <div class="wrap-wide lab-bar">
+        <a class="wordmark" href={sitePath('/')}>{LAB_NAME}</a>
         <nav aria-label="Primary navigation">
           <ul class="lab-nav">
             {
@@ -217,4 +219,26 @@ const pageAnimation = {
   });
 
   document.addEventListener('astro:page-load', setup);
+
+  // Header search: icon-only until opened. Without JS the field is always visible.
+  function setupSearch() {
+    const form = document.querySelector<HTMLFormElement>('[data-search]');
+    const input = form?.querySelector<HTMLInputElement>('input');
+    if (!form || !input) return;
+    form.classList.add('is-collapsible');
+    const open = () => { form.classList.add('is-open'); input.focus(); };
+    const close = () => { if (!input.value) form.classList.remove('is-open'); };
+    form.addEventListener('submit', (event) => {
+      // First click on the icon opens the field instead of submitting an empty query.
+      if (!form.classList.contains('is-open') || !input.value.trim()) { event.preventDefault(); open(); }
+    });
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') { input.value = ''; close(); (form.querySelector('button') as HTMLElement).focus(); }
+    });
+    form.addEventListener('focusout', (event) => {
+      if (!form.contains(event.relatedTarget as Node | null)) close();
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupSearch);
 </script>
