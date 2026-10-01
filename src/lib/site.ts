@@ -2,8 +2,9 @@ export const LAB_NAME = 'Climate Resilient and Equitable Infrastructure Lab';
 export const LAB_SHORT = 'CREI';
 export const PI_NAME = 'Farshid Vahedifard';
 export const ADDRESS = '200 College Avenue, Medford, MA 02155, USA';
+/** Campus map pin: Curtis Hall (Joy, 2026-10-01). Street address text stays 200 College Avenue. */
 export const MAPS_URL =
-  'https://www.google.com/maps/search/?api=1&query=200+College+Avenue+Medford+MA+02155';
+  'https://www.google.com/maps/place/Curtis+Hall,+Medford,+MA+02155/@42.407318,-71.1176105,17z/data=!4m6!3m5!1s0x89e376dc67d749d5:0x24b335390d8a059d!8m2!3d42.4068229!4d-71.1164893!16s%2Fg%2F11mcj60g52';
 export const EMAIL = 'farshid.vahedifard@tufts.edu';
 export const SCHOLAR_URL = 'https://scholar.google.com/citations?user=dc3G9EoAAAAJ';
 export const TUFTS_URL = 'https://www.tufts.edu';
