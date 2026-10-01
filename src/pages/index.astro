@@ -4,14 +4,11 @@ import { getCollection } from 'astro:content';
 import AreaCard from '../components/AreaCard.astro';
 import PersonCard from '../components/PersonCard.astro';
 import ProjectPlaceholders from '../components/ProjectPlaceholders.astro';
-import PubItem from '../components/PubItem.astro';
+import HighlightTabs from '../components/HighlightTabs.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { HOME_SUBTITLE, LAB_NAME, RESEARCH_AREAS } from '../lib/site';
 
 const people = (await getCollection('people')).sort((a, b) => a.data.order - b.data.order);
-const pubs = (await getCollection('publications'))
-  .filter((p) => p.data.highlight)
-  .sort((a, b) => b.data.year - a.data.year);
 ---
 
 <BaseLayout
@@ -29,8 +26,8 @@ const pubs = (await getCollection('publications'))
 
   <section class="section" aria-labelledby="areas-heading">
     <div class="wrap">
-      <h2 id="areas-heading">Research areas</h2>
-      <div class="grid grid-3">
+      <h2 id="areas-heading" class="section-title">Research areas</h2>
+      <div class="grid grid-areas">
         {
           RESEARCH_AREAS.map((area) => (
             <AreaCard title={area.title} body={area.body} hover={area.hover} chips={area.chips} />
@@ -42,15 +39,15 @@ const pubs = (await getCollection('publications'))
 
   <section class="section section-band" aria-labelledby="projects-heading">
     <div class="wrap">
-      <h2 id="projects-heading">Highlighted projects</h2>
+      <h2 id="projects-heading" class="section-title">Highlighted projects</h2>
       <ProjectPlaceholders />
-      <p><a href={sitePath('/projects')}>All projects</a></p>
+      <p class="section-more"><a class="more-link" href={sitePath('/projects')}>All projects</a></p>
     </div>
   </section>
 
   <section class="section" aria-labelledby="people-heading">
     <div class="wrap">
-      <h2 id="people-heading">People</h2>
+      <h2 id="people-heading" class="section-title">People</h2>
       {
         people.length === 0 ? (
           <p class="empty">
@@ -62,21 +59,15 @@ const pubs = (await getCollection('publications'))
           </div>
         )
       }
-      <p><a href={sitePath('/people')}>Lab members</a></p>
+      <p class="section-more"><a class="more-link" href={sitePath('/people')}>Lab members</a></p>
     </div>
   </section>
 
   <section class="section section-band" aria-labelledby="pubs-heading">
     <div class="wrap">
-      <h2 id="pubs-heading">Highlighted publications</h2>
-      {
-        pubs.length === 0 ? (
-          <p class="empty">Explore our research on the Publications page.</p>
-        ) : (
-          pubs.map((pub) => <PubItem pub={pub} />)
-        )
-      }
-      <p><a href={sitePath('/publications')}>View more publications</a></p>
+      <h2 id="pubs-heading" class="section-title">Highlighted publications</h2>
+      <HighlightTabs />
+      <p class="section-more"><a class="more-link" href={sitePath('/publications')}>View more publications</a></p>
     </div>
   </section>
 </BaseLayout>

@@ -1,8 +1,8 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import { sitePath, localPath } from '../lib/paths';
 import '../styles/global.css';
 import {
-  ADDRESS,
   CEE_URL,
   EMAIL,
   LAB_NAME,
@@ -22,6 +22,14 @@ interface Props {
 const { title, description = `${LAB_NAME} at Tufts University.` } = Astro.props;
 const path = localPath(Astro.url.pathname);
 const pageTitle = title.includes(LAB_SHORT) ? title : `${title} · ${LAB_SHORT}`;
+
+// Keyframes live in global.css; header and footer are excluded so only content moves.
+const pageOut = { name: 'page-out', duration: '200ms', easing: 'ease-in', fillMode: 'both' };
+const pageIn = { name: 'page-in', duration: '420ms', easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fillMode: 'both' };
+const pageAnimation = {
+  forwards: { old: pageOut, new: pageIn },
+  backwards: { old: pageOut, new: pageIn },
+};
 ---
 
 <!doctype html>
@@ -39,6 +47,7 @@ const pageTitle = title.includes(LAB_SHORT) ? title : `${title} · ${LAB_SHORT}`
     />
     <link rel="sitemap" href={sitePath('/sitemap-index.xml')} />
     <title>{pageTitle}</title>
+    <ClientRouter />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -82,53 +91,60 @@ const pageTitle = title.includes(LAB_SHORT) ? title : `${title} · ${LAB_SHORT}`
       </div>
     </header>
 
-    <main id="main">
+    <main id="main" transition:name="page" transition:animate={pageAnimation}>
       <slot />
     </main>
 
     <footer class="site-footer">
       <div class="wrap footer-grid">
         <div>
-          <a class="footer-brand" href={TUFTS_URL}>Tufts</a>
-          <p>
-            {LAB_NAME} ({LAB_SHORT})<br />
+          <a
+            class="footer-logo"
+            href={TUFTS_URL}
+            style={`--logo: url('${sitePath('/brand/tufts-white.png')}')`}
+          >
+            <img src={sitePath('/brand/tufts-white.png')} alt="Tufts University" width="394" height="169" />
+          </a>
+          <p class="footer-lab">
+            {LAB_NAME}<br />
+            Department of Civil and Environmental Engineering
+          </p>
+        </div>
+        <div>
+          <h2 class="footer-heading">Visit Us</h2>
+          <address class="footer-address">
             School of Engineering<br />
-            Civil and Environmental Engineering
-          </p>
+            200 College Avenue<br />
+            Medford, MA 02155<br />
+            United States
+          </address>
+          <a class="footer-map" href={MAPS_URL}>Campus Map</a>
         </div>
-        <div>
-          <h2 class="kicker" style="color: var(--color-white);">Visit Us</h2>
-          <p>
-            <a href={MAPS_URL}>{ADDRESS}</a>
-          </p>
-        </div>
-        <div>
-          <h2 class="kicker" style="color: var(--color-white);">In this site</h2>
+        <nav aria-label="Footer">
+          <h2 class="footer-heading">Explore</h2>
           <ul class="footer-list">
             {
-              PRIMARY_NAV.map((item) => (
+              PRIMARY_NAV.filter((item) => item.href !== '/').map((item) => (
                 <li>
                   <a href={sitePath(item.href)}>{item.label}</a>
                 </li>
               ))
             }
+          </ul>
+        </nav>
+        <div>
+          <h2 class="footer-heading">Connect</h2>
+          <ul class="footer-list">
             <li><a href={sitePath('/join')}>Opportunities</a></li>
             <li><a href={sitePath('/contact')}>Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="kicker" style="color: var(--color-white);">Follow</h2>
-          <ul class="footer-list">
             <li><a href={SCHOLAR_URL}>Google Scholar</a></li>
-            <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+            <li><a href={`mailto:${EMAIL}`}>Email</a></li>
           </ul>
         </div>
       </div>
-      <div class="wrap">
-        <p class="copyright">
-          © 2026 Climate Resilient and Equitable Infrastructure Lab, Department of Civil and
-          Environmental Engineering, Tufts University.
-        </p>
+      <div class="wrap footer-bottom">
+        <p class="copyright">© 2026 {LAB_NAME}, Tufts University. All rights reserved.</p>
+        <a class="to-top" href="#main">Back to top ↑</a>
       </div>
     </footer>
   </body>
@@ -149,33 +165,56 @@ const pageTitle = title.includes(LAB_SHORT) ? title : `${title} · ${LAB_SHORT}`
 </style>
 
 <script>
-  // Content stays visible without JavaScript. Animate once on entry, without moving focus.
+  // Scroll reveal with stagger. Content is visible without JS; `js-reveal` gates the hidden state.
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const running = new Map<Element, Animation>();
-  if ('IntersectionObserver' in window) {
+  const TARGETS = '.section > .wrap > h1, .section > .wrap > h2, .section > .wrap > .lede, .grid > *, .project-cards > *, .highlight-tabs';
+
+  function reveal(el: Element) {
+    el.classList.add('is-visible');
+    // Drop the reveal hooks after entry so hover transforms stay snappy.
+    const done = (event: Event) => {
+      if (event.target !== el) return; // ignore transitions bubbling from children
+      el.removeEventListener('transitionend', done);
+      el.removeAttribute('data-reveal');
+      el.classList.remove('is-visible');
+      (el as HTMLElement).style.removeProperty('--i');
+    };
+    el.addEventListener('transitionend', done);
+  }
+
+  function setup() {
+    const root = document.documentElement;
+    if (reducedMotion.matches || !('IntersectionObserver' in window)) {
+      root.classList.remove('js-reveal');
+      return;
+    }
+    root.classList.add('js-reveal');
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         observer.unobserve(entry.target);
-        if (reducedMotion.matches || entry.target.contains(document.activeElement)) continue;
-        const animation = entry.target.animate(
-          [{ transform: 'translateY(22px)', opacity: 0.45 }, { transform: 'translateY(0)', opacity: 1 }],
-          { duration: 520, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' },
-        );
-        running.set(entry.target, animation);
-        animation.onfinish = () => running.delete(entry.target);
+        reveal(entry.target);
       }
-    }, { threshold: 0, rootMargin: '0px 0px -24px 0px' });
-    document.querySelectorAll('.section > .wrap').forEach((section) => observer.observe(section));
-    reducedMotion.addEventListener('change', () => {
-      if (reducedMotion.matches) { running.forEach((animation) => animation.cancel()); running.clear(); }
-    });
-    document.addEventListener('focusin', (event) => {
-      for (const [element, animation] of running) {
-        if (event.target instanceof Node && element.contains(event.target)) {
-          animation.cancel(); running.delete(element);
-        }
-      }
+    }, { rootMargin: '0px 0px -8% 0px' });
+
+    document.querySelectorAll('main').forEach((main) => {
+      main.querySelectorAll(TARGETS).forEach((el) => {
+        // Above-the-fold content already animates with the page transition; never hide it.
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.92) return;
+        const siblings = el.parentElement ? Array.from(el.parentElement.children) : [];
+        const isGridItem = el.parentElement?.matches('.grid, .project-cards');
+        el.setAttribute('data-reveal', '');
+        if (isGridItem) (el as HTMLElement).style.setProperty('--i', String(siblings.indexOf(el) % 4));
+        observer.observe(el);
+      });
     });
   }
+
+  // Keyboard users never land on invisible content. Registered once; document persists across swaps.
+  document.addEventListener('focusin', (event) => {
+    const hidden = (event.target as Element | null)?.closest?.('[data-reveal]:not(.is-visible)');
+    if (hidden) reveal(hidden);
+  });
+
+  document.addEventListener('astro:page-load', setup);
 </script>
