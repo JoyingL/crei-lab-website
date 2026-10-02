@@ -9,7 +9,7 @@ const pi = people.filter((p) => p.data.role === 'pi');
 const rest = people.filter((p) => p.data.role !== 'pi');
 ---
 
-<BaseLayout title="People" description="People of the Climate Resilient and Equitable Infrastructure Lab at Tufts.">
+<BaseLayout title="People" description="Members of the Climate Resilient and Equitable Infrastructure Lab at Tufts University.">
   <section class="section">
     <div class="wrap">
       <h1>People</h1>
@@ -21,7 +21,7 @@ const rest = people.filter((p) => p.data.role !== 'pi');
       <h2>Principal investigator</h2>
       {
         pi.length === 0 ? (
-          <p class="empty">For research inquiries, contact Farshid Vahedifard.</p>
+          <p class="empty">Profile not yet available.</p>
         ) : (
           <div class="grid grid-people">
             {pi.map((person) => <PersonCard person={person} />)}
@@ -38,7 +38,8 @@ const rest = people.filter((p) => p.data.role !== 'pi');
         </section>
       )}
       <p>
-        Interested in working with the lab? See <a href={sitePath('/join')}>Opportunities</a>.
+        Information for prospective students and researchers is on the
+        <a href={sitePath('/join')}>Opportunities</a> page.
       </p>
     </div>
   </section>

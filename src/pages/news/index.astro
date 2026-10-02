@@ -10,11 +10,11 @@ const items = (await getCollection('news')).sort((a, b) => b.data.date.valueOf()
     <div class="wrap">
       <h1>News</h1>
       <p class="lede">
-        Research news, media coverage, and commentary from Tufts and other outlets.
+        News about the lab’s research, including coverage from Tufts and other outlets.
       </p>
       {
         items.length === 0 ? (
-          <p class="empty">For research news, visit Tufts Now.</p>
+          <p class="empty">No news items yet.</p>
         ) : (
           items.map((item) => (
             <article class="pub-item">

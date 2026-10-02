@@ -13,50 +13,49 @@ const pi = (await getCollection('people')).find((p) => p.data.role === 'pi');
     <div class="wrap" style="max-width: var(--measure-narrow);">
       <h1>About</h1>
       <p class="lede">
-        We study how climate extremes affect earthen infrastructure and the communities it serves.
-        Our research at Tufts University combines soil mechanics, infrastructure resilience, and
-        environmental justice.
+        The {LAB_NAME}, in the Department of Civil and Environmental Engineering at Tufts
+        University, studies how climate extremes affect earthen infrastructure and the communities
+        it serves.
       </p>
 
       <h2>Challenge</h2>
       <p>
-        Drought, flooding, and wildfire change the moisture and temperature conditions that
-        influence soil behavior. These changes can affect the stability of slopes, dams, and
-        levees. Compound and cascading hazards add to this risk, with consequences for the
-        communities that depend on these systems.
+        Drought, flooding, and wildfire change soil moisture and temperature, and with them soil
+        strength and deformation. These changes can reduce the stability of slopes, dams, and
+        levees. Compound and cascading hazards, in which events overlap or follow one another, add
+        to this risk. When these structures fail, the consequences reach the communities that
+        depend on them.
       </p>
 
       <h2>Contribution</h2>
       <p>
-        We investigate the resilience and adaptation of critical infrastructure to extreme
-        events in a changing climate. Our work connects geotechnical engineering with
-        environmental justice, with particular attention to risks facing disadvantaged
-        communities.
+        Our work focuses on critical infrastructure such as levees and dams: how it withstands
+        extreme events in a changing climate, and how it can be adapted. We pair geotechnical
+        engineering with environmental justice, paying particular attention to the risks facing
+        disadvantaged communities.
       </p>
 
       <h2>Approach</h2>
       <p>
         We use analytical and numerical methods to study water flow, heat transfer, and stress
-        in variably saturated soils. We apply this understanding to assess slopes, dams, and
-        levees under changing climate conditions. Our research draws on climate science,
-        hydrology, geosciences, social science, remote sensing, and data science.
+        in variably saturated soils. We apply these models to slopes, dams, and levees under
+        changing climate conditions. Much of this work is collaborative, drawing on climate
+        science, hydrology, geosciences, social science, remote sensing, and data science.
       </p>
 
       <h2>Principal investigator</h2>
       <p>
-        Farshid Vahedifard is Professor of Civil and Environmental Engineering at Tufts and the
-        Louis Berger Chair. His research examines how
-        climate extremes affect infrastructure and disadvantaged communities. Read his full
-        profile at{' '}
-        <a href={CEE_PROFILE_URL}>Tufts CEE</a>
-        {' · '}
-        <a href={FACULTY_PROFILE_URL}>facultyprofiles.tufts.edu</a>.
+        Farshid Vahedifard is Professor and Louis Berger Chair in Civil and Environmental
+        Engineering. His full biography is available on his{' '}
+        <a href={CEE_PROFILE_URL}>Tufts CEE profile</a> and{' '}
+        <a href={FACULTY_PROFILE_URL}>Tufts faculty profile</a>.
       </p>
       {pi && <PersonCard person={pi} />}
 
       <p class="about-actions">
-        Explore our <a href={sitePath('/projects')}>projects</a> and
-        <a href={sitePath('/publications')}>publications</a>, or <a href={sitePath('/contact')}>contact us</a>.
+        Our <a href={sitePath('/projects')}>projects</a> and
+        <a href={sitePath('/publications')}>publications</a> describe this work in more detail, and
+        we welcome <a href={sitePath('/contact')}>inquiries</a>.
       </p>
     </div>
   </section>

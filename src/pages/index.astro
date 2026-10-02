@@ -13,7 +13,7 @@ const people = (await getCollection('people')).sort((a, b) => a.data.order - b.d
 
 <BaseLayout
   title={LAB_NAME}
-  description="Climate Resilient and Equitable Infrastructure Lab at Tufts University School of Engineering."
+  description="The Climate Resilient and Equitable Infrastructure Lab at Tufts University studies how climate extremes affect earthen infrastructure and the communities it serves."
 >
   <section class="hero">
     <img class="hero-map" src={sitePath('/world-map.svg')} alt="" aria-hidden="true" width="1440" height="600" />
@@ -30,7 +30,7 @@ const people = (await getCollection('people')).sort((a, b) => a.data.order - b.d
       <div class="grid grid-areas">
         {
           RESEARCH_AREAS.map((area) => (
-            <AreaCard title={area.title} body={area.body} hover={area.hover} chips={area.chips} />
+            <AreaCard title={area.title} body={area.body} hover={area.hover} />
           ))
         }
       </div>
@@ -50,16 +50,14 @@ const people = (await getCollection('people')).sort((a, b) => a.data.order - b.d
       <h2 id="people-heading" class="section-title">People</h2>
       {
         people.length === 0 ? (
-          <p class="empty">
-            For research inquiries, contact Farshid Vahedifard.
-          </p>
+          <p class="empty">Member profiles are not yet available.</p>
         ) : (
           <div class="grid grid-people">
             {people.map((person) => <PersonCard person={person} />)}
           </div>
         )
       }
-      <p class="section-more"><a class="more-link" href={sitePath('/people')}>Lab members</a></p>
+      <p class="section-more"><a class="more-link" href={sitePath('/people')}>All people</a></p>
     </div>
   </section>
 
@@ -67,7 +65,7 @@ const people = (await getCollection('people')).sort((a, b) => a.data.order - b.d
     <div class="wrap">
       <h2 id="pubs-heading" class="section-title">Highlighted publications</h2>
       <HighlightTabs />
-      <p class="section-more"><a class="more-link" href={sitePath('/publications')}>View more publications</a></p>
+      <p class="section-more"><a class="more-link" href={sitePath('/publications')}>All publications</a></p>
     </div>
   </section>
 </BaseLayout>

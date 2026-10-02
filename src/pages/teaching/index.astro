@@ -11,11 +11,11 @@ const courses = (await getCollection('teaching')).sort((a, b) => (b.data.year ??
     <div class="wrap">
       <h1>Teaching</h1>
       <p class="lede">
-        Graduate courses in infrastructure risk, resilience, and equity.
+        Courses taught by Farshid Vahedifard on infrastructure risk, resilience, and equity.
       </p>
       {
         courses.length === 0 ? (
-          <p class="empty">For course inquiries, contact Farshid Vahedifard.</p>
+          <p class="empty">Course information will be posted here.</p>
         ) : (
           courses.map((course) => (
             <article class="pub-item">
@@ -30,8 +30,8 @@ const courses = (await getCollection('teaching')).sort((a, b) => (b.data.year ??
       }
       <h2>For students and collaborators</h2>
       <p>
-        For questions about graduate research or course projects,
-        <a href={sitePath('/join')}>contact the lab</a>.
+        Students interested in research or course projects related to this work are welcome to
+        <a href={sitePath('/join')}>get in touch</a>.
       </p>
     </div>
   </section>
