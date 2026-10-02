@@ -44,7 +44,6 @@ const tabs = HIGHLIGHT_TABS.flatMap((tab, index) => {
           <span class="paper-year">{tab.pub.year}</span>
         </div>
         <div class="paper-copy">
-          <p class="kicker">{tab.area}</p>
           <h3>{tab.pub.title}</h3>
           <p class="pub-meta">
             {tab.pub.authors.map((name, j) => (
@@ -56,7 +55,7 @@ const tabs = HIGHLIGHT_TABS.flatMap((tab, index) => {
           </p>
           <p class="paper-cite"><em>{tab.pub.venue}</em> ({tab.pub.year})</p>
           {tab.pub.doi && (
-            <a class="more-link" href={`https://doi.org/${tab.pub.doi}`}>Read the paper</a>
+            <a class="more-link" href={`https://doi.org/${tab.pub.doi}`}>View article</a>
           )}
         </div>
       </div>

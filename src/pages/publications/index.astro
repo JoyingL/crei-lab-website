@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import PubItem from '../../components/PubItem.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SCHOLAR_URL } from '../../lib/site';
 
 const pubs = (await getCollection('publications')).sort((a, b) => b.data.year - a.data.year);
 const years = [...new Set(pubs.map((p) => p.data.year))];
@@ -9,19 +10,22 @@ const years = [...new Set(pubs.map((p) => p.data.year))];
 
 <BaseLayout
   title="Publications"
-  description="Publications from the Climate Resilient and Equitable Infrastructure Lab."
+  description="Journal articles and conference papers from the Climate Resilient and Equitable Infrastructure Lab at Tufts University."
 >
   <section class="section">
     <div class="wrap">
       <h1>Publications</h1>
       <p class="lede">
-        Journal articles and selected conference papers on geotechnical engineering, climate hazards,
-        and infrastructure equity, listed by year.
+        Journal articles and selected conference papers, most recent first. The work spans
+        geotechnical engineering, climate hazards, and infrastructure equity.
       </p>
-      <p class="pub-count">{pubs.length} publications listed.</p>
+      <p class="pub-count">{pubs.length} publications</p>
       {
         pubs.length === 0 ? (
-          <p class="empty">Browse Farshid Vahedifard’s publications on Google Scholar.</p>
+          <p class="empty">
+            A full list of Farshid Vahedifard’s publications is available on{' '}
+            <a href={SCHOLAR_URL}>Google Scholar</a>.
+          </p>
         ) : (
           years.map((year) => (
             <section aria-labelledby={`year-${year}`}>

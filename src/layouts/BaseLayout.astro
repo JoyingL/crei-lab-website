@@ -19,7 +19,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = `${LAB_NAME} at Tufts University.` } = Astro.props;
+const { title, description = `${LAB_NAME}, Department of Civil and Environmental Engineering, Tufts University.` } = Astro.props;
 const path = localPath(Astro.url.pathname);
 const pageTitle = title.includes(LAB_SHORT) ? title : `${title} · ${LAB_SHORT}`;
 
@@ -145,7 +145,7 @@ const pageAnimation = {
         </div>
       </div>
       <div class="wrap footer-bottom">
-        <p class="copyright">© 2026 {LAB_NAME}, Tufts University. All rights reserved.</p>
+        <p class="copyright">© 2026 {LAB_NAME}, Tufts University</p>
         <a class="to-top" href="#main">Back to top ↑</a>
       </div>
     </footer>

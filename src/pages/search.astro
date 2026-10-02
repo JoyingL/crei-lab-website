@@ -18,7 +18,7 @@ const index = [
   { href: sitePath('/publications'), title: 'Publications', kind: 'Page', text: '' },
   { href: sitePath('/teaching'), title: 'Teaching', kind: 'Page', text: '' },
   { href: sitePath('/news'), title: 'News', kind: 'Page', text: '' },
-  { href: sitePath('/join'), title: 'Join', kind: 'Page', text: 'openings' },
+  { href: sitePath('/join'), title: 'Opportunities', kind: 'Page', text: 'join us prospective students collaboration' },
   ...people.map((p) => ({
     href: sitePath('/people'),
     title: p.data.name,
@@ -56,7 +56,7 @@ const index = [
         <input id="q-page" name="q" type="search" placeholder="Search this site" />
         <button type="submit">Search</button>
       </form>
-      <p id="search-status" class="empty" role="status" aria-live="polite">Enter a term.</p>
+      <p id="search-status" class="empty" role="status" aria-live="polite">Enter a search term above.</p>
       <ul id="search-results" class="search-results footer-list"></ul>
     </div>
   </section>
@@ -70,15 +70,15 @@ const index = [
   const list = document.getElementById('search-results');
   if (input) input.value = params.get('q') || '';
   if (!q) {
-    status.textContent = 'Enter a term.';
+    status.textContent = 'Enter a search term above.';
   } else {
     const hits = index.filter((item) =>
       `${item.title} ${item.kind} ${item.text}`.toLowerCase().includes(q),
     );
     if (hits.length === 0) {
-      status.textContent = `No matches for “${q}”.`;
+      status.textContent = `No results for “${q}”.`;
     } else {
-      status.textContent = `${hits.length} match${hits.length === 1 ? '' : 'es'}.`;
+      status.textContent = `${hits.length} result${hits.length === 1 ? '' : 's'}`;
       // Build links with DOM APIs so collection content can never be interpreted as HTML.
       hits.forEach((hit) => {
         const item = document.createElement('li');

@@ -31,20 +31,20 @@ export const RESEARCH_AREAS = [
   {
     title: 'Climate Extremes',
     hover: 'Drought, flooding, wildfire, and cascading hazards.',
-    body: 'We study how drought, flooding, and wildfire affect earthen infrastructure and nearby communities. We examine compound and cascading hazards to understand how one event changes the impacts of another.',
+    body: 'We study how drought, flooding, and wildfire affect earthen infrastructure and the communities that depend on it. When hazards overlap or follow one another, one event can change the impact of the next, so we also examine compound and cascading hazards.',
     chips: ['drought', 'flood', 'wildfire', 'cascading hazards'],
   },
   {
     title: 'Earthen Infrastructure',
     hover: 'Slopes, dams, and levees in a changing climate.',
-    body: 'We analyze how changes in moisture and temperature affect the performance of slopes, dams, and levees. This work informs the assessment and adaptation of earthen infrastructure under changing climate conditions.',
+    body: 'We analyze how changes in soil moisture and temperature affect the performance of slopes, dams, and levees. The results inform how these structures are assessed and adapted as climate conditions change.',
     chips: ['slopes', 'dams', 'levees', 'climate adaptation'],
   },
   {
     title: 'Equitable Infrastructure',
     hover: 'Infrastructure risk and environmental justice.',
-    body: 'We examine how infrastructure risks affect disadvantaged communities. Our research connects climate adaptation with environmental justice, considering who is exposed to hazards and who benefits from infrastructure protection.',
-    chips: ['environmental justice', 'equity', 'communities'],
+    body: 'We examine how infrastructure risks affect disadvantaged communities, including who is exposed to hazards and who benefits when infrastructure is protected. This work treats climate adaptation as a question of environmental justice.',
+    chips: ['environmental justice', 'equity', 'disadvantaged communities'],
   },
   {
     title: 'Unsaturated Mechanics',

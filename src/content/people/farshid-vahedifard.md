@@ -11,4 +11,4 @@ order: 1
 highlight: true
 ---
 
-Farshid Vahedifard is Professor of Civil and Environmental Engineering at Tufts and the Louis Berger Chair. His research sits at the interface of geotechnical engineering, climate, and environmental justice.
+Farshid Vahedifard is Professor and Louis Berger Chair in Civil and Environmental Engineering at Tufts University. His research connects geotechnical engineering with climate change and environmental justice, with a focus on how extreme events affect infrastructure and disadvantaged communities.

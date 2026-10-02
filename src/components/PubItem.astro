@@ -28,17 +28,17 @@ function authorClass(name: string) {
     {' '}({year}). <em>{venue}</em>
   </p>
   <p>
-    {doi && <a href={`https://doi.org/${doi}`}>DOI</a>}
+    {doi && <a href={`https://doi.org/${doi}`} aria-label={`DOI for ${title}`}>DOI</a>}
     {pdf && (
       <>
         {' '}
-        <a href={pdf}>PDF</a>
+        <a href={pdf} aria-label={`PDF of ${title}`}>PDF</a>
       </>
     )}
     {code && (
       <>
         {' '}
-        <a href={code}>Code</a>
+        <a href={code} aria-label={`Code for ${title}`}>Code</a>
       </>
     )}
   </p>
