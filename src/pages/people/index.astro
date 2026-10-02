@@ -6,7 +6,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const people = (await getCollection('people')).sort((a, b) => a.data.order - b.data.order);
 const pi = people.filter((p) => p.data.role === 'pi');
-const rest = people.filter((p) => p.data.role !== 'pi');
+const isVisiting = (p: (typeof people)[number]) => /visiting/i.test(p.data.title);
+const visiting = people.filter((p) => p.data.role !== 'pi' && isVisiting(p));
+const rest = people.filter((p) => p.data.role !== 'pi' && !isVisiting(p));
 ---
 
 <BaseLayout title="People" description="Members of the Climate Resilient and Equitable Infrastructure Lab at Tufts University.">
@@ -28,6 +30,15 @@ const rest = people.filter((p) => p.data.role !== 'pi');
           </div>
         )
       }
+
+      {visiting.length > 0 && (
+        <section aria-labelledby="visiting-heading">
+          <h2 id="visiting-heading">Visiting faculty</h2>
+          <div class="grid grid-people">
+            {visiting.map((person) => <PersonCard person={person} />)}
+          </div>
+        </section>
+      )}
 
       {rest.length > 0 && (
         <section aria-labelledby="members-heading">
