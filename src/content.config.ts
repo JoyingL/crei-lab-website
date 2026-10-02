@@ -7,10 +7,16 @@ const people = defineCollection({
   schema: z.object({
     name: z.string(),
     role: z.enum(['pi', 'researcher', 'student', 'alumni', 'staff']),
+    /** People page section. Falls back to role when omitted. */
+    group: z.enum(['pi', 'phd', 'masters', 'visiting', 'collaborator', 'alumni']).optional(),
+    /** Year the person joined the lab; sorts members within a section (earliest first). */
+    since: z.number().optional(),
     title: z.string(),
     affiliation: z.string(),
     email: z.string().email().optional(),
     scholar: z.string().url().optional(),
+    linkedin: z.string().url().optional(),
+    website: z.string().url().optional(),
     orcid: z.string().optional(),
     photo: z.string().optional(),
     order: z.number().default(99),

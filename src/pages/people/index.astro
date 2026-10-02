@@ -1,14 +1,41 @@
 ---
 import { sitePath } from '../../lib/paths';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import PersonCard from '../../components/PersonCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const people = (await getCollection('people')).sort((a, b) => a.data.order - b.data.order);
-const pi = people.filter((p) => p.data.role === 'pi');
-const isVisiting = (p: (typeof people)[number]) => /visiting/i.test(p.data.title);
-const visiting = people.filter((p) => p.data.role !== 'pi' && isVisiting(p));
-const rest = people.filter((p) => p.data.role !== 'pi' && !isVisiting(p));
+type Person = CollectionEntry<'people'>;
+type Group = NonNullable<Person['data']['group']>;
+
+// Section order follows HuMNet: PI, students, then visiting faculty, collaborators, alumni.
+const SECTIONS: { group: Group; heading: string }[] = [
+  { group: 'pi', heading: 'Principal investigator' },
+  { group: 'phd', heading: 'Ph.D. students' },
+  { group: 'masters', heading: 'Master’s students' },
+  { group: 'visiting', heading: 'Visiting faculty' },
+  { group: 'collaborator', heading: 'Collaborators' },
+  { group: 'alumni', heading: 'Alumni' },
+];
+
+const ROLE_FALLBACK: Record<Person['data']['role'], Group> = {
+  pi: 'pi',
+  student: 'phd',
+  researcher: 'collaborator',
+  staff: 'collaborator',
+  alumni: 'alumni',
+};
+
+const groupOf = (p: Person): Group => p.data.group ?? ROLE_FALLBACK[p.data.role];
+
+// Longest-serving members first; `order` breaks ties and covers entries without a join year.
+const bySeniority = (a: Person, b: Person) =>
+  (a.data.since ?? 9999) - (b.data.since ?? 9999) || a.data.order - b.data.order;
+
+const people = await getCollection('people');
+const sections = SECTIONS.map((s) => ({
+  ...s,
+  members: people.filter((p) => groupOf(p) === s.group).sort(bySeniority),
+})).filter((s) => s.members.length > 0);
 ---
 
 <BaseLayout title="People" description="Members of the Climate Resilient and Equitable Infrastructure Lab at Tufts University.">
@@ -20,34 +47,15 @@ const rest = people.filter((p) => p.data.role !== 'pi' && !isVisiting(p));
         at Tufts University.
       </p>
 
-      <h2>Principal investigator</h2>
-      {
-        pi.length === 0 ? (
-          <p class="empty">Profile not yet available.</p>
-        ) : (
+      {sections.map((s) => (
+        <section class="people-section" aria-labelledby={`people-${s.group}`}>
+          <h2 id={`people-${s.group}`}>{s.heading}</h2>
           <div class="grid grid-people">
-            {pi.map((person) => <PersonCard person={person} />)}
-          </div>
-        )
-      }
-
-      {visiting.length > 0 && (
-        <section aria-labelledby="visiting-heading">
-          <h2 id="visiting-heading">Visiting faculty</h2>
-          <div class="grid grid-people">
-            {visiting.map((person) => <PersonCard person={person} />)}
+            {s.members.map((person) => <PersonCard person={person} />)}
           </div>
         </section>
-      )}
+      ))}
 
-      {rest.length > 0 && (
-        <section aria-labelledby="members-heading">
-          <h2 id="members-heading">Lab members</h2>
-          <div class="grid grid-people">
-            {rest.map((person) => <PersonCard person={person} />)}
-          </div>
-        </section>
-      )}
       <p>
         Information for prospective students and researchers is on the
         <a href={sitePath('/join')}>Opportunities</a> page.
@@ -55,3 +63,7 @@ const rest = people.filter((p) => p.data.role !== 'pi' && !isVisiting(p));
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .people-section + .people-section { margin-top: var(--space-6); }
+</style>

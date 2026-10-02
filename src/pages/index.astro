@@ -8,7 +8,12 @@ import HighlightTabs from '../components/HighlightTabs.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { HOME_SUBTITLE, LAB_NAME, RESEARCH_AREAS } from '../lib/site';
 
-const people = (await getCollection('people')).sort((a, b) => a.data.order - b.data.order);
+// Home shows faculty only (PI first, then visiting); students are listed on /people.
+const rank = (p: { data: { role: string; group?: string } }) =>
+  p.data.role === 'pi' ? 0 : p.data.group === 'visiting' ? 1 : 2;
+const people = (await getCollection('people'))
+  .filter((p) => rank(p) < 2)
+  .sort((a, b) => rank(a) - rank(b) || a.data.order - b.data.order);
 ---
 
 <BaseLayout

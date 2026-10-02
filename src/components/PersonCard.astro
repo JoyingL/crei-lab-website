@@ -7,13 +7,28 @@ interface Props {
 }
 
 const { person } = Astro.props;
-const { name, title, affiliation, email, scholar, photo } = person.data;
+const { name, title, affiliation, email, scholar, linkedin, website, photo } = person.data;
+const initials = name
+  .split(/\s+/)
+  .map((part) => part[0])
+  .filter(Boolean)
+  .slice(0, 2)
+  .join('');
+
+const links = [
+  scholar && { href: scholar, label: 'Google Scholar' },
+  linkedin && { href: linkedin, label: 'LinkedIn' },
+  website && { href: website, label: 'Website' },
+].filter(Boolean) as { href: string; label: string }[];
 ---
 
-<article class="card">
+<article class="card person-card">
   {
-    photo && (
-      <img class="person-photo" src={sitePath(photo)} alt={name} width="320" height="400" />
+    photo ? (
+      <img class="person-photo" src={sitePath(photo)} alt={name} width="320" height="400" loading="lazy" />
+    ) : (
+      // Placeholder until a photo is supplied; decorative, the name follows as text.
+      <div class="person-photo person-initials" aria-hidden="true">{initials}</div>
     )
   }
   <h3 class="person-name">{name}</h3>
@@ -27,10 +42,33 @@ const { name, title, affiliation, email, scholar, photo } = person.data;
     )
   }
   {
-    scholar && (
-      <p>
-        <a href={scholar}>Google Scholar</a>
+    links.length > 0 && (
+      <p class="person-links">
+        {links.map((link) => (
+          <a href={link.href} aria-label={`${link.label}: ${name}`}>{link.label}</a>
+        ))}
       </p>
     )
   }
 </article>
+
+<style>
+  .person-initials {
+    display: grid;
+    place-items: center;
+    background: linear-gradient(140deg, var(--color-sky), #f4f7fb);
+    color: var(--color-primary);
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .person-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+</style>

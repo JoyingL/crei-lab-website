@@ -1,6 +1,7 @@
 ---
 name: Paul Kirshen
 role: researcher
+group: visiting
 title: Visiting Professor, Civil and Environmental Engineering
 affiliation: Department of Civil and Environmental Engineering, Tufts University
 email: paul.kirshen@tufts.edu
