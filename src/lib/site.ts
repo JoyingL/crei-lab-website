@@ -58,12 +58,22 @@ export const RESEARCH_AREAS = [
  * Home "Highlighted publications" tabs: one representative paper per research area.
  * Provisional picks (2026-09) until Joy / Farshid confirm; ids are publication file slugs.
  */
-export const HIGHLIGHT_TABS = [
+// `image`: first-page render in /public/papers (from Joy's Zotero PDFs); tabs without one
+// fall back to the typographic cover.
+export const HIGHLIGHT_TABS: readonly { area: string; pub: string; image?: string }[] = [
   { area: 'Climate Extremes', pub: '2016-compound-hazards-yield-louisiana-flood-182' },
-  { area: 'Earthen Infrastructure', pub: '2026-risk-based-adaptation-framework-for-levees-under-evolving-climatic-and-012' },
-  { area: 'Equitable Infrastructure', pub: '2025-equitable-cleanup-of-superfund-sites-leaving-no-u-s-community-behind-030' },
+  {
+    area: 'Earthen Infrastructure',
+    pub: '2026-to-fix-ageing-water-infrastructure-we-must-plan-for-an-ageing-population',
+    image: '/papers/ageing-water-infrastructure.webp',
+  },
+  {
+    area: 'Equitable Infrastructure',
+    pub: '2025-equitable-cleanup-of-superfund-sites-leaving-no-u-s-community-behind-030',
+    image: '/papers/superfund-equitable-cleanup.webp',
+  },
   { area: 'Unsaturated Mechanics', pub: '2026-from-particle-gradation-to-soil-water-retention-and-suction-stress-cha-009' },
-] as const;
+];
 
 export function isInGroupAuthor(name: string) {
   const n = name.replace(/\./g, '').replace(/\s+/g, ' ').trim().toLowerCase();

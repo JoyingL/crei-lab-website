@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { HIGHLIGHT_TABS, isInGroupAuthor } from '../lib/site';
+import { sitePath } from '../lib/paths';
 
 const pubs = await getCollection('publications');
 const tabs = HIGHLIGHT_TABS.flatMap((tab, index) => {
@@ -35,14 +36,27 @@ const tabs = HIGHLIGHT_TABS.flatMap((tab, index) => {
         aria-labelledby={`${tab.key}-tab`}
         hidden={i !== 0}
       >
-        {/* Typographic stand-in for a first-page image; replace with a figure when supplied. */}
-        <div class="paper-cover" aria-hidden="true">
-          <span class="paper-venue">{tab.pub.venue}</span>
-          <span class="paper-rule"></span>
-          <span class="paper-title">{tab.pub.title}</span>
-          <span class="paper-lines"><i></i><i></i><i></i><i></i><i></i></span>
-          <span class="paper-year">{tab.pub.year}</span>
-        </div>
+        {tab.image ? (
+          <a class="paper-page" href={tab.pub.doi ? `https://doi.org/${tab.pub.doi}` : undefined} tabindex="-1" aria-hidden="true">
+            <img
+              src={sitePath(tab.image)}
+              alt=""
+              width="720"
+              height="957"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+          </a>
+        ) : (
+          /* Typographic stand-in until a first-page image is supplied. */
+          <div class="paper-cover" aria-hidden="true">
+            <span class="paper-venue">{tab.pub.venue}</span>
+            <span class="paper-rule"></span>
+            <span class="paper-title">{tab.pub.title}</span>
+            <span class="paper-lines"><i></i><i></i><i></i><i></i><i></i></span>
+            <span class="paper-year">{tab.pub.year}</span>
+          </div>
+        )}
         <div class="paper-copy">
           <h3>{tab.pub.title}</h3>
           <p class="pub-meta">
@@ -143,6 +157,36 @@ const tabs = HIGHLIGHT_TABS.flatMap((tab, index) => {
   }
 
   .tab-panel:hover .paper-cover { transform: rotate(0) translateY(-4px); }
+
+  /* Real first page: a sheet of paper with a soft drop shadow, as on HuMNet. */
+  .paper-page {
+    display: block;
+    width: 100%;
+    max-width: 22rem;
+    margin-inline: auto;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--color-white);
+    box-shadow:
+      0 1px 2px rgb(0 46 109 / 0.08),
+      0 18px 40px -12px rgb(0 46 109 / 0.28);
+    transition:
+      transform 600ms var(--ease-out),
+      box-shadow 600ms var(--ease-out);
+  }
+
+  .paper-page img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .tab-panel:hover .paper-page {
+    transform: translateY(-6px);
+    box-shadow:
+      0 2px 4px rgb(0 46 109 / 0.08),
+      0 28px 56px -14px rgb(0 46 109 / 0.32);
+  }
 
   .paper-venue {
     color: var(--color-text);
