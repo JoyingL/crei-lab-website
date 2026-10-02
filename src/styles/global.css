@@ -118,10 +118,10 @@ p {
 .kicker {
   margin: 0 0 var(--space-2);
   color: var(--color-secondary);
-  font-family: var(--font-body);
-  font-size: 0.8rem;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -263,8 +263,9 @@ p {
   border-radius: var(--radius-pill);
   background: var(--color-accent-strong);
   color: var(--color-white);
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-weight: 600;
+  letter-spacing: 0.01em;
   text-decoration: none;
   box-shadow: var(--shadow-sm);
   transition:
@@ -275,11 +276,6 @@ p {
     transform var(--dur) var(--ease-out);
 }
 
-.btn::after {
-  content: "→";
-  transition: transform var(--dur) var(--ease-out);
-}
-
 .btn:hover {
   background: var(--color-primary);
   border-color: var(--color-primary);
@@ -288,28 +284,24 @@ p {
   transform: translateY(-2px);
 }
 
-.btn:hover::after {
-  transform: translateX(3px);
-}
-
-/* Text link with an animated arrow, used for "View more" style links. */
+/* Plain text link for "All projects" style destinations; no arrow glyph. */
 .more-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
   margin-top: var(--space-5);
   color: var(--color-link);
+  font-family: var(--font-ui);
   font-weight: 600;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.3em;
+  transition: text-decoration-color var(--dur-fast) ease, color var(--dur-fast) ease;
 }
 
-.more-link::after {
-  content: "→";
-  transition: transform var(--dur) var(--ease-out);
-}
-
-.more-link:hover::after {
-  transform: translateX(4px);
+.more-link:hover {
+  color: var(--color-primary);
+  text-decoration-color: currentColor;
 }
 
 .btn-ghost {
@@ -469,32 +461,38 @@ p {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 0 0.7rem;
+  padding: 0 0.85rem;
   color: var(--color-text);
+  font-family: var(--font-ui);
   font-size: 0.9375rem;
-  font-weight: 600;
+  font-weight: 500;
+  letter-spacing: 0.005em;
   text-decoration: none;
   transition: color var(--dur-fast) ease;
 }
 
-/* Underline slides in from the center instead of appearing abruptly. */
+/* Hover underline: a 3px Tufts Blue bar that grows out from the center along the
+   bottom edge of the header. The current page keeps the bar. */
 .lab-nav a::after {
   content: "";
   position: absolute;
-  left: 0.7rem;
-  right: 0.7rem;
-  bottom: 6px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--color-primary);
+  left: 0.35rem;
+  right: 0.35rem;
+  bottom: calc(-1 * var(--space-2) - 1px);
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--color-accent);
   transform: scaleX(0);
   transition: transform var(--dur) var(--ease-out);
 }
 
-.lab-nav a[aria-current="page"],
 .lab-nav a:hover,
 .lab-nav a:focus-visible {
   color: var(--color-primary);
+}
+
+.lab-nav a[aria-current="page"] {
+  color: var(--color-text);
 }
 
 .lab-nav a[aria-current="page"]::after,
@@ -752,6 +750,8 @@ p {
 
 @media (max-width: 640px) {
   .lab-bar > nav { margin-left: 0; width: 100%; }
+  /* Nav wraps on phones, so keep the bar inside each link rather than on the header edge. */
+  .lab-nav a::after { bottom: 4px; }
   .lab-nav { margin-left: -0.5rem; }
 
   /* Keep both marks and the search icon on one row. */
@@ -798,6 +798,20 @@ p {
 .institution-logo { width: calc(1.875rem * 394 / 169); }
 .department-logo { width: calc(1.875rem * 1086 / 122); }
 .inst-inner { min-height: 0; padding-block: 0.375rem; }
+
+/* Interface typography: Plus Jakarta Sans for controls and labels; headings stay serif,
+   running text stays in the body face. */
+.footer-heading,
+.footer-list a,
+.footer-map,
+.to-top,
+.placeholder-label,
+.chip,
+.inst-search input,
+.pub-count,
+.contact-card h2 {
+  font-family: var(--font-ui);
+}
 
 /* Page transitions (Astro ClientRouter, see BaseLayout): main content fades and rises. */
 @keyframes page-out { to { opacity: 0; transform: translateY(-8px); } }

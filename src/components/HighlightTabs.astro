@@ -84,9 +84,12 @@ const tabs = HIGHLIGHT_TABS.flatMap((tab, index) => {
     border-radius: calc(var(--radius-card) - 4px);
     background: transparent;
     color: var(--color-text-muted);
-    font-weight: 600;
+    font-family: var(--font-ui);
+    font-weight: 500;
     transition: color var(--dur) var(--ease-out);
   }
+
+  .tab-list button[aria-selected="true"] { font-weight: 600; }
 
   .tab-list button:hover,
   .tab-list button[aria-selected="true"] {
