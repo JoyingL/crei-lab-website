@@ -25,6 +25,8 @@
 
   --font-display: "Source Serif 4", Georgia, serif;
   --font-body: Arial, Helvetica, sans-serif;
+  /* Interface text: navigation, buttons, labels, tabs, footer headings. */
+  --font-ui: "Plus Jakarta Sans", Arial, Helvetica, sans-serif;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
