@@ -4,16 +4,17 @@ dist/
 .DS_Store
 
 # Internal research material and working notes; keep the public repository site-only.
-data/
-docs/
-figures/
-output/
-scripts/
-CLAUDE.md
-findings.md
-progress.md
-task_plan.md
+# Leading slash = root folder only, so src/data/ (site data) is still tracked.
+/data/
+/docs/
+/figures/
+/output/
+/scripts/
+/CLAUDE.md
+/findings.md
+/progress.md
+/task_plan.md
 
 # Joy's draft copies and local tool settings stay out of the public repo.
-src-Joyy/
-.claude/
+/src-Joyy/
+/.claude/

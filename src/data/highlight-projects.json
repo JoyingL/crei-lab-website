@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Planning Ageing Water Infrastructure for Ageing Populations",
+    "summary": "How should water infrastructure decisions account for the ageing of the people these systems serve? This Comment introduces the infrastructure-society ageing gap (ISAG) as a framework for decisions across the infrastructure life cycle.",
+    "image": "/projects/ageing-water-infrastructure.webp",
+    "imageAlt": "Scatter plot of mean large dam age against the share of population aged 65 and over in 25 countries, above a bar chart of large dams completed per decade since 1900.",
+    "width": 1065,
+    "height": 1345,
+    "href": "https://doi.org/10.1038/s44221-026-00711-z",
+    "pub": "2026-to-fix-ageing-water-infrastructure-we-must-plan-for-an-ageing-population"
+  },
+  {
+    "title": "Equitable Cleanup of U.S. Superfund Sites",
+    "summary": "Who lives near the most contaminated U.S. sites, and where should cleanup come first? A spatial analysis of 13,453 Superfund sites yields an Action Priority Matrix that ranks states and regions by cleanup urgency.",
+    "image": "/projects/superfund-equitable-cleanup.webp",
+    "imageAlt": "Map of the ten EPA regions with box plots and radar charts comparing population composition near Superfund sites with active cleanup and with no cleanup.",
+    "width": 1200,
+    "height": 1088,
+    "href": "https://doi.org/10.1038/s41467-025-63607-8",
+    "pub": "2025-equitable-cleanup-of-superfund-sites-leaving-no-u-s-community-behind-030",
+    "news": "https://now.tufts.edu/2025/10/24/addressing-population-disparities-near-worst-superfund-sites"
+  },
+  {
+    "title": "Modeling the Size and Likelihood of Extreme Wildfires",
+    "summary": "Do standard fire size models capture the largest wildfires? Across 30,331 U.S. fires, models fit only to typical fires can misestimate large fire exceedance probability by up to three orders of magnitude.",
+    "image": "/projects/wildfire-extremes.webp",
+    "imageAlt": "Map of four U.S. ecoregions and exceedance probability curves of burned area comparing lognormal fits to all fires and to tail fires only.",
+    "width": 1200,
+    "height": 1212,
+    "href": "https://doi.org/10.1029/2025EF007485",
+    "pub": "2026-accounting-for-extremes-in-modeling-the-size-and-likelihood-of-large-f-002",
+    "news": "https://engineering.tufts.edu/news-events/news/characterizing-extreme-wildfire-statistics-improve-risk-assessment-and-resilience"
+  },
+  {
+    "title": "Calibrating Levee Seepage Models with Field Monitoring Data",
+    "summary": "How can field monitoring data improve predictions of transient seepage in levees? This study develops a hybrid calibration framework that uses measurements from an instrumented levee to calibrate a finite element seepage model.",
+    "image": "/projects/levee-seepage-calibration.webp",
+    "imageAlt": "Finite element mesh of a levee cross section with a silty sand embankment, a gravel layer, a silty foundation layer, boundary conditions, and numbered sensor locations.",
+    "width": 1200,
+    "height": 423,
+    "href": "https://doi.org/10.1016/j.ress.2026.113617",
+    "pub": "2026-a-hybrid-model-calibration-framework-for-transient-seepage-prediction-in-levees"
+  }
+]

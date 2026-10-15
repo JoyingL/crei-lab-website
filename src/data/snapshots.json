@@ -1,0 +1,20 @@
+[
+  {
+    "src": "/snapshots/lab-meeting-room-gathering.webp",
+    "alt": "Lab members around a long conference table in a meeting room, smiling and holding up small plush toys unwrapped from gift boxes.",
+    "width": 1600,
+    "height": 1200
+  },
+  {
+    "src": "/snapshots/lab-lunch-sunlit-restaurant.webp",
+    "alt": "Lab members share a meal at a long table in a sunlit restaurant with tall windows and hanging lamps.",
+    "width": 1200,
+    "height": 1600
+  },
+  {
+    "src": "/snapshots/lab-group-dinner.webp",
+    "alt": "Lab members gathered around a long table for a group meal at a restaurant.",
+    "width": 1024,
+    "height": 768
+  }
+]

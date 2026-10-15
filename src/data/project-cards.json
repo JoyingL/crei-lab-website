@@ -1,0 +1,20 @@
+[
+  {
+    "project": "nsf-2401545",
+    "short": "Levee Adaptation",
+    "tagline": "Equitable adaptation of flood protection infrastructure to compound hazards",
+    "image": "/projects/flood-adaptation-portfolio.webp",
+    "imageAlt": "Illustrated landscape of flood protection infrastructure, including dams, levees, floodwalls, drainage systems, and seawalls, labeled with stressors such as extreme precipitation, drought, sea level rise, storm surge, and land subsidence.",
+    "width": 1200,
+    "height": 679
+  },
+  {
+    "project": "nsf-2552816",
+    "short": "Levee Digital Twin",
+    "tagline": "Physics-based models and monitoring data for levee flood-risk assessment",
+    "image": "/projects/levee-adaptation-framework.webp",
+    "imageAlt": "Cycle diagram of a five-step levee framework: risk screening, stakeholder engagement, multi-scale risk assessment, co-production of adaptation, and performance monitoring.",
+    "width": 1200,
+    "height": 1215
+  }
+]
