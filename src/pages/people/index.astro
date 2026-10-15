@@ -104,11 +104,11 @@ const featured = shots.length === 3 && shots.filter(isPortrait).length === 1;
 
   .people-faculty :global(.person) { max-width: none; }
 
-  /* Photo-forward grid: cards fill their columns (4 across at full width), narrow gutters. */
+  /* Photo-forward grid: cards fill their columns (4 across at full width), 2.5rem gutters. */
   .people-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
-    gap: var(--space-6) var(--space-5);
+    gap: 2.5rem 2.5rem;
     margin-bottom: var(--space-5);
   }
 
