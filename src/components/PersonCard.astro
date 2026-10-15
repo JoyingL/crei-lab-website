@@ -1,20 +1,21 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { sitePath } from '../lib/paths';
+import { CEE_PROFILE_URL } from '../lib/site';
 import { hasProfile, initialsOf, profilePath } from '../lib/people';
 import IconLinks from './IconLinks.astro';
 
 interface Props {
   person: CollectionEntry<'people'>;
-  /** Principal Investigator: name links to About. */
+  /** Principal Investigator: name links to the Tufts CEE profile. */
   pi?: boolean;
 }
 
 const { person, pi = false } = Astro.props;
 const { name, title, email, scholar, linkedin, website, photo } = person.data;
 const initials = initialsOf(name);
-// PI links to About; postdocs and Ph.D. students to their profile; others to an external page if any.
-const nameHref = pi ? sitePath('/about') : hasProfile(person) ? sitePath(profilePath(person)) : website;
+// PI links to the CEE profile (like visiting faculty); postdocs and Ph.D. students to their profile; others to an external page if any.
+const nameHref = pi ? CEE_PROFILE_URL : hasProfile(person) ? sitePath(profilePath(person)) : website;
 ---
 
 <article class="person">

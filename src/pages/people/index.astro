@@ -17,14 +17,8 @@ const CURRENT: { group: Group; heading: string }[] = [
   { group: 'collaborator', heading: 'Collaborators' },
 ];
 
-// Alumni grouped by the section they were in; unknown former role goes last.
-const ALUMNI: { key: string; heading: string }[] = [
-  { key: 'postdoc', heading: 'Former Postdoctoral Associates' },
-  { key: 'phd', heading: 'Former Ph.D. Students' },
-  { key: 'masters', heading: 'Former Master’s Students' },
-  { key: 'visiting-researcher', heading: 'Former Visiting Researchers' },
-  { key: 'other', heading: 'Former Lab Members' },
-];
+// Alumni in one list without sub-headings (Joy, 2026-10-15), ordered by former role; unknown role last.
+const ALUMNI_ORDER = ['postdoc', 'phd', 'masters', 'visiting-researcher', 'other'];
 
 // Longest-serving members first; `order` breaks ties and covers entries without a join year.
 const bySeniority = (a: Person, b: Person) =>
@@ -37,12 +31,8 @@ const isFaculty = (g: Group) => g === 'pi' || g === 'visiting';
 const faculty = current.filter((s) => isFaculty(s.group));
 const others = current.filter((s) => !isFaculty(s.group));
 const alumni = membersOf('alumni');
-const alumniGroups = ALUMNI.map((g) => ({
-  ...g,
-  members: alumni.filter((p) => (p.data.formerGroup ?? 'other') === g.key),
-})).filter((g) => g.members.length > 0);
-// A single unlabeled group needs no sub-heading.
-const showAlumniHeadings = !(alumniGroups.length === 1 && alumniGroups[0].key === 'other');
+const alumniRank = (p: Person) => ALUMNI_ORDER.indexOf(p.data.formerGroup ?? 'other');
+const alumniList = [...alumni].sort((a, b) => alumniRank(a) - alumniRank(b));
 
 // Snapshots: portrait first so the feature layout puts it on the left.
 const isPortrait = (s: { width: number; height: number }) => s.height > s.width;
@@ -83,25 +73,20 @@ const featured = shots.length === 3 && shots.filter(isPortrait).length === 1;
       {alumni.length > 0 && (
         <section class="people-group" aria-labelledby="people-alumni">
           <h2 id="people-alumni">Alumni</h2>
-          {alumniGroups.map((g) => (
-            <section class="people-subgroup" aria-labelledby={showAlumniHeadings ? `alumni-${g.key}` : undefined}>
-              {showAlumniHeadings && <h3 id={`alumni-${g.key}`}>{g.heading}</h3>}
-              <ul class="alumni-list">
-                {g.members.map((p) => {
-                  const role = p.data.formerGroup ? ROLE_LABEL[p.data.formerGroup] : undefined;
-                  const meta = [role, p.data.years && `(${p.data.years})`].filter(Boolean).join(' ');
-                  const href = hasProfile(p) ? sitePath(profilePath(p)) : p.data.website;
-                  return (
-                    <li>
-                      <strong class="alumni-name">{href ? <a href={href}>{p.data.name}</a> : p.data.name}</strong>
-                      {meta && <span class="alumni-meta">, {meta}</span>}
-                      {p.data.current && <span class="alumni-current">. Currently {p.data.current.replace(/\.$/, '')}.</span>}
-                    </li>
-                  );
-                })}
-              </ul>
-            </section>
-          ))}
+          <ul class="alumni-list">
+            {alumniList.map((p) => {
+              const role = p.data.formerGroup ? ROLE_LABEL[p.data.formerGroup] : undefined;
+              const meta = [role, p.data.years && `(${p.data.years})`].filter(Boolean).join(' ');
+              const href = hasProfile(p) ? sitePath(profilePath(p)) : p.data.website;
+              return (
+                <li>
+                  <strong class="alumni-name">{href ? <a href={href}>{p.data.name}</a> : p.data.name}</strong>
+                  {meta && <span class="alumni-meta">, {meta}</span>}
+                  {p.data.current && <span class="alumni-current">. Currently {p.data.current.replace(/\.$/, '')}.</span>}
+                </li>
+              );
+            })}
+          </ul>
         </section>
       )}
 

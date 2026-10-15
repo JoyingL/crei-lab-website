@@ -5,7 +5,7 @@ import AreaCard from '../components/AreaCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import HighlightTabs from '../components/HighlightTabs.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { FACULTY_LINKS, HOME_SUBTITLE, LAB_NAME, RESEARCH_AREAS } from '../lib/site';
+import { CEE_PROFILE_URL, FACULTY_LINKS, HOME_SUBTITLE, LAB_NAME, RESEARCH_AREAS } from '../lib/site';
 
 // Home shows faculty only (PI first, then visiting); students are listed on /people.
 const rank = (p: { data: { role: string; group?: string } }) =>
@@ -14,9 +14,9 @@ const people = (await getCollection('people'))
   .filter((p) => rank(p) < 2)
   .sort((a, b) => rank(a) - rank(b) || a.data.order - b.data.order);
 
-// Home faculty links: PI to the About profile, visiting faculty to their CEE profile.
+// Home faculty links: every faculty name opens their Tufts CEE profile (Joy, 2026-10-15).
 const facultyHref = (p: (typeof people)[number]) =>
-  p.data.role === 'pi' ? sitePath('/about') : p.data.website ?? FACULTY_LINKS[p.id];
+  p.data.role === 'pi' ? CEE_PROFILE_URL : p.data.website ?? FACULTY_LINKS[p.id];
 
 // Funded projects flagged `highlight` (only those with a cover), up to three across.
 const projects = (await getCollection('projects'))
@@ -71,7 +71,7 @@ const projects = (await getCollection('projects'))
           <ul class="faculty-row">
             {people.map((person) => {
               const href = facultyHref(person);
-              const external = person.data.role !== 'pi';
+              const external = true;
               // "Professor and Louis Berger Chair in Civil..." -> two lines, then the university.
               const titleLines = [...person.data.title.split(/,\s*|\s+in\s+(?=[A-Z])/), 'Tufts University'];
               return (
