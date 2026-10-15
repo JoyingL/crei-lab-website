@@ -9,6 +9,7 @@ pages: "031005"
 doi: 10.1088/1748-9326/ad2c23
 url: "https://doi.org/10.1088/1748-9326/ad2c23"
 topic: drought
+topics: [extreme-events, unsaturated]
 type: journal
 highlight: false
 ---

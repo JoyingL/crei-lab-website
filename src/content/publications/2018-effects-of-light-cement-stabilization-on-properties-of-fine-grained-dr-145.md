@@ -8,6 +8,7 @@ issue: "2"
 pages: "280-291"
 doi: 10.1520/gtj20170073
 url: "https://doi.org/10.1520/gtj20170073"
+topics: [resilient-equitable]
 type: journal
 highlight: false
 ---

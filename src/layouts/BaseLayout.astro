@@ -128,7 +128,7 @@ const pageAnimation = {
         </div>
         <div>
           <p class="footer-pi">Prof. {PI_NAME}</p>
-          <a class="footer-email" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <p class="footer-contact">Contact: <a class="footer-email" href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
           <nav aria-label="Footer">
             <h2 class="footer-heading">Explore</h2>
             <ul class="footer-list">
@@ -145,9 +145,14 @@ const pageAnimation = {
       </div>
       <div class="wrap footer-bottom">
         <p class="copyright">© 2026 {LAB_NAME}, Tufts University</p>
-        <a class="to-top" href="#main">Back to top</a>
       </div>
     </footer>
+
+    <button class="to-top-fab" type="button" aria-label="Back to top" data-to-top transition:persist>
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+        <path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
   </body>
 </html>
 
@@ -240,4 +245,23 @@ const pageAnimation = {
   }
 
   document.addEventListener('astro:page-load', setupSearch);
+
+  // Floating back-to-top: shown once the page has scrolled past roughly one screen.
+  // The button persists across ClientRouter swaps, so listeners are bound once.
+  function setupToTop() {
+    const button = document.querySelector<HTMLButtonElement>('[data-to-top]');
+    if (!button || button.dataset.ready) return;
+    button.dataset.ready = 'true';
+    const update = () => button.classList.toggle('is-shown', window.scrollY > window.innerHeight * 0.6);
+    window.addEventListener('scroll', update, { passive: true });
+    document.addEventListener('astro:after-swap', update);
+    update();
+    button.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+      // Move focus to the top of the page so keyboard users continue from there.
+      document.querySelector<HTMLElement>('.wordmark')?.focus({ preventScroll: true });
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupToTop);
 </script>

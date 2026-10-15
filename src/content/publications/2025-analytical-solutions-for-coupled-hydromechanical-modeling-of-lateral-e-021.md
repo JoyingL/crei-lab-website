@@ -8,6 +8,7 @@ pages: "107038"
 doi: 10.1016/j.compgeo.2024.107038
 url: "https://doi.org/10.1016/j.compgeo.2024.107038"
 topic: unsaturated soils
+topics: [methods, multiphysics, unsaturated]
 type: journal
 highlight: false
 ---

@@ -9,6 +9,7 @@ pages: "1751-1764"
 doi: 10.1002/2017wr021975
 url: "https://doi.org/10.1002/2017wr021975"
 topic: climate
+topics: [extreme-events]
 type: journal
 highlight: false
 ---

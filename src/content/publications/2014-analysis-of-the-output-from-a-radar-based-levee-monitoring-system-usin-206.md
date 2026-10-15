@@ -7,6 +7,7 @@ pages: "943-952"
 doi: 10.1061/9780784413272.092
 url: "https://doi.org/10.1061/9780784413272.092"
 topic: slopes/dams/levees
+topics: [slopes-dams-levees]
 type: conference
 highlight: false
 ---

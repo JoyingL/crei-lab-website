@@ -8,6 +8,7 @@ pages: "45-56"
 doi: 10.1016/j.trgeo.2016.02.002
 url: "https://doi.org/10.1016/j.trgeo.2016.02.002"
 topic: unsaturated soils
+topics: [unsaturated]
 type: journal
 highlight: false
 ---

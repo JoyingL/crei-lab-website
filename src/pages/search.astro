@@ -2,6 +2,8 @@
 import { sitePath } from '../lib/paths';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { hasProfile, profilePath } from '../lib/people';
+import { RESEARCH_AREAS } from '../lib/site';
 
 const [people, publications, news, teaching] = await Promise.all([
   getCollection('people'),
@@ -11,16 +13,22 @@ const [people, publications, news, teaching] = await Promise.all([
 ]);
 
 const index = [
-  { href: sitePath('/'), title: 'Home', kind: 'Page', text: 'climate resilient equitable infrastructure' },
+  { href: sitePath('/'), title: 'Home', kind: 'Page', text: 'climate resilient equitable infrastructure research areas' },
+  ...RESEARCH_AREAS.map((area) => ({
+    href: sitePath('/'),
+    title: area.title,
+    kind: 'Research Area',
+    text: `${area.body} ${area.chips.join(' ')}`,
+  })),
   { href: sitePath('/about'), title: 'About', kind: 'Page', text: 'farshid vahedifard principal investigator biography teaching courses' },
-  { href: sitePath('/lab'), title: 'About Our Lab', kind: 'Page', text: 'challenge contribution approach climate extremes earthen infrastructure' },
+  { href: sitePath('/lab'), title: 'About Our Lab', kind: 'Page', text: 'challenge contribution approach climate extremes equitable infrastructure coastal resilience earthen infrastructure' },
   { href: sitePath('/people'), title: 'People', kind: 'Page', text: 'principal investigator' },
   { href: sitePath('/projects'), title: 'Projects', kind: 'Page', text: '' },
   { href: sitePath('/publications'), title: 'Publications', kind: 'Page', text: '' },
   { href: sitePath('/news'), title: 'News', kind: 'Page', text: '' },
   { href: sitePath('/join'), title: 'Opportunities', kind: 'Page', text: 'join us prospective students collaboration' },
   ...people.map((p) => ({
-    href: sitePath('/people'),
+    href: sitePath(hasProfile(p) ? profilePath(p) : '/people'),
     title: p.data.name,
     kind: 'People',
     text: `${p.data.title} ${p.data.affiliation}`,

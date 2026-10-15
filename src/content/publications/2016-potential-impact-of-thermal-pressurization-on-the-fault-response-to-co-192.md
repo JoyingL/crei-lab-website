@@ -6,6 +6,7 @@ venue: Geo-Chicago 2016
 pages: "147-156"
 doi: 10.1061/9780784480120.016
 url: "https://doi.org/10.1061/9780784480120.016"
+topics: [multiphysics]
 type: conference
 highlight: false
 ---

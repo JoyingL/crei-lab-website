@@ -8,6 +8,7 @@ issue: "2"
 pages: "04024491"
 doi: 10.1061/jmcee7.mteng-17506
 url: "https://doi.org/10.1061/jmcee7.mteng-17506"
+topics: [unsaturated, multiphysics]
 type: journal
 highlight: false
 ---

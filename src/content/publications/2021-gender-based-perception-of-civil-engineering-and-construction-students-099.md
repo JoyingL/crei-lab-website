@@ -9,6 +9,7 @@ pages: "40-52"
 doi: 10.1108/ijdrbe-03-2021-0030
 url: "https://doi.org/10.1108/ijdrbe-03-2021-0030"
 topic: infrastructure
+topics: [resilient-equitable]
 type: journal
 highlight: false
 ---

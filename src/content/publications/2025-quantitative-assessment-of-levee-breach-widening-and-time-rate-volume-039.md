@@ -7,6 +7,7 @@ pages: "70-79"
 doi: 10.1061/9780784486511.008
 url: "https://doi.org/10.1061/9780784486511.008"
 topic: slopes/dams/levees
+topics: [slopes-dams-levees, extreme-events, methods]
 type: conference
 highlight: false
 ---

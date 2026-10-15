@@ -8,6 +8,7 @@ issue: "1"
 pages: "04025177"
 doi: 10.1061/jggefk.gteng-14248
 url: "https://doi.org/10.1061/jggefk.gteng-14248"
+topics: [multiphysics, methods]
 type: journal
 highlight: false
 ---

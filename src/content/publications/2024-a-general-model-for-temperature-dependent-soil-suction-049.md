@@ -9,6 +9,7 @@ pages: "04024124"
 doi: 10.1061/jggefk.gteng-11944
 url: "https://doi.org/10.1061/jggefk.gteng-11944"
 topic: drought
+topics: [multiphysics, unsaturated, methods]
 type: journal
 highlight: false
 ---

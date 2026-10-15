@@ -9,6 +9,7 @@ pages: "045009"
 doi: 10.1088/2634-4505/ad111e
 url: "https://doi.org/10.1088/2634-4505/ad111e"
 topic: infrastructure
+topics: [resilient-equitable, climate-adaptation, extreme-events]
 type: journal
 highlight: false
 ---

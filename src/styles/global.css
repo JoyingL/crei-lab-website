@@ -280,7 +280,7 @@ p {
   transform: translateY(-2px);
 }
 
-/* Plain text link for "All projects" style destinations; no arrow glyph. */
+/* Plain text link for secondary destinations; no arrow glyph. */
 .more-link {
   display: inline-flex;
   align-items: center;
@@ -602,11 +602,6 @@ p {
   font-size: 0.8125rem;
 }
 
-.to-top {
-  font-size: 0.8125rem;
-  font-weight: 600;
-}
-
 .site-footer a:focus-visible {
   outline-color: var(--color-focus);
 }
@@ -671,7 +666,7 @@ p {
   from { opacity: 0; transform: translateY(18px); }
 }
 
-/* Left-aligned section headings with an optional small uppercase kicker above (no accent rule). */
+/* Section headings (centered on Home via .home-section) with an optional small uppercase kicker above. */
 .section-title {
   margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem);
   font-size: clamp(1.6rem, 3vw, 2.25rem);
@@ -806,7 +801,6 @@ p {
 .footer-heading,
 .footer-list a,
 .footer-map,
-.to-top,
 .placeholder-label,
 .chip,
 .inst-search input,

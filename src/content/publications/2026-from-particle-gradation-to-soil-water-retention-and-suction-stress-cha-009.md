@@ -9,6 +9,7 @@ pages: "04026018"
 doi: 10.1061/jenmdt.emeng-8575
 url: "https://doi.org/10.1061/jenmdt.emeng-8575"
 topic: unsaturated soils
+topics: [unsaturated, methods]
 type: journal
 highlight: false
 ---

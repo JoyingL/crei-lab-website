@@ -52,11 +52,16 @@ const tabs = HIGHLIGHT_PUBS.flatMap((tab, index) => {
         </figure>
         <div class="highlight-copy">
           <h3>{tab.pub.title}</h3>
-          <p class="pub-meta">
-            {tab.pub.authors.map((name, j) => <>{authorSeparator(j, tab.pub.authors.length)}<span class={isInGroupAuthor(name) ? 'author-ingroup' : undefined}>{natureAuthor(name)}</span></>)}
+          {tab.pub.abstract && <p class="highlight-abstract">{tab.pub.abstract}</p>}
+          {/* Nature-style reference; the whole citation links to the article. Single line on purpose (JSX whitespace). */}
+          <p class="highlight-cite">
+            {tab.pub.doi ? (
+              <a href={`https://doi.org/${tab.pub.doi}`} aria-label={`${tab.pub.title}, ${tab.pub.venue} (${tab.pub.year}), opens the article`}>{tab.pub.authors.map((name, j) => <>{authorSeparator(j, tab.pub.authors.length)}<span class={isInGroupAuthor(name) ? 'author-ingroup' : undefined}>{natureAuthor(name)}</span></>)}{' '}<em>{tab.pub.venue}</em>{tab.pub.volume && <>{' '}<b>{tab.pub.volume}</b></>}{tab.pub.pages && <>, {tab.pub.pages}</>}{` (${tab.pub.year}).`}</a>
+            ) : (
+              <>{tab.pub.authors.map((name, j) => <>{authorSeparator(j, tab.pub.authors.length)}{natureAuthor(name)}</>)}{' '}<em>{tab.pub.venue}</em>{` (${tab.pub.year}).`}</>
+            )}
           </p>
-          <p class="highlight-cite"><em>{tab.pub.venue}</em> ({tab.pub.year})</p>
-          {tab.pub.doi && <a class="more-link" href={`https://doi.org/${tab.pub.doi}`}>View article</a>}
+          {tab.coverage && <p class="highlight-coverage">Related coverage: <a href={tab.coverage.url}>{tab.coverage.label}</a></p>}
         </div>
       </div>
     ))}
@@ -68,7 +73,7 @@ const tabs = HIGHLIGHT_PUBS.flatMap((tab, index) => {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: clamp(2rem, 5vw, 4rem);
-    align-items: center;
+    align-items: start;
     margin-top: clamp(2rem, 5vw, 3rem);
   }
 
@@ -96,13 +101,19 @@ const tabs = HIGHLIGHT_PUBS.flatMap((tab, index) => {
     object-fit: contain;
   }
 
-  .highlight-copy h3 { margin-bottom: 1rem; font-size: clamp(1.25rem, 2.2vw, 1.6rem); line-height: 1.3; }
-  .highlight-cite { color: var(--color-text-muted); }
-  .highlight-copy .more-link { margin-top: 0.5rem; }
+  .highlight-panel { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  .highlight-figure { position: sticky; top: 1.5rem; }
+  .highlight-copy { max-width: 40rem; text-align: left; }
+  .highlight-copy h3 { margin: 0 0 1rem; font-size: clamp(1.25rem, 2.2vw, 1.55rem); line-height: 1.3; }
+  .highlight-abstract { margin: 0 0 1.25rem; color: var(--color-text-muted); font-size: 0.9375rem; line-height: 1.7; hyphens: auto; }
+  .highlight-cite { margin: 0; font-size: 0.9375rem; line-height: 1.6; }
+  .highlight-cite a { color: var(--color-link); text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: 0.2em; }
+  .highlight-cite a:hover { color: var(--color-primary); text-decoration-color: currentColor; }
+  .highlight-coverage { margin: 0.75rem 0 0; color: var(--color-text-muted); font-family: var(--font-ui); font-size: 0.8125rem; }
 
   @media (max-width: 760px) {
     .highlight-panel { grid-template-columns: minmax(0, 1fr); }
-    .highlight-figure { height: auto; }
+    .highlight-figure { position: static; height: auto; }
     .highlight-figure img { max-height: 20rem; }
   }
 </style>

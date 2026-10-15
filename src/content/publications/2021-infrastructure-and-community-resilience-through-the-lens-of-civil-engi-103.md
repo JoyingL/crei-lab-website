@@ -7,6 +7,7 @@ pages: "46-55"
 doi: 10.1061/9780784483701.005
 url: "https://doi.org/10.1061/9780784483701.005"
 topic: infrastructure
+topics: [resilient-equitable]
 type: conference
 highlight: false
 ---

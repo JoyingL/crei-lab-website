@@ -2,13 +2,19 @@
 import { getCollection } from 'astro:content';
 import ProjectCard from '../../components/ProjectCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sitePath } from '../../lib/paths';
 
-// Funded projects, each grouping the papers it supported. Projects with a figure lead.
+// Funded projects. Those with a figure are "Highlighted" (image cards); every project, with or
+// without a figure, appears once more in the compact list below, ongoing work first.
 const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order || (b.data.year ?? 0) - (a.data.year ?? 0),
+);
+const highlighted = projects.filter((p) => p.data.cover);
+const list = [...projects].sort(
   (a, b) =>
-    Number(Boolean(b.data.cover)) - Number(Boolean(a.data.cover)) ||
-    a.data.order - b.data.order ||
-    (b.data.year ?? 0) - (a.data.year ?? 0),
+    Number(b.data.status === 'current') - Number(a.data.status === 'current') ||
+    (b.data.year ?? 0) - (a.data.year ?? 0) ||
+    a.data.order - b.data.order,
 );
 ---
 
@@ -16,13 +22,123 @@ const projects = (await getCollection('projects')).sort(
   <section class="section">
     <div class="wrap">
       <h1>Projects</h1>
-      {projects.length === 0 ? (
-        <p class="empty">Projects will be listed here.</p>
-      ) : (
-        <div class="project-cards">
-          {projects.map((project) => <ProjectCard project={project} />)}
-        </div>
+      {projects.length === 0 && <p class="empty">Projects will be listed here.</p>}
+
+      {highlighted.length > 0 && (
+        <section class="projects-block" aria-labelledby="highlighted-projects">
+          <h2 id="highlighted-projects">Highlighted Projects</h2>
+          <div class="project-cards project-cards--featured">
+            {highlighted.map((project) => <ProjectCard project={project} />)}
+          </div>
+        </section>
+      )}
+
+      {list.length > 0 && (
+        <section class="projects-block" aria-labelledby="all-projects">
+          <h2 id="all-projects">Selected List of All Projects</h2>
+          <ul class="project-list">
+            {list.map((project) => {
+              const { title, funder, year, status } = project.data;
+              const ongoing = status === 'current';
+              return (
+                <li>
+                  <a class="project-row" href={sitePath(`/projects/${project.id}`)}>
+                    <span class="project-row-title">{title}</span>
+                    <span class="project-row-meta">
+                      {funder}
+                      {year && <span>{ongoing ? `${year}–present` : `Started ${year}`}</span>}
+                      <span class:list={['project-status', { 'is-ongoing': ongoing }]}>
+                        {ongoing ? 'Ongoing' : 'Completed'}
+                      </span>
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
       )}
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .projects-block + .projects-block {
+    margin-top: var(--space-7, 3.5rem);
+  }
+
+  .projects-block h2 {
+    margin-bottom: var(--space-4, 1.25rem);
+  }
+
+  /* Two highlighted cards sit side by side and stay a readable size on wide screens. */
+  .project-cards--featured {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    max-width: 60rem;
+  }
+
+  .project-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .project-list li {
+    margin: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .project-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.25rem 2rem;
+    align-items: baseline;
+    padding: 0.85rem 0.25rem;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .project-row-title {
+    font-family: var(--font-heading, serif);
+    font-size: 1.05rem;
+    line-height: 1.35;
+    color: var(--color-primary);
+  }
+
+  .project-row:hover .project-row-title,
+  .project-row:focus-visible .project-row-title {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .project-row-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.9rem;
+    justify-content: flex-end;
+    font-family: var(--font-ui, sans-serif);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .project-status {
+    font-weight: 600;
+  }
+
+  .project-status.is-ongoing {
+    color: #1d6b3a; /* 6.4:1 on white */
+  }
+
+  @media (max-width: 47.99rem) {
+    .project-row {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .project-row-meta {
+      justify-content: flex-start;
+      white-space: normal;
+    }
+  }
+</style>

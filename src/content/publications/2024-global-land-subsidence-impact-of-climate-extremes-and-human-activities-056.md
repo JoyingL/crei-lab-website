@@ -9,6 +9,7 @@ pages: "e2023RG000817"
 doi: 10.1029/2023rg000817
 url: "https://doi.org/10.1029/2023rg000817"
 topic: climate
+topics: [extreme-events]
 type: journal
 highlight: false
 ---

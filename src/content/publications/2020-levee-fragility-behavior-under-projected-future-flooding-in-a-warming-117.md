@@ -9,6 +9,7 @@ pages: "04020139"
 doi: 10.1061/(asce)gt.1943-5606.0002399
 url: "https://doi.org/10.1061/(asce)gt.1943-5606.0002399"
 topic: slopes/dams/levees
+topics: [extreme-events, slopes-dams-levees]
 type: journal
 highlight: false
 ---

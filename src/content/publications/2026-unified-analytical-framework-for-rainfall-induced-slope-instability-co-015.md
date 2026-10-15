@@ -9,6 +9,7 @@ pages: "04026081"
 doi: 10.1061/jggefk.gteng-14977
 url: "https://doi.org/10.1061/jggefk.gteng-14977"
 topic: slopes/dams/levees
+topics: [slopes-dams-levees, extreme-events, methods]
 type: journal
 highlight: false
 ---

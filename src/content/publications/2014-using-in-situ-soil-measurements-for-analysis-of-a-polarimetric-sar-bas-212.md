@@ -8,6 +8,7 @@ pages: "157-168"
 doi: 10.1016/j.enggeo.2014.07.007
 url: "https://doi.org/10.1016/j.enggeo.2014.07.007"
 topic: slopes/dams/levees
+topics: [slopes-dams-levees]
 type: journal
 highlight: false
 ---

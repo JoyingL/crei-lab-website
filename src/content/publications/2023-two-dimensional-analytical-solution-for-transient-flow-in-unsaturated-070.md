@@ -9,6 +9,7 @@ pages: "e2023WR035326"
 doi: 10.1029/2023wr035326
 url: "https://doi.org/10.1029/2023wr035326"
 topic: unsaturated soils
+topics: [methods, multiphysics, unsaturated]
 type: journal
 highlight: false
 ---

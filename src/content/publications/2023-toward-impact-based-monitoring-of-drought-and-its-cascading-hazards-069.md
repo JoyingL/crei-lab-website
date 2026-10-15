@@ -9,6 +9,7 @@ pages: "582-595"
 doi: 10.1038/s43017-023-00457-2
 url: "https://doi.org/10.1038/s43017-023-00457-2"
 topic: drought
+topics: [extreme-events]
 type: journal
 highlight: false
 ---

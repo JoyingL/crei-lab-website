@@ -7,6 +7,7 @@ pages: "844-852"
 doi: 10.1061/9780784482124.085
 url: "https://doi.org/10.1061/9780784482124.085"
 topic: unsaturated soils
+topics: [slopes-dams-levees, multiphysics, unsaturated]
 type: conference
 highlight: false
 ---

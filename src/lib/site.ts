@@ -16,6 +16,11 @@ export const FACULTY_PROFILE_URL = 'https://facultyprofiles.tufts.edu/farshid-va
 export const HOME_SUBTITLE =
   'The resilience and adaptation of critical infrastructure to extreme events in a changing climate.';
 
+/** External profile for Home faculty without a `website` field (people collection id -> URL). */
+export const FACULTY_LINKS: Record<string, string> = {
+  'paul-kirshen': 'https://engineering.tufts.edu/cee/people/faculty/paul-kirshen',
+};
+
 /** Teaching folded into About and Opportunities kept in the footer (Joy, 2026-10-15). */
 export const PRIMARY_NAV = [
   { href: '/', label: 'Home' },
@@ -39,31 +44,31 @@ export const MAPS_EMBED_URL =
   'https://www.google.com/maps?q=Tufts+University+School+of+Engineering,+200+College+Ave,+Medford,+MA+02155&z=15&output=embed';
 
 /**
- * Home research areas (Joy, 2026-10-15). Equal weight, so no ordinals.
+ * Home research areas; titles and text verbatim from Joy (2026-10-15, 14:18). Equal weight, so no ordinals.
  * `texture` picks the line-drawing strip in AreaCard.
  */
 export const RESEARCH_AREAS = [
   {
     title: 'Climate Extremes',
-    body: 'We study how drought, flooding, and wildfire affect earthen infrastructure, including how overlapping or successive hazards alter risks to the communities that depend on it.',
-    chips: ['Compound Hazards', 'Drought', 'Wildfire & Flood'],
+    body: 'Understanding how extreme events develop and interact helps us anticipate their impacts on infrastructure and communities. We combine data analysis and modeling to characterize climate hazards, assess exposure, and inform adaptation to compound and cascading disruptions.',
+    chips: ['Wildfire', 'Flood & Drought', 'Compound Hazards'],
     texture: 'contours',
   },
   {
     title: 'Equitable Infrastructure',
-    body: 'We examine who is exposed to infrastructure hazards and who benefits from adaptation, with a focus on disadvantaged communities and environmental justice.',
-    chips: ['Environmental Justice', 'Social Vulnerability'],
+    body: 'Infrastructure systems connect communities to essential services, but their benefits and risks are not shared equally. We examine how environmental hazards, service disruptions, and technological transitions affect different populations, informing decisions that address disparities in access to essential services.',
+    chips: ['Access Equity', 'Lifeline Networks', 'Social Vulnerability'],
     texture: 'blocks',
   },
   {
     title: 'Coastal Resilience',
-    body: 'We study how coastal landscapes respond to sea level rise, wave action, rainfall, and vegetation change. We work alongside local and Indigenous communities throughout the process.',
-    chips: ['Sea Level Rise', 'Coastal Bluffs', 'Community Partnership'],
+    body: 'Coastal change reflects the interactions of ocean conditions, weather, and the landscape. We combine remote sensing and physical modeling to understand how cliffs and shorelines evolve, informing adaptation in collaboration with local and Indigenous communities.',
+    chips: ['Sea Level Rise', 'Remote Sensing', 'Community Partnership'],
     texture: 'waves',
   },
   {
     title: 'Earthen Infrastructure',
-    body: 'We investigate how changing soil moisture and temperature influence slopes, dams, and levees, informing their assessment and adaptation in a changing climate.',
+    body: 'The performance of slopes, dams, and levees depends on how soils respond to changing environmental conditions and loading. We model interacting hydrological, thermal, and mechanical processes to assess stability and guide infrastructure monitoring and adaptation.',
     chips: ['Dams & Levees', 'Slope Stability', 'Unsaturated Soils'],
     texture: 'mesh',
   },
@@ -87,6 +92,8 @@ export const HIGHLIGHT_PUBS: readonly {
   imageAlt: string;
   width: number;
   height: number;
+  /** Optional news story about the paper, shown under the citation. */
+  coverage?: { label: string; url: string };
 }[] = [
   {
     label: 'Ageing Water Infrastructure',
@@ -111,6 +118,10 @@ export const HIGHLIGHT_PUBS: readonly {
     imageAlt: 'Figure from the study of large wildfire size and likelihood in the United States.',
     width: 1200,
     height: 1211,
+    coverage: {
+      label: 'Characterizing Extreme Wildfire Statistics to Improve Risk Assessment and Resilience (Tufts School of Engineering)',
+      url: 'https://engineering.tufts.edu/news-events/news/characterizing-extreme-wildfire-statistics-improve-risk-assessment-and-resilience',
+    },
   },
   {
     label: 'Levee Seepage Calibration',

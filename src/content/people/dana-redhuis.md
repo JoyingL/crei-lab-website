@@ -6,6 +6,6 @@ title: Ph.D. Student
 affiliation: Civil and Environmental Engineering, Tufts University
 email: dana.redhuis@tufts.edu
 order: 8
+# Internal note (not rendered):
+# Roster and email from Joy (设计网站.md, 2026-10-15). Photo, join year, and title wording pending.
 ---
-
-Roster and email from Joy (设计网站.md, 2026-10-15). Photo, join year, and title wording pending.

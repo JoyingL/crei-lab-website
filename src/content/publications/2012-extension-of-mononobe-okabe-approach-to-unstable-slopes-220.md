@@ -8,6 +8,7 @@ issue: "2"
 pages: "239-256"
 doi: 10.1016/j.sandf.2012.02.004
 url: "https://doi.org/10.1016/j.sandf.2012.02.004"
+topics: [slopes-dams-levees, methods]
 type: journal
 highlight: false
 ---

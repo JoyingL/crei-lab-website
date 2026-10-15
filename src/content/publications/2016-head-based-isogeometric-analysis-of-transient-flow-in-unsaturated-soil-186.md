@@ -8,6 +8,7 @@ pages: "183-197"
 doi: 10.1016/j.compgeo.2016.11.018
 url: "https://doi.org/10.1016/j.compgeo.2016.11.018"
 topic: unsaturated soils
+topics: [methods, unsaturated]
 type: journal
 highlight: false
 ---

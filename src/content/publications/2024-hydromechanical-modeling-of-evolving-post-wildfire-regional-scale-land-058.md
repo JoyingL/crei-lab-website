@@ -8,6 +8,7 @@ pages: "107538"
 doi: 10.1016/j.enggeo.2024.107538
 url: "https://doi.org/10.1016/j.enggeo.2024.107538"
 topic: wildfire
+topics: [extreme-events, multiphysics, slopes-dams-levees]
 type: journal
 highlight: false
 ---

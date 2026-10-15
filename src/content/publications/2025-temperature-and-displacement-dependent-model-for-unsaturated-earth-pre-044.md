@@ -8,6 +8,7 @@ pages: "100712"
 doi: 10.1016/j.gete.2025.100712
 url: "https://doi.org/10.1016/j.gete.2025.100712"
 topic: unsaturated soils
+topics: [multiphysics, unsaturated, methods]
 type: journal
 highlight: false
 ---

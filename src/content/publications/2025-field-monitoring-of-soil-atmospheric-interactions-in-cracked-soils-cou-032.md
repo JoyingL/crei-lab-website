@@ -7,6 +7,7 @@ volume: "358"
 pages: "108436"
 doi: 10.1016/j.enggeo.2025.108436
 url: "https://doi.org/10.1016/j.enggeo.2025.108436"
+topics: [multiphysics, unsaturated]
 type: journal
 highlight: false
 ---

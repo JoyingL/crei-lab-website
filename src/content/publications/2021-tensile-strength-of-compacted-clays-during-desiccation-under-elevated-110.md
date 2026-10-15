@@ -8,6 +8,7 @@ issue: "4"
 pages: "1119-1134"
 doi: 10.1520/gtj20200114
 url: "https://doi.org/10.1520/gtj20200114"
+topics: [unsaturated, multiphysics]
 type: journal
 highlight: false
 ---

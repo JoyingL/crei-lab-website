@@ -8,6 +8,7 @@ issue: "6"
 pages: "451-462"
 doi: 10.1680/geot.11.p.130
 url: "https://doi.org/10.1680/geot.11.p.130"
+topics: [methods]
 type: journal
 highlight: false
 ---

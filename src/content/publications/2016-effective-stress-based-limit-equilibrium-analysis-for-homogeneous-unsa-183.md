@@ -9,6 +9,7 @@ pages: "D4016003"
 doi: 10.1061/(asce)gm.1943-5622.0000554
 url: "https://doi.org/10.1061/(asce)gm.1943-5622.0000554"
 topic: unsaturated soils
+topics: [unsaturated, slopes-dams-levees, methods]
 type: journal
 highlight: false
 ---

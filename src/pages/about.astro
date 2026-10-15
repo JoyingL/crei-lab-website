@@ -6,8 +6,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { CEE_PROFILE_URL, FACULTY_PROFILE_URL, SCHOLAR_URL } from '../lib/site';
 
 // About = the PI (Joy, 2026-10-15). Lab overview moved to /lab; Teaching folded in here.
+// Bio text: Joy's draft (设计网站.md, 2026-10-15), fact-checked; mirrored in docs/about_pi_draft.md.
 const pi = (await getCollection('people')).find((p) => p.data.role === 'pi');
 const courses = (await getCollection('teaching')).sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
+
+const doi = (id: string) => `https://doi.org/${id}`;
 ---
 
 <BaseLayout title="About" description="Farshid Vahedifard, Professor and Louis Berger Chair in Civil and Environmental Engineering at Tufts University.">
@@ -28,17 +31,57 @@ const courses = (await getCollection('teaching')).sort((a, b) => (b.data.year ??
         </div>
       )}
 
-      <div class="profile-bio">
+      <div class="profile-bio pi-bio">
         <p>
-          Farshid Vahedifard is Professor and Louis Berger Chair in Civil and Environmental
-          Engineering at Tufts University. His research connects geotechnical engineering with
-          climate change and environmental justice, with a focus on how extreme events affect
-          infrastructure and disadvantaged communities.
+          <strong>Farshid Vahedifard</strong> is Professor and Louis Berger Chair in Civil and Environmental
+          Engineering at Tufts University. He also serves as the Lead for Resilient and Equitable
+          Infrastructure at the United Nations University Institute for Water, Environment and Health
+          (UNU-INWEH). His work connects geotechnical engineering with climate adaptation and
+          environmental justice, addressing how infrastructure and communities can better prepare for
+          changing environmental conditions and extreme events.
         </p>
         <p>
-          See his <a href={CEE_PROFILE_URL}>Tufts CEE profile</a>,
+          Farshid’s research spans the physical processes that govern infrastructure performance and the
+          social conditions that shape its consequences. His fundamental work examines how water, heat,
+          and mechanical processes interact in variably saturated soils, influencing the behavior and
+          stability of slopes, dams, and levees. Building on this foundation, he studies infrastructure
+          resilience under drought, flooding, wildfire, and compound and cascading hazards. His research
+          brings together geotechnical engineering, climate science, hydrology, data science, and social
+          science to assess risk and inform adaptation, with particular attention to historically
+          underserved and socially vulnerable communities.
+        </p>
+        <p>
+          His recent work includes frameworks for equitable and resilient infrastructure
+          (<a href={doi('10.1093/pnasnexus/pgae157')}><cite>PNAS Nexus</cite></a>), population disparities near
+          Superfund sites and equitable cleanup prioritization
+          (<a href={doi('10.1038/s41467-025-63607-8')}><cite>Nature Communications</cite></a>), and water
+          infrastructure planning that accounts for population aging
+          (<a href={doi('10.1038/s44221-026-00711-z')}><cite>Nature Water</cite></a>). These studies extend
+          infrastructure assessment beyond physical performance to consider whom infrastructure serves
+          and how investment decisions can address unequal risks and needs. His group is also developing
+          NSF-supported hybrid digital twins for levee monitoring and risk assessment, and working with
+          the Wampanoag Tribe to understand erosion at the Aquinnah Cliffs on Martha’s Vineyard. These
+          projects combine modeling and environmental observations with practical decision-making and
+          community collaboration.
+        </p>
+        <p>
+          Farshid contributes to infrastructure policy through ASCE’s Committee on America’s
+          Infrastructure, including work on the dams and levees chapters of the
+          <cite>2025 Report Card for America’s Infrastructure</cite>. Before joining Tufts in 2023, he spent
+          more than a decade at Mississippi State University, where he held the CEE Advisory Board
+          Endowed Professorship. He is a Fellow of ASCE and received its Norman Medal in 2022 for
+          research on levee fragility under projected future flooding. He was also among the recipients
+          of the 2026 ASCE State-of-the-Art of Civil Engineering Award for the book
+          <cite>Effects of Climate Change on Life-Cycle Performance of Structures and Infrastructure Systems:
+          Safety, Reliability, and Risk</cite>. He earned his Ph.D. in Civil Engineering from the University
+          of Delaware in 2011, following master’s degrees from the University of Delaware and Bu-Ali Sina
+          University, and a bachelor’s degree from K.N. Toosi University of Technology.
+        </p>
+        <p>
+          Please visit our <a href={sitePath('/projects')}>Projects</a> and
+          <a href={sitePath('/publications')}>Publications</a> pages, his
           <a href={FACULTY_PROFILE_URL}>Tufts faculty profile</a>, or
-          <a href={SCHOLAR_URL}>Google Scholar</a> for more.
+          <a href={SCHOLAR_URL}>Google Scholar</a> to learn more about his work.
         </p>
       </div>
 
@@ -58,11 +101,32 @@ const courses = (await getCollection('teaching')).sort((a, b) => (b.data.year ??
       )}
 
       <p class="about-actions">
-        Read more <a href={sitePath('/lab')}>about our lab</a>. Our
-        <a href={sitePath('/projects')}>projects</a> and
-        <a href={sitePath('/publications')}>publications</a> describe this work in more detail, and
-        we welcome <a href={sitePath('/join')}>inquiries</a>.
+        Read more <a href={sitePath('/lab')}>about our lab</a>, or see
+        <a href={sitePath('/join')}>opportunities</a> to join us.
       </p>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* Readable measure for the long-form bio; spacing between paragraphs rather than indents. */
+  .pi-bio {
+    max-width: 34em;
+    margin-top: var(--space-6);
+  }
+  .pi-bio p {
+    margin: 0 0 1.15em;
+  }
+  .pi-bio p:last-child {
+    margin-bottom: 0;
+  }
+  .pi-bio cite {
+    font-style: italic;
+  }
+  .pi-bio a {
+    text-underline-offset: 0.15em;
+  }
+  .pi-bio + h2 {
+    margin-top: var(--space-7);
+  }
+</style>

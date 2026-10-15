@@ -9,6 +9,7 @@ pages: "05019009"
 doi: 10.1061/(asce)gt.1943-5606.0002134
 url: "https://doi.org/10.1061/(asce)gt.1943-5606.0002134"
 topic: slopes/dams/levees
+topics: [slopes-dams-levees, methods, multiphysics]
 type: journal
 highlight: false
 ---

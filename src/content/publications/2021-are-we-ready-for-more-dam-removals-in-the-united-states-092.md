@@ -9,6 +9,7 @@ pages: "013001"
 doi: 10.1088/2634-4505/abe639
 url: "https://doi.org/10.1088/2634-4505/abe639"
 topic: slopes/dams/levees
+topics: [slopes-dams-levees]
 type: journal
 highlight: false
 ---

@@ -7,6 +7,7 @@ pages: "373-382"
 doi: 10.1061/9780784486733.036
 url: "https://doi.org/10.1061/9780784486733.036"
 topic: wildfire
+topics: [extreme-events, slopes-dams-levees, methods]
 type: conference
 highlight: false
 ---

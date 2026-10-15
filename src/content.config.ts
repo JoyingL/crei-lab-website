@@ -13,6 +13,12 @@ const people = defineCollection({
       .optional(),
     /** Year the person joined the lab; sorts members within a section (earliest first). */
     since: z.number().optional(),
+    /** Alumni only: section they belonged to while in the lab. */
+    formerGroup: z.enum(['postdoc', 'phd', 'masters', 'visiting-researcher']).optional(),
+    /** Years in the lab, e.g. "2023–2026" (alumni list). */
+    years: z.string().optional(),
+    /** Alumni only: current position, e.g. "Assistant Professor, University of X". */
+    current: z.string().optional(),
     title: z.string(),
     affiliation: z.string(),
     email: z.string().email().optional(),
@@ -42,6 +48,8 @@ const publications = defineCollection({
     /** Keys from PUB_TOPICS; first is the primary topic. */
     topics: z.array(z.string()).default([]),
     doi: z.string().optional(),
+    /** Abstract or standfirst, shown in Home Highlighted Publications. */
+    abstract: z.string().optional(),
     url: z.string().url().optional(),
     pdf: z.string().url().optional(),
     code: z.string().url().optional(),
@@ -80,6 +88,8 @@ const news = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     excerpt: z.string(),
+    /** Label shown before the item on /news. */
+    category: z.enum(['Grant', 'Award', 'Publication', 'Media', 'Conference', 'Lab']).default('Lab'),
     source: z.string().optional(),
     url: z.string().url().optional(),
   }),

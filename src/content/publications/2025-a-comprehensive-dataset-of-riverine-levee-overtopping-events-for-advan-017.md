@@ -9,6 +9,7 @@ pages: "36"
 doi: 10.1038/s41597-025-06349-y
 url: "https://doi.org/10.1038/s41597-025-06349-y"
 topic: slopes/dams/levees
+topics: [slopes-dams-levees, extreme-events]
 type: journal
 highlight: false
 ---

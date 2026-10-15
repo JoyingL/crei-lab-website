@@ -8,6 +8,7 @@ issue: "3"
 pages: "283-295"
 doi: 10.1177/1548512917693119
 url: "https://doi.org/10.1177/1548512917693119"
+topics: [methods]
 type: journal
 highlight: false
 ---

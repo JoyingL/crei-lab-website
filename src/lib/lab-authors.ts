@@ -53,3 +53,12 @@ export async function labAuthorMatcher() {
     return list.some((m) => sameName(m, parsed));
   };
 }
+
+/** Byline predicate for one person (their name plus `authorAs` spellings), for profile pages. */
+export function personAuthorMatcher(person: { name: string; authorAs: string[] }) {
+  const own = [person.name, ...person.authorAs].map(parse);
+  return (name: string) => {
+    const parsed = parse(name);
+    return own.some((m) => sameName(m, parsed));
+  };
+}

@@ -7,6 +7,7 @@ volume: "374"
 pages: "124008"
 doi: 10.1016/j.jenvman.2024.124008
 url: "https://doi.org/10.1016/j.jenvman.2024.124008"
+topics: [extreme-events]
 type: journal
 highlight: false
 ---

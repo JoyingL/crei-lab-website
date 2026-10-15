@@ -14,7 +14,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, summary, status, year, funder, url, cover, coverAlt, coverWidth, coverHeight, pubs: pubIds } = project.data;
+const { title, summary, status, year, funder, cover, coverAlt, coverWidth, coverHeight, pubs: pubIds } = project.data;
 const allPubs = await getCollection('publications');
 const pubs = pubIds
   .map((id) => allPubs.find((p) => p.id === id))
@@ -37,13 +37,12 @@ const meta = [funder, year ? `${status === 'current' ? 'Since' : 'Started'} ${ye
         </figure>
       )}
       <p>{summary}</p>
-      {url && <p><a href={url}>Award or project page</a></p>}
 
-      <h2>Related Publications</h2>
-      {pubs.length === 0 ? (
-        <p class="empty">Publications from this project will be listed here.</p>
-      ) : (
-        pubs.map((pub) => <PubItem pub={pub} />)
+      {pubs.length > 0 && (
+        <>
+          <h2>Related Publications</h2>
+          {pubs.map((pub) => <PubItem pub={pub} />)}
+        </>
       )}
     </div>
   </section>

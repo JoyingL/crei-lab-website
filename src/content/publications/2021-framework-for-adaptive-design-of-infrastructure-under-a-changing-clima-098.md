@@ -7,6 +7,7 @@ pages: "267-277"
 doi: 10.1061/9780784483695.026
 url: "https://doi.org/10.1061/9780784483695.026"
 topic: infrastructure
+topics: [climate-adaptation]
 type: conference
 highlight: false
 ---

@@ -8,6 +8,7 @@ issue: "12"
 pages: "04019111"
 doi: 10.1061/(asce)gt.1943-5606.0002174
 url: "https://doi.org/10.1061/(asce)gt.1943-5606.0002174"
+topics: [methods]
 type: journal
 highlight: false
 ---

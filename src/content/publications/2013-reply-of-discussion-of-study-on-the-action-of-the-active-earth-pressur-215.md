@@ -5,6 +5,7 @@ year: 2013
 venue: "International Journal for Numerical & Analytical Methods in Geomechanics 37 …"
 url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dc3G9EoAAAAJ&cstart=200&pagesize=100&citation_for_view=dc3G9EoAAAAJ:u9iWguZQMMsC"
 topic: slopes/dams/levees
+topics: [methods]
 type: journal
 highlight: false
 ---

@@ -8,7 +8,7 @@ interface Props {
 
 const { title, body, chips = [], texture = 'contours' } = Astro.props;
 
-// Decorative line drawings (topography, exposure dots, waves, FEM mesh) generated at build time.
+// Decorative line drawings (topography, exposure dots, coastline, FEM mesh) generated at build time.
 const W = 320;
 const H = 88;
 const hash = (x: number, y: number) => {
@@ -29,15 +29,30 @@ function contours() {
   });
 }
 
+// Coastal Resilience: swell lines offshore (top) that bend around an eroding cliff edge
+// (bottom right), drawn as a hatched bluff profile.
 function waves() {
-  return Array.from({ length: 8 }, (_, k) => {
+  const swell = Array.from({ length: 6 }, (_, k) => {
     const pts = Array.from({ length: 81 }, (_, i) => {
       const x = (i / 80) * W;
-      const y = 8 + k * 10.5 + 3.2 * Math.sin(x / 15 + k * 1.1) + 1.4 * Math.sin(x / 6.5 + k);
+      const shore = Math.max(0, (x - 170) / 150); // waves steepen toward the cliff
+      const y = 8 + k * 9.5 + (3 + 4 * shore) * Math.sin(x / (15 - 5 * shore) + k * 1.1) + 1.2 * Math.sin(x / 6.5 + k);
       return `${f(x)},${f(y)}`;
     });
     return `M${pts.join('L')}`;
   });
+  // Cliff profile: irregular retreating edge from (200, H) up to the right edge.
+  const edge = Array.from({ length: 25 }, (_, i) => {
+    const t = i / 24;
+    const x = 205 + t * 115 + (hash(i, 3) - 0.5) * 6;
+    const y = H - t * 30 - 6 * Math.sin(t * 9) * (1 - t);
+    return [x, y] as const;
+  });
+  const cliff = `M${edge.map(([x, y]) => `${f(x)},${f(y)}`).join('L')}`;
+  const hatch = edge
+    .filter((_, i) => i % 2 === 0)
+    .map(([x, y]) => `M${f(x)},${f(y)}L${f(x + 9)},${f(H)}`);
+  return [...swell, cliff, ...hatch];
 }
 
 function mesh() {

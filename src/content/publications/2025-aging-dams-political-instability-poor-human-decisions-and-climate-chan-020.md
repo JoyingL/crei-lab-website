@@ -9,6 +9,7 @@ pages: "5"
 doi: 10.1038/s44304-024-00056-1
 url: "https://doi.org/10.1038/s44304-024-00056-1"
 topic: climate
+topics: [slopes-dams-levees, extreme-events]
 type: journal
 highlight: false
 ---

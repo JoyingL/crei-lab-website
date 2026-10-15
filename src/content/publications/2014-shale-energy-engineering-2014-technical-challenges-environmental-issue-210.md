@@ -4,6 +4,7 @@ authors: ["Meehan, CL", "VanBriesen, JM", "Vahedifard, F", "Yu, X", "Quiroga, C"
 year: 2014
 venue: American Society of Civil Engineers
 url: "http://cedb.asce.org/CEDBsearch/record.jsp?dockey=0318550"
+topics: [resilient-equitable]
 type: journal
 highlight: false
 ---

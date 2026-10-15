@@ -7,6 +7,7 @@ pages: "624-633"
 doi: 10.1061/9780784484708.059
 url: "https://doi.org/10.1061/9780784484708.059"
 topic: unsaturated soils
+topics: [unsaturated, multiphysics]
 type: conference
 highlight: false
 ---

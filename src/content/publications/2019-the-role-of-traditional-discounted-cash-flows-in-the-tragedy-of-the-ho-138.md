@@ -8,6 +8,7 @@ issue: "4"
 pages: "643-660"
 doi: 10.1007/s11027-019-09884-3
 url: "https://doi.org/10.1007/s11027-019-09884-3"
+topics: [climate-adaptation]
 type: journal
 highlight: false
 ---

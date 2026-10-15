@@ -9,6 +9,7 @@ pages: "07022008"
 doi: 10.1061/(asce)gt.1943-5606.0002810
 url: "https://doi.org/10.1061/(asce)gt.1943-5606.0002810"
 topic: unsaturated soils
+topics: [unsaturated]
 type: journal
 highlight: false
 ---

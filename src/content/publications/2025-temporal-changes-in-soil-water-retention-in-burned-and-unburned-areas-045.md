@@ -8,6 +8,7 @@ pages: "1-16"
 doi: 10.1139/cgj-2025-0234
 url: "https://doi.org/10.1139/cgj-2025-0234"
 topic: wildfire
+topics: [extreme-events, slopes-dams-levees, unsaturated]
 type: journal
 highlight: false
 ---

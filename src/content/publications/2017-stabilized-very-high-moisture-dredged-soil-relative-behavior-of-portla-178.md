@@ -8,6 +8,7 @@ issue: "9"
 pages: "04017110"
 doi: 10.1061/(asce)mt.1943-5533.0001970
 url: "https://doi.org/10.1061/(asce)mt.1943-5533.0001970"
+topics: [resilient-equitable]
 type: journal
 highlight: false
 ---

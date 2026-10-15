@@ -1,0 +1,171 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import IconLinks from '../../components/IconLinks.astro';
+import PubItem from '../../components/PubItem.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { personAuthorMatcher } from '../../lib/lab-authors';
+import { sitePath } from '../../lib/paths';
+import { groupOf, hasProfile, initialsOf, ROLE_LABEL } from '../../lib/people';
+import { LAB_NAME } from '../../lib/site';
+
+// Profile pages for postdocs and Ph.D. students, current and former.
+export async function getStaticPaths() {
+  const people = await getCollection('people');
+  return people.filter(hasProfile).map((person) => ({ params: { id: person.id }, props: { person } }));
+}
+
+interface Props {
+  person: CollectionEntry<'people'>;
+}
+
+const { person } = Astro.props;
+const { name, title, affiliation, email, scholar, linkedin, website, photo, years, current } = person.data;
+const isAlumni = groupOf(person) === 'alumni';
+const formerRole = person.data.formerGroup ? ROLE_LABEL[person.data.formerGroup] : undefined;
+// File bodies are public bios only; sourcing notes live in YAML comments.
+const bio = person.body?.trim();
+
+const isAuthor = personAuthorMatcher(person.data);
+const pubs = (await getCollection('publications'))
+  .filter((p) => p.data.authors.some(isAuthor))
+  .sort((a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title));
+---
+
+<BaseLayout title={name} description={`${name}, ${title}, ${LAB_NAME} at Tufts University.`}>
+  <section class="section">
+    <div class="wrap">
+      <nav class="crumb" aria-label="Breadcrumb">
+        <a href={sitePath('/people')}>People</a>
+        <span aria-hidden="true"> / </span>
+        <span aria-current="page">{name}</span>
+      </nav>
+
+      <header class="profile">
+        {photo ? (
+          <img class="profile-photo" src={sitePath(photo)} alt="" width="400" height="500" />
+        ) : (
+          <div class="profile-photo profile-initials" aria-hidden="true">{initialsOf(name)}</div>
+        )}
+        <div class="profile-text">
+          <h1>{name}</h1>
+          {isAlumni ? (
+            <>
+              {(formerRole || years) && (
+                <p class="profile-title">
+                  {['Former', formerRole].filter(Boolean).join(' ')}
+                  {years && ` (${years})`}
+                </p>
+              )}
+              {current && <p class="profile-affil">Currently {current}</p>}
+            </>
+          ) : (
+            <>
+              <p class="profile-title">{title}</p>
+              <p class="profile-affil">{affiliation}</p>
+            </>
+          )}
+          <IconLinks name={name} scholar={scholar} website={website} linkedin={linkedin} email={email} />
+          {bio && <div class="profile-bio"><p>{bio}</p></div>}
+        </div>
+      </header>
+
+      {pubs.length > 0 && (
+        <section class="profile-pubs" aria-labelledby="profile-pubs">
+          <h2 id="profile-pubs">Publications with the Lab</h2>
+          <div class="pub-list">
+            {pubs.map((pub) => <PubItem pub={pub} />)}
+          </div>
+        </section>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .crumb {
+    margin-bottom: var(--space-5);
+    color: var(--color-text-muted);
+    font-family: var(--font-ui);
+    font-size: 0.8125rem;
+  }
+
+  .profile {
+    display: grid;
+    grid-template-columns: minmax(10rem, 15rem) minmax(0, 1fr);
+    gap: var(--space-6);
+    align-items: start;
+  }
+
+  .profile-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 25%;
+    background: var(--color-sky);
+  }
+
+  .profile-initials {
+    display: grid;
+    place-items: center;
+    color: color-mix(in srgb, var(--color-primary) 55%, transparent);
+    font-family: var(--font-display);
+    font-size: 3.25rem;
+    letter-spacing: 0.04em;
+  }
+
+  .profile-text h1 {
+    margin: 0 0 var(--space-2);
+  }
+
+  .profile-title,
+  .profile-affil {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .profile-title {
+    font-size: 1.0625rem;
+  }
+
+  .profile-affil {
+    margin-top: 0.15rem;
+    font-size: 0.9375rem;
+  }
+
+  .profile-text :global(.icon-links) {
+    margin-top: var(--space-4);
+  }
+
+  .profile-text :global(.icon-links a) {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .profile-bio {
+    max-width: 44rem;
+    margin-top: var(--space-5);
+    line-height: 1.65;
+  }
+
+  .profile-pubs {
+    margin-top: var(--space-7);
+  }
+
+  .profile-pubs h2 {
+    margin-bottom: var(--space-4);
+    font-size: clamp(1.35rem, 2.4vw, 1.65rem);
+  }
+
+  @media (max-width: 40rem) {
+    .profile {
+      grid-template-columns: 7rem minmax(0, 1fr);
+      gap: var(--space-4);
+    }
+
+    .profile-text h1 {
+      font-size: 1.6rem;
+    }
+  }
+</style>

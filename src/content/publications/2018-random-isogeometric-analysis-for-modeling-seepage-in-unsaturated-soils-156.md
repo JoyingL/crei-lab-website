@@ -9,6 +9,7 @@ pages: "04018105"
 doi: 10.1061/(asce)em.1943-7889.0001524
 url: "https://doi.org/10.1061/(asce)em.1943-7889.0001524"
 topic: unsaturated soils
+topics: [methods, unsaturated]
 type: journal
 highlight: false
 ---

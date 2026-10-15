@@ -7,6 +7,7 @@ pages: "498-507"
 doi: 10.1061/9780784480724.045
 url: "https://doi.org/10.1061/9780784480724.045"
 topic: climate
+topics: [extreme-events, slopes-dams-levees, methods]
 type: conference
 highlight: false
 ---

@@ -8,6 +8,7 @@ issue: "1"
 pages: "55-68"
 doi: 10.1680/jenge.18.00035
 url: "https://doi.org/10.1680/jenge.18.00035"
+topics: [resilient-equitable]
 type: journal
 highlight: false
 ---

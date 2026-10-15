@@ -9,6 +9,7 @@ pages: "117-127"
 doi: 10.1139/cgj-2015-0602
 url: "https://doi.org/10.1139/cgj-2015-0602"
 topic: slopes/dams/levees
+topics: [extreme-events, slopes-dams-levees]
 type: journal
 highlight: false
 ---

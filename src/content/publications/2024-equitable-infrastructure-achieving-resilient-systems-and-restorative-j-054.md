@@ -9,6 +9,7 @@ pages: "pgae157"
 doi: 10.1093/pnasnexus/pgae157
 url: "https://doi.org/10.1093/pnasnexus/pgae157"
 topic: infrastructure
+topics: [resilient-equitable]
 type: journal
 highlight: false
 ---

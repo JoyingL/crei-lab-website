@@ -8,6 +8,7 @@ issue: "3"
 pages: "225-230"
 doi: 10.1680/jgele.19.00026
 url: "https://doi.org/10.1680/jgele.19.00026"
+topics: [multiphysics]
 type: journal
 highlight: false
 ---

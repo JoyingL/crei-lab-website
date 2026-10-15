@@ -1,10 +1,10 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import PersonCard from '../../components/PersonCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-
-type Person = CollectionEntry<'people'>;
-type Group = NonNullable<Person['data']['group']>;
+import snapshots from '../../data/snapshots.json';
+import { sitePath } from '../../lib/paths';
+import { groupOf, hasProfile, profilePath, ROLE_LABEL, type Group, type Person } from '../../lib/people';
 
 // Order per Joy (2026-10-15): PI, visiting faculty, postdocs, students, visiting researchers.
 const CURRENT: { group: Group; heading: string }[] = [
@@ -17,15 +17,14 @@ const CURRENT: { group: Group; heading: string }[] = [
   { group: 'collaborator', heading: 'Collaborators' },
 ];
 
-const ROLE_FALLBACK: Record<Person['data']['role'], Group> = {
-  pi: 'pi',
-  student: 'phd',
-  researcher: 'collaborator',
-  staff: 'collaborator',
-  alumni: 'alumni',
-};
-
-const groupOf = (p: Person): Group => p.data.group ?? ROLE_FALLBACK[p.data.role];
+// Alumni grouped by the section they were in; unknown former role goes last.
+const ALUMNI: { key: string; heading: string }[] = [
+  { key: 'postdoc', heading: 'Former Postdoctoral Associates' },
+  { key: 'phd', heading: 'Former Ph.D. Students' },
+  { key: 'masters', heading: 'Former Master’s Students' },
+  { key: 'visiting-researcher', heading: 'Former Visiting Researchers' },
+  { key: 'other', heading: 'Former Lab Members' },
+];
 
 // Longest-serving members first; `order` breaks ties and covers entries without a join year.
 const bySeniority = (a: Person, b: Person) =>
@@ -35,6 +34,17 @@ const people = await getCollection('people');
 const membersOf = (group: Group) => people.filter((p) => groupOf(p) === group).sort(bySeniority);
 const current = CURRENT.map((s) => ({ ...s, members: membersOf(s.group) })).filter((s) => s.members.length > 0);
 const alumni = membersOf('alumni');
+const alumniGroups = ALUMNI.map((g) => ({
+  ...g,
+  members: alumni.filter((p) => (p.data.formerGroup ?? 'other') === g.key),
+})).filter((g) => g.members.length > 0);
+// A single unlabeled group needs no sub-heading.
+const showAlumniHeadings = !(alumniGroups.length === 1 && alumniGroups[0].key === 'other');
+
+// Snapshots: portrait first so the feature layout puts it on the left.
+const isPortrait = (s: { width: number; height: number }) => s.height > s.width;
+const shots = [...snapshots].sort((a, b) => Number(isPortrait(b)) - Number(isPortrait(a)));
+const featured = shots.length === 3 && shots.filter(isPortrait).length === 1;
 ---
 
 <BaseLayout title="People" description="Members of the Climate Resilient and Equitable Infrastructure Lab at Tufts University.">
@@ -50,7 +60,7 @@ const alumni = membersOf('alumni');
             {s.group === 'pi' ? (
               s.members.map((person) => <PersonCard person={person} wide />)
             ) : (
-              <div class="grid grid-people">
+              <div class="people-grid">
                 {s.members.map((person) => <PersonCard person={person} />)}
               </div>
             )}
@@ -61,11 +71,150 @@ const alumni = membersOf('alumni');
       {alumni.length > 0 && (
         <section class="people-group" aria-labelledby="people-alumni">
           <h2 id="people-alumni">Alumni</h2>
-          <div class="grid grid-people">
-            {alumni.map((person) => <PersonCard person={person} />)}
-          </div>
+          {alumniGroups.map((g) => (
+            <section class="people-subgroup" aria-labelledby={showAlumniHeadings ? `alumni-${g.key}` : undefined}>
+              {showAlumniHeadings && <h3 id={`alumni-${g.key}`}>{g.heading}</h3>}
+              <ul class="alumni-list">
+                {g.members.map((p) => {
+                  const role = p.data.formerGroup ? ROLE_LABEL[p.data.formerGroup] : undefined;
+                  const meta = [role, p.data.years && `(${p.data.years})`].filter(Boolean).join(' ');
+                  const href = hasProfile(p) ? sitePath(profilePath(p)) : p.data.website;
+                  return (
+                    <li>
+                      <strong class="alumni-name">{href ? <a href={href}>{p.data.name}</a> : p.data.name}</strong>
+                      {meta && <span class="alumni-meta">, {meta}</span>}
+                      {p.data.current && <span class="alumni-current">. Currently {p.data.current.replace(/\.$/, '')}.</span>}
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
+          ))}
+        </section>
+      )}
+
+      {shots.length > 0 && (
+        <section class="people-group snapshots" aria-labelledby="people-snapshots">
+          <h2 id="people-snapshots">Snapshots from Lab Activities</h2>
+          <ul class:list={['snapshot-mosaic', featured ? 'mosaic-feature' : 'mosaic-masonry']}>
+            {shots.map((s) => (
+              <li class={isPortrait(s) ? 'is-portrait' : 'is-landscape'}>
+                <img src={sitePath(s.src)} alt={s.alt} width={s.width} height={s.height} loading="lazy" decoding="async" />
+              </li>
+            ))}
+          </ul>
         </section>
       )}
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* Photo-forward grid: fixed-width tracks so a lone member does not stretch across the row. */
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 12.5rem), 1fr));
+    gap: var(--space-6) var(--space-5);
+    margin-bottom: var(--space-5);
+  }
+
+  @media (max-width: 30rem) {
+    .people-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-5) var(--space-4);
+    }
+  }
+
+  .alumni-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-width: 52rem;
+  }
+
+  .alumni-list li {
+    padding: 0.5rem 0;
+    border-top: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+  }
+
+  .alumni-list li:last-child {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+  }
+
+  .alumni-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+
+  .alumni-name a {
+    color: var(--color-text);
+  }
+
+  .alumni-name a:hover {
+    color: var(--color-link);
+  }
+
+  .alumni-meta,
+  .alumni-current {
+    color: var(--color-text-muted);
+  }
+
+  /*
+   * Snapshots. One portrait + two landscapes: portrait left, landscapes stacked right.
+   * Columns 9fr : 8fr make the 3:4 portrait exactly as tall as two stacked 4:3 photos.
+   * Any other mix falls back to a masonry column flow that keeps each photo's own ratio.
+   */
+  .snapshot-mosaic {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .snapshot-mosaic li {
+    overflow: hidden;
+    background: var(--color-sky);
+  }
+
+  .snapshot-mosaic img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .mosaic-feature {
+    display: grid;
+    grid-template-columns: 9fr 8fr;
+    gap: var(--space-3);
+  }
+
+  .mosaic-feature .is-portrait {
+    grid-row: span 2;
+  }
+
+  .mosaic-feature .is-portrait img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mosaic-masonry {
+    columns: 3 16rem;
+    column-gap: var(--space-3);
+  }
+
+  .mosaic-masonry li {
+    break-inside: avoid;
+    margin-bottom: var(--space-3);
+  }
+
+  @media (max-width: 40rem) {
+    .mosaic-feature {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .mosaic-feature .is-portrait {
+      grid-row: auto;
+    }
+  }
+</style>

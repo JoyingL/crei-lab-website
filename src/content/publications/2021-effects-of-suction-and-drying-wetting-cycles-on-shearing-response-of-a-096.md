@@ -8,6 +8,7 @@ issue: "7"
 pages: "04021173"
 doi: 10.1061/(asce)mt.1943-5533.0003816
 url: "https://doi.org/10.1061/(asce)mt.1943-5533.0003816"
+topics: [unsaturated]
 type: journal
 highlight: false
 ---

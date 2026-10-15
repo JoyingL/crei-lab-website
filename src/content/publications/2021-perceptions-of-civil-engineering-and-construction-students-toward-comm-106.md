@@ -9,6 +9,7 @@ pages: "04021015"
 doi: 10.1061/(asce)ei.2643-9115.0000056
 url: "https://doi.org/10.1061/(asce)ei.2643-9115.0000056"
 topic: infrastructure
+topics: [resilient-equitable]
 type: journal
 highlight: false
 ---

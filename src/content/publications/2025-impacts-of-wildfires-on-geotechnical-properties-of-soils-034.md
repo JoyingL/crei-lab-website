@@ -8,6 +8,7 @@ issue: "12"
 pages: "04025293"
 doi: 10.1061/ijgnai.gmeng-10789
 url: "https://doi.org/10.1061/ijgnai.gmeng-10789"
+topics: [extreme-events]
 type: journal
 highlight: false
 ---

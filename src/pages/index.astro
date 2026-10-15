@@ -2,11 +2,10 @@
 import { sitePath } from '../lib/paths';
 import { getCollection } from 'astro:content';
 import AreaCard from '../components/AreaCard.astro';
-import PersonCard from '../components/PersonCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import HighlightTabs from '../components/HighlightTabs.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { HOME_SUBTITLE, LAB_NAME, RESEARCH_AREAS } from '../lib/site';
+import { FACULTY_LINKS, HOME_SUBTITLE, LAB_NAME, RESEARCH_AREAS } from '../lib/site';
 
 // Home shows faculty only (PI first, then visiting); students are listed on /people.
 const rank = (p: { data: { role: string; group?: string } }) =>
@@ -15,7 +14,11 @@ const people = (await getCollection('people'))
   .filter((p) => rank(p) < 2)
   .sort((a, b) => rank(a) - rank(b) || a.data.order - b.data.order);
 
-// Funded projects flagged `highlight`, up to three across.
+// Home faculty links: PI to the About profile, visiting faculty to their CEE profile.
+const facultyHref = (p: (typeof people)[number]) =>
+  p.data.role === 'pi' ? sitePath('/about') : p.data.website ?? FACULTY_LINKS[p.id];
+
+// Funded projects flagged `highlight` (only those with a cover), up to three across.
 const projects = (await getCollection('projects'))
   .filter((p) => p.data.highlight)
   .sort((a, b) => a.data.order - b.data.order || (b.data.year ?? 0) - (a.data.year ?? 0))
@@ -35,9 +38,8 @@ const projects = (await getCollection('projects'))
     </div>
   </section>
 
-  <section class="section" aria-labelledby="areas-heading">
+  <section class="section home-section" aria-labelledby="areas-heading">
     <div class="wrap">
-      <p class="kicker">What We Do</p>
       <h2 id="areas-heading" class="section-title">Research Areas</h2>
       <div class="area-grid">
         {
@@ -49,37 +51,61 @@ const projects = (await getCollection('projects'))
     </div>
   </section>
 
-  <section class="section section-band" aria-labelledby="projects-heading">
+  <section class="section section-band home-section" aria-labelledby="projects-heading">
     <div class="wrap">
       <h2 id="projects-heading" class="section-title">Highlighted Projects</h2>
-      <div class="project-cards">
+      <div class={`project-cards project-cards-home count-${projects.length}`}>
         {projects.map((project) => <ProjectCard project={project} />)}
       </div>
-      <p class="section-more"><a class="more-link" href={sitePath('/projects')}>All projects</a></p>
+      <p class="section-more"><a class="btn" href={sitePath('/projects')}>View More Projects</a></p>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="people-heading">
+  <section class="section home-section" aria-labelledby="people-heading">
     <div class="wrap">
       <h2 id="people-heading" class="section-title">People</h2>
       {
         people.length === 0 ? (
           <p class="empty">Member profiles are not yet available.</p>
         ) : (
-          <div class="grid grid-people grid-people-home">
-            {people.map((person) => <PersonCard person={person} />)}
-          </div>
+          <ul class="faculty-row">
+            {people.map((person) => {
+              const href = facultyHref(person);
+              const external = person.data.role !== 'pi';
+              // "Professor and Louis Berger Chair in Civil..." -> two lines, then the university.
+              const titleLines = [...person.data.title.split(/,\s*|\s+in\s+(?=[A-Z])/), 'Tufts University'];
+              return (
+                <li class="faculty">
+                  {person.data.photo ? (
+                    <img class="faculty-photo" src={sitePath(person.data.photo)} alt="" width="320" height="320" loading="lazy" />
+                  ) : (
+                    <span class="faculty-photo faculty-initials" aria-hidden="true">
+                      {person.data.name.split(/\s+/).map((w) => w[0]).slice(0, 2).join('')}
+                    </span>
+                  )}
+                  <h3 class="faculty-name">
+                    {href ? (
+                      <a href={href} {...(external ? { rel: 'noopener' } : {})}>{person.data.name}</a>
+                    ) : (
+                      person.data.name
+                    )}
+                  </h3>
+                  {titleLines.map((line) => <p class="faculty-title">{line}</p>)}
+                </li>
+              );
+            })}
+          </ul>
         )
       }
-      <p class="section-more"><a class="more-link" href={sitePath('/people')}>All people</a></p>
+      <p class="section-more"><a class="btn" href={sitePath('/people')}>View All People</a></p>
     </div>
   </section>
 
-  <section class="section section-band" aria-labelledby="pubs-heading">
+  <section class="section section-band home-section" aria-labelledby="pubs-heading">
     <div class="wrap">
       <h2 id="pubs-heading" class="section-title">Highlighted Publications</h2>
       <HighlightTabs />
-      <p class="section-more"><a class="more-link" href={sitePath('/publications')}>All publications</a></p>
+      <p class="section-more"><a class="btn" href={sitePath('/publications')}>View More Publications</a></p>
     </div>
   </section>
 </BaseLayout>

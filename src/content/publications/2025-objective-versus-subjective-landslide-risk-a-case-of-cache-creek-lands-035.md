@@ -8,6 +8,7 @@ pages: "105910"
 doi: 10.1016/j.ijdrr.2025.105910
 url: "https://doi.org/10.1016/j.ijdrr.2025.105910"
 topic: slopes/dams/levees
+topics: [slopes-dams-levees, resilient-equitable]
 type: journal
 highlight: false
 ---

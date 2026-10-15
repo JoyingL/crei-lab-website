@@ -8,6 +8,7 @@ issue: "9"
 pages: "1522-1532"
 doi: 10.1139/cgj-2016-0057
 url: "https://doi.org/10.1139/cgj-2016-0057"
+topics: [slopes-dams-levees, methods]
 type: journal
 highlight: false
 ---

@@ -9,6 +9,7 @@ pages: "e2022EF003213"
 doi: 10.1029/2022ef003213
 url: "https://doi.org/10.1029/2022ef003213"
 topic: wildfire
+topics: [extreme-events, slopes-dams-levees, unsaturated]
 type: journal
 highlight: false
 ---

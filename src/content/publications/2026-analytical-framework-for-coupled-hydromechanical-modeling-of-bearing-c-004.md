@@ -9,6 +9,7 @@ pages: "637"
 doi: 10.1007/s10064-026-05304-4
 url: "https://doi.org/10.1007/s10064-026-05304-4"
 topic: unsaturated soils
+topics: [methods, multiphysics, unsaturated]
 type: journal
 highlight: false
 ---

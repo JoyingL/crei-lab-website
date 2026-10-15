@@ -9,6 +9,7 @@ pages: "180-193"
 doi: 10.1016/j.enggeo.2012.10.016
 url: "https://doi.org/10.1016/j.enggeo.2012.10.016"
 topic: slopes/dams/levees
+topics: [slopes-dams-levees, methods]
 type: journal
 highlight: false
 ---

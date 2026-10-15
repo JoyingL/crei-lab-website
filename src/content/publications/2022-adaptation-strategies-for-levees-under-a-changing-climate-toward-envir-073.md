@@ -9,6 +9,7 @@ pages: "50-56"
 doi: 10.1061/geosek.0000422
 url: "https://doi.org/10.1061/geosek.0000422"
 topic: slopes/dams/levees
+topics: [climate-adaptation, slopes-dams-levees, resilient-equitable]
 type: journal
 highlight: false
 ---

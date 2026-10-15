@@ -9,6 +9,7 @@ pages: "2528-2535"
 doi: 10.1016/j.conbuildmat.2010.06.003
 url: "https://doi.org/10.1016/j.conbuildmat.2010.06.003"
 topic: infrastructure
+topics: [methods]
 type: journal
 highlight: false
 ---

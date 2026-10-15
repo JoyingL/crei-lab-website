@@ -8,6 +8,7 @@ issue: "1"
 pages: "301-332"
 doi: 10.1146/annurev-earth-032524-120845
 url: "https://doi.org/10.1146/annurev-earth-032524-120845"
+topics: [resilient-equitable, climate-adaptation]
 type: journal
 highlight: false
 ---

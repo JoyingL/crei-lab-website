@@ -7,6 +7,7 @@ volume: "297"
 pages: "106536"
 doi: 10.1016/j.enggeo.2022.106536
 url: "https://doi.org/10.1016/j.enggeo.2022.106536"
+topics: [unsaturated]
 type: journal
 highlight: false
 ---
