@@ -34,4 +34,4 @@ The decorative world map uses public-domain Natural Earth 1:110m land geometry (
 
 Institutional marks are supplied Tufts University and Civil and Environmental Engineering white logo assets. The CEE header image is cropped to its department text, omitting the repeated Tufts mark and divider, as requested; its text proportions are preserved.
 
-Projects currently uses three editorial placeholders; funding records are excluded from public project listings and site search.
+Projects are funded projects (`src/content/projects/`); each lists its papers in `pubs` (matched by grant acknowledgment). Home Highlighted Publications are hand-picked in `HIGHLIGHT_PUBS` (`src/lib/site.ts`).

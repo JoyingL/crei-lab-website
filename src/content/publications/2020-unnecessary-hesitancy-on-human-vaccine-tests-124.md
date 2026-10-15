@@ -1,6 +1,6 @@
 ---
 title: Unnecessary hesitancy on human vaccine tests
-authors: [F. Vahedifard, Kaveh Madani, Amir AghaKouchak, Sannith Kumar Thota]
+authors: ["Vahedifard, F.", "Madani, Kaveh", "AghaKouchak, Amir", "Thota, Sannith Kumar"]
 year: 2020
 venue: Science
 doi: 10.1126/science.abc8264

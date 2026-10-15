@@ -12,11 +12,11 @@ const [people, publications, news, teaching] = await Promise.all([
 
 const index = [
   { href: sitePath('/'), title: 'Home', kind: 'Page', text: 'climate resilient equitable infrastructure' },
-  { href: sitePath('/about'), title: 'About', kind: 'Page', text: 'challenge contribution approach climate extremes earthen infrastructure' },
+  { href: sitePath('/about'), title: 'About', kind: 'Page', text: 'farshid vahedifard principal investigator biography teaching courses' },
+  { href: sitePath('/lab'), title: 'About Our Lab', kind: 'Page', text: 'challenge contribution approach climate extremes earthen infrastructure' },
   { href: sitePath('/people'), title: 'People', kind: 'Page', text: 'principal investigator' },
   { href: sitePath('/projects'), title: 'Projects', kind: 'Page', text: '' },
   { href: sitePath('/publications'), title: 'Publications', kind: 'Page', text: '' },
-  { href: sitePath('/teaching'), title: 'Teaching', kind: 'Page', text: '' },
   { href: sitePath('/news'), title: 'News', kind: 'Page', text: '' },
   { href: sitePath('/join'), title: 'Opportunities', kind: 'Page', text: 'join us prospective students collaboration' },
   ...people.map((p) => ({
@@ -38,7 +38,7 @@ const index = [
     text: p.data.excerpt,
   })),
   ...teaching.map((p) => ({
-    href: sitePath('/teaching'),
+    href: sitePath('/about'),
     title: p.data.title,
     kind: 'Teaching',
     text: `${p.data.code ?? ''} ${p.data.description ?? ''}`,

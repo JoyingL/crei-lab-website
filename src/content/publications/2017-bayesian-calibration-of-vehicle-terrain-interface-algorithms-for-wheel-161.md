@@ -1,8 +1,10 @@
 ---
 title: Bayesian calibration of Vehicle-Terrain Interface algorithms for wheeled vehicles on loose sands
-authors: [I Dettwiller, M Rais-Rohani, F Vahedifard, GL Mason, JD Priddy]
+authors: ["Dettwiller, Ian", "Rais-Rohani, Masoud", "Vahedifard, Farshid", "Mason, George L.", "Priddy, Jody D."]
 year: 2017
 venue: Journal of Terramechanics
+volume: "71"
+pages: "45-56"
 doi: 10.1016/j.jterra.2017.02.003
 url: "https://doi.org/10.1016/j.jterra.2017.02.003"
 type: journal

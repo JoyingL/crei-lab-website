@@ -6,4 +6,7 @@ year: 2024
 funder: NASA
 url: https://now.tufts.edu/2024/10/18/partnerships-climate-resilience
 highlight: true
+short: "Geohazard Equity"
+tagline: "Earth observations for equitable resilience to geohazards"
+order: 3
 ---

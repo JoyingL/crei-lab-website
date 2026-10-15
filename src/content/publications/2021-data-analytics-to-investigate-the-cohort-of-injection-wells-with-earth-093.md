@@ -1,8 +1,11 @@
 ---
 title: Data analytics to investigate the cohort of injection wells with earthquakes in Oklahoma
-authors: [A Amirlatifi, B KC, M Adibifard, F Vahedifard, E Ghazanfari]
+authors: ["Amirlatifi, Amin", "KC, Bijay", "Adibifard, Meisam", "Vahedifard, Farshid", "Ghazanfari, Ehsan"]
 year: 2021
 venue: Earthquake Spectra
+volume: "37"
+issue: "1S"
+pages: "1652-1672"
 doi: 10.1177/8755293021989725
 url: "https://doi.org/10.1177/8755293021989725"
 type: journal

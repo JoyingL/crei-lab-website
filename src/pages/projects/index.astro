@@ -1,13 +1,28 @@
 ---
-import ProjectPlaceholders from '../../components/ProjectPlaceholders.astro';
+import { getCollection } from 'astro:content';
+import ProjectCard from '../../components/ProjectCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Funded projects, each grouping the papers it supported. Projects with a figure lead.
+const projects = (await getCollection('projects')).sort(
+  (a, b) =>
+    Number(Boolean(b.data.cover)) - Number(Boolean(a.data.cover)) ||
+    a.data.order - b.data.order ||
+    (b.data.year ?? 0) - (a.data.year ?? 0),
+);
 ---
 
-<BaseLayout title="Projects" description="Research projects at the Climate Resilient and Equitable Infrastructure Lab.">
+<BaseLayout title="Projects" description="Funded research projects at the Climate Resilient and Equitable Infrastructure Lab.">
   <section class="section">
     <div class="wrap">
       <h1>Projects</h1>
-      <ProjectPlaceholders />
+      {projects.length === 0 ? (
+        <p class="empty">Projects will be listed here.</p>
+      ) : (
+        <div class="project-cards">
+          {projects.map((project) => <ProjectCard project={project} />)}
+        </div>
+      )}
     </div>
   </section>
 </BaseLayout>

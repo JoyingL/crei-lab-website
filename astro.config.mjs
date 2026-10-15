@@ -6,5 +6,10 @@ export default defineConfig({
   site: 'https://joyingl.github.io',
   base: '/crei-lab-website',
   output: 'static',
+  // Teaching folded into About and Contact into Opportunities (2026-10-15); keep old links working.
+  redirects: {
+    '/teaching': '/about',
+    '/contact': '/join',
+  },
   integrations: [sitemap()],
 });

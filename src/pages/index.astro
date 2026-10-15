@@ -3,7 +3,7 @@ import { sitePath } from '../lib/paths';
 import { getCollection } from 'astro:content';
 import AreaCard from '../components/AreaCard.astro';
 import PersonCard from '../components/PersonCard.astro';
-import ProjectPlaceholders from '../components/ProjectPlaceholders.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import HighlightTabs from '../components/HighlightTabs.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { HOME_SUBTITLE, LAB_NAME, RESEARCH_AREAS } from '../lib/site';
@@ -14,6 +14,12 @@ const rank = (p: { data: { role: string; group?: string } }) =>
 const people = (await getCollection('people'))
   .filter((p) => rank(p) < 2)
   .sort((a, b) => rank(a) - rank(b) || a.data.order - b.data.order);
+
+// Funded projects flagged `highlight`, up to three across.
+const projects = (await getCollection('projects'))
+  .filter((p) => p.data.highlight)
+  .sort((a, b) => a.data.order - b.data.order || (b.data.year ?? 0) - (a.data.year ?? 0))
+  .slice(0, 3);
 ---
 
 <BaseLayout
@@ -25,17 +31,18 @@ const people = (await getCollection('people'))
     <div class="wrap">
       <h1 class="hero-name"><span>Climate Resilient and Equitable</span>{' '}<span>Infrastructure Lab</span></h1>
       <p class="lede">{HOME_SUBTITLE}</p>
-      <a class="btn" href={sitePath('/about')}>About the lab</a>
+      <a class="btn" href={sitePath('/lab')}>About Our Lab</a>
     </div>
   </section>
 
   <section class="section" aria-labelledby="areas-heading">
     <div class="wrap">
-      <h2 id="areas-heading" class="section-title">Research areas</h2>
-      <div class="grid grid-areas">
+      <p class="kicker">What We Do</p>
+      <h2 id="areas-heading" class="section-title">Research Areas</h2>
+      <div class="area-grid">
         {
           RESEARCH_AREAS.map((area) => (
-            <AreaCard title={area.title} body={area.body} hover={area.hover} />
+            <AreaCard title={area.title} body={area.body} chips={area.chips} texture={area.texture} />
           ))
         }
       </div>
@@ -44,8 +51,10 @@ const people = (await getCollection('people'))
 
   <section class="section section-band" aria-labelledby="projects-heading">
     <div class="wrap">
-      <h2 id="projects-heading" class="section-title">Highlighted projects</h2>
-      <ProjectPlaceholders />
+      <h2 id="projects-heading" class="section-title">Highlighted Projects</h2>
+      <div class="project-cards">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </div>
       <p class="section-more"><a class="more-link" href={sitePath('/projects')}>All projects</a></p>
     </div>
   </section>
@@ -57,7 +66,7 @@ const people = (await getCollection('people'))
         people.length === 0 ? (
           <p class="empty">Member profiles are not yet available.</p>
         ) : (
-          <div class="grid grid-people">
+          <div class="grid grid-people grid-people-home">
             {people.map((person) => <PersonCard person={person} />)}
           </div>
         )
@@ -68,7 +77,7 @@ const people = (await getCollection('people'))
 
   <section class="section section-band" aria-labelledby="pubs-heading">
     <div class="wrap">
-      <h2 id="pubs-heading" class="section-title">Highlighted publications</h2>
+      <h2 id="pubs-heading" class="section-title">Highlighted Publications</h2>
       <HighlightTabs />
       <p class="section-more"><a class="more-link" href={sitePath('/publications')}>All publications</a></p>
     </div>

@@ -1,8 +1,11 @@
 ---
 title: A framework for analyzing the stability of geosynthetic reinforced soil walls under unsaturated conditions
-authors: [A Rajabian, F Vahedifard, D Leshchinsky]
+authors: ["Rajabian, Ahmad", "Vahedifard, Farshid", "Leshchinsky, Dov"]
 year: 2024
 venue: Journal of Geotechnical and Geoenvironmental Engineering
+volume: "150"
+issue: "6"
+pages: "06024002"
 doi: 10.1061/jggefk.gteng-12069
 url: "https://doi.org/10.1061/jggefk.gteng-12069"
 topic: unsaturated soils

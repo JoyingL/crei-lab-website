@@ -1,0 +1,50 @@
+---
+import { sitePath } from '../lib/paths';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { LAB_NAME } from '../lib/site';
+---
+
+<BaseLayout title="About Our Lab" description={`About the ${LAB_NAME} at Tufts University.`}>
+  <section class="section">
+    <div class="wrap" style="max-width: var(--measure-narrow);">
+      <h1>About Our Lab</h1>
+      <p class="lede">
+        The {LAB_NAME}, in the Department of Civil and Environmental Engineering at Tufts
+        University, studies how climate extremes affect earthen infrastructure and the communities
+        it serves.
+      </p>
+
+      <h2>Challenge</h2>
+      <p>
+        Drought, flooding, and wildfire change soil moisture and temperature, and with them soil
+        strength and deformation. These changes can reduce the stability of slopes, dams, and
+        levees. Compound and cascading hazards, in which events overlap or follow one another, add
+        to this risk. When these structures fail, the consequences reach the communities that
+        depend on them.
+      </p>
+
+      <h2>Contribution</h2>
+      <p>
+        Our work focuses on critical infrastructure such as levees and dams: how it withstands
+        extreme events in a changing climate, and how it can be adapted. We pair geotechnical
+        engineering with environmental justice, paying particular attention to the risks facing
+        disadvantaged communities.
+      </p>
+
+      <h2>Approach</h2>
+      <p>
+        We use analytical and numerical methods to study water flow, heat transfer, and stress
+        in variably saturated soils. We apply these models to slopes, dams, and levees under
+        changing climate conditions. Much of this work is collaborative, drawing on climate
+        science, hydrology, geosciences, social science, remote sensing, and data science.
+      </p>
+
+      <p class="about-actions">
+        The lab is led by <a href={sitePath('/about')}>Prof. Farshid Vahedifard</a>. Our
+        <a href={sitePath('/projects')}>projects</a> and
+        <a href={sitePath('/publications')}>publications</a> describe this work in more detail, and
+        we welcome <a href={sitePath('/join')}>inquiries</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

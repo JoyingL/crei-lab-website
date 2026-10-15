@@ -155,15 +155,11 @@ p {
   .grid-areas { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* Fixed-width tracks so a lone PI card does not stretch across the row. */
+/* Fixed-width tracks so a lone card does not stretch across the row. */
 .grid-people {
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 17rem));
-  margin-bottom: var(--space-6);
-}
-
-/* Center only under a centered section title (Home). */
-.section-title ~ .grid-people {
-  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
 }
 
 .card {
@@ -675,26 +671,16 @@ p {
   from { opacity: 0; transform: translateY(18px); }
 }
 
-/* Centered section headings with a short accent rule, as on the reference sites. */
+/* Left-aligned section headings with an optional small uppercase kicker above (no accent rule). */
 .section-title {
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-  text-align: center;
+  margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem);
   font-size: clamp(1.6rem, 3vw, 2.25rem);
 }
 
-.section-title::after {
-  content: "";
-  display: block;
-  width: 3rem;
-  height: 3px;
-  margin: 0.9rem auto 0;
-  border-radius: 3px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-}
+.kicker + .section-title { margin-top: 0; }
 
 .section-more {
   margin: var(--space-6) 0 0;
-  text-align: center;
 }
 
 .section-more .more-link { margin-top: 0; }
@@ -735,9 +721,25 @@ p {
 }
 
 .pub-item {
-  padding-block: var(--space-4);
-  border-top: 1px solid var(--color-border);
+  padding-block: 0.7rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
 }
+
+.pub-ref {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.pub-ref a {
+  margin-left: 0.15rem;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.pub-title { color: var(--color-text); }
 
 .pub-item h3 {
   font-family: var(--font-body);

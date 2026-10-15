@@ -1,8 +1,9 @@
 ---
 title: Engineering Properties of Lightly Cemented Dredged Soil
-authors: [MOA Bazne, F Vahedifard, IL Howard, BT Smith]
+authors: ["Bazne, Mohammed O. A.", "Vahedifard, Farshid", "Howard, Isaac L.", "Smith, Braden T."]
 year: 2016
 venue: Geo-Chicago 2016
+pages: "422-431"
 doi: 10.1061/9780784480168.042
 url: "https://doi.org/10.1061/9780784480168.042"
 type: conference

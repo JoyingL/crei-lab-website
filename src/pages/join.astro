@@ -10,30 +10,35 @@ import { EMAIL } from '../lib/site';
       <p class="kicker">Opportunities</p>
       <h1>Join Us</h1>
       <p class="lede">
-        We welcome inquiries from prospective students and researchers interested in climate
-        hazards, soil mechanics, and equitable infrastructure.
+        We welcome applicants motivated to address challenges at the intersection of climate change,
+        resilient infrastructure, and environmental justice. Our research studies how critical
+        infrastructure (e.g., levees, dams, slopes) withstands and adapts to extreme events (e.g.,
+        drought, flooding, wildfires, compound and cascading hazards) in a changing climate. Our work
+        combines systems engineering and geotechnical modeling with environmental science, remote
+        sensing, and data-driven computational methods.
       </p>
-      <h2>Prospective students</h2>
+
+      <h2>Prospective Students</h2>
       <p>
-        Our <a href={sitePath('/projects')}>projects</a> and
-        <a href={sitePath('/publications')}>publications</a> offer an overview of the questions we
-        study. If your interests overlap with our work, please email Farshid Vahedifard with a brief
-        introduction, including your academic background, the degree you would like to pursue, and
-        the research questions that interest you.
+        We encourage applicants to explore our <a href={sitePath('/projects')}>projects</a> and
+        <a href={sitePath('/publications')}>publications</a> to learn more about our research.
+        Interested students should contact Dr. Vahedifard at
+        <a href={`mailto:${EMAIL}?subject=${encodeURIComponent('Prospective Student: [Last Name]')}`}>{EMAIL}</a>
+        with the subject line “Prospective Student: [Last Name]”, a CV, and a brief introduction
+        outlining (1) your motivation for joining the group and (2) the research questions or topics
+        that excite you most.
       </p>
       <p>
         Please check the relevant Tufts department or graduate program website for application
         requirements and deadlines.
       </p>
-      <h2>Research collaboration</h2>
+
+      <h2>Research Collaboration</h2>
       <p>
-        To discuss a potential collaboration, please email Farshid Vahedifard with a brief
-        description of your research question and how it connects with our work.
-      </p>
-      <h2>Contact</h2>
-      <p>
-        Farshid Vahedifard<br />
-        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        We actively collaborate with researchers across disciplines and around the world, as well as
+        with agencies and practitioners. To discuss a potential collaboration, please email
+        <a href={`mailto:${EMAIL}`}>Dr. Vahedifard</a> with a brief description of your research
+        question and how it connects with our work.
       </p>
     </div>
   </section>

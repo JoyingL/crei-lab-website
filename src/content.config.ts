@@ -7,13 +7,17 @@ const people = defineCollection({
   schema: z.object({
     name: z.string(),
     role: z.enum(['pi', 'researcher', 'student', 'alumni', 'staff']),
-    /** People page section. Falls back to role when omitted. */
-    group: z.enum(['pi', 'phd', 'masters', 'visiting', 'collaborator', 'alumni']).optional(),
+    /** People page section. Falls back to role when omitted. `visiting` = visiting faculty. */
+    group: z
+      .enum(['pi', 'visiting', 'postdoc', 'phd', 'masters', 'visiting-researcher', 'collaborator', 'alumni'])
+      .optional(),
     /** Year the person joined the lab; sorts members within a section (earliest first). */
     since: z.number().optional(),
     title: z.string(),
     affiliation: z.string(),
     email: z.string().email().optional(),
+    /** Extra spellings used in bylines ("Family, Given"), for blue author highlighting. */
+    authorAs: z.array(z.string()).default([]),
     scholar: z.string().url().optional(),
     linkedin: z.string().url().optional(),
     website: z.string().url().optional(),
@@ -31,6 +35,12 @@ const publications = defineCollection({
     authors: z.array(z.string()),
     year: z.number(),
     venue: z.string(),
+    volume: z.coerce.string().optional(),
+    issue: z.coerce.string().optional(),
+    /** Page range or article number. */
+    pages: z.coerce.string().optional(),
+    /** Keys from PUB_TOPICS; first is the primary topic. */
+    topics: z.array(z.string()).default([]),
     doi: z.string().optional(),
     url: z.string().url().optional(),
     pdf: z.string().url().optional(),
@@ -51,7 +61,16 @@ const projects = defineCollection({
     funder: z.string().optional(),
     url: z.string().url().optional(),
     highlight: z.boolean().default(false),
+    /** Card title (1 to 4 words) and one-line tagline, as on HuMNet's project grid. */
+    short: z.string().optional(),
+    tagline: z.string().optional(),
     cover: z.string().optional(),
+    coverAlt: z.string().optional(),
+    coverWidth: z.number().optional(),
+    coverHeight: z.number().optional(),
+    /** Publication ids linked to this project (grant acknowledgment); add new papers here. */
+    pubs: z.array(z.string()).default([]),
+    order: z.number().default(100),
   }),
 });
 

@@ -1,74 +1,40 @@
 ---
 import { sitePath } from '../lib/paths';
 import type { CollectionEntry } from 'astro:content';
+import IconLinks from './IconLinks.astro';
 
 interface Props {
   person: CollectionEntry<'people'>;
+  /** Wide Principal Investigator row with bio (People page). */
+  wide?: boolean;
 }
 
-const { person } = Astro.props;
-const { name, title, affiliation, email, scholar, linkedin, website, photo } = person.data;
+const { person, wide = false } = Astro.props;
+const { name, title, email, scholar, linkedin, website, photo } = person.data;
 const initials = name
   .split(/\s+/)
   .map((part) => part[0])
   .filter(Boolean)
   .slice(0, 2)
   .join('');
-
-const links = [
-  scholar && { href: scholar, label: 'Google Scholar' },
-  linkedin && { href: linkedin, label: 'LinkedIn' },
-  website && { href: website, label: 'Website' },
-].filter(Boolean) as { href: string; label: string }[];
+// Only the PI file body is public bio text; other bodies hold sourcing notes.
+const bio = wide ? person.body?.trim() : undefined;
 ---
 
-<article class="card person-card">
+<article class={wide ? 'pi-card' : 'member'}>
   {
     photo ? (
-      <img class="person-photo" src={sitePath(photo)} alt={name} width="320" height="400" loading="lazy" />
+      <img class="member-photo" src={sitePath(photo)} alt={name} width="320" height="320" loading="lazy" />
     ) : (
       // Placeholder until a photo is supplied; decorative, the name follows as text.
-      <div class="person-photo person-initials" aria-hidden="true">{initials}</div>
+      <div class="member-photo member-initials" aria-hidden="true">{initials}</div>
     )
   }
-  <h3 class="person-name">{name}</h3>
-  <p class="person-meta">{title}</p>
-  <p class="person-meta">{affiliation}</p>
-  {
-    email && (
-      <p>
-        <a href={`mailto:${email}`}>{email}</a>
-      </p>
-    )
-  }
-  {
-    links.length > 0 && (
-      <p class="person-links">
-        {links.map((link) => (
-          <a href={link.href} aria-label={`${link.label}: ${name}`}>{link.label}</a>
-        ))}
-      </p>
-    )
-  }
+  {wide && <p class="pi-title">{title}</p>}
+  <div>
+    <h3 class="member-name">{name}</h3>
+    {!wide && <p class="member-title">{title}</p>}
+  </div>
+  <IconLinks name={name} scholar={scholar} website={website} linkedin={linkedin} email={email} />
+  {bio && <p class="pi-bio">{bio}</p>}
 </article>
-
-<style>
-  .person-initials {
-    display: grid;
-    place-items: center;
-    background: linear-gradient(140deg, var(--color-sky), #f4f7fb);
-    color: var(--color-primary);
-    font-family: var(--font-display);
-    font-size: 2.5rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-  }
-
-  .person-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 1rem;
-    margin-top: auto;
-    margin-bottom: 0;
-  }
-</style>

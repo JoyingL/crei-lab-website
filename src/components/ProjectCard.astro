@@ -1,21 +1,37 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { sitePath } from '../lib/paths';
 
 interface Props {
   project: CollectionEntry<'projects'>;
 }
 
+// Image-top project card (HuMNet style): figure, short title, one-line tagline. Whole card links.
 const { project } = Astro.props;
-const { title, summary, status, year, funder, url } = project.data;
+const { title, short, tagline, summary, cover, coverAlt, coverWidth, coverHeight, funder, year } = project.data;
+const heading = short ?? title;
 ---
 
-<article class="card">
-  <p class="kicker">{status}{year ? ` · ${year}` : ''}{funder ? ` · ${funder}` : ''}</p>
-  <h3>{title}</h3>
-  <p>{summary}</p>
-  {url && (
-    <p>
-      <a href={url}>Project page</a>
-    </p>
-  )}
+<article class="project-card">
+  <a class="project-link" href={sitePath(`/projects/${project.id}`)}>
+    <div class="project-media">
+      {cover ? (
+        <img
+          src={sitePath(cover)}
+          alt={coverAlt ?? ''}
+          width={coverWidth ?? 800}
+          height={coverHeight ?? 600}
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        // Typographic stand-in until a figure is chosen for this project.
+        <span class="project-media-label" aria-hidden="true">{funder ?? 'Project'}{year ? ` · ${year}` : ''}</span>
+      )}
+    </div>
+    <div class="project-copy">
+      <h3>{heading}</h3>
+      <p>{tagline ?? (short ? title : summary)}</p>
+    </div>
+  </a>
 </article>

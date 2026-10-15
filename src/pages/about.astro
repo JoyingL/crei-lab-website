@@ -1,61 +1,67 @@
 ---
 import { sitePath } from '../lib/paths';
 import { getCollection } from 'astro:content';
-import PersonCard from '../components/PersonCard.astro';
+import IconLinks from '../components/IconLinks.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { CEE_PROFILE_URL, FACULTY_PROFILE_URL, LAB_NAME } from '../lib/site';
+import { CEE_PROFILE_URL, FACULTY_PROFILE_URL, SCHOLAR_URL } from '../lib/site';
 
+// About = the PI (Joy, 2026-10-15). Lab overview moved to /lab; Teaching folded in here.
 const pi = (await getCollection('people')).find((p) => p.data.role === 'pi');
+const courses = (await getCollection('teaching')).sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
 ---
 
-<BaseLayout title="About" description={`About the ${LAB_NAME} at Tufts University.`}>
+<BaseLayout title="About" description="Farshid Vahedifard, Professor and Louis Berger Chair in Civil and Environmental Engineering at Tufts University.">
   <section class="section">
-    <div class="wrap" style="max-width: var(--measure-narrow);">
-      <h1>About</h1>
-      <p class="lede">
-        The {LAB_NAME}, in the Department of Civil and Environmental Engineering at Tufts
-        University, studies how climate extremes affect earthen infrastructure and the communities
-        it serves.
-      </p>
+    <div class="wrap" style="max-width: 56rem;">
+      {pi && (
+        <div class="profile-head">
+          {pi.data.photo && <img src={sitePath(pi.data.photo)} alt={pi.data.name} width="480" height="600" />}
+          <div>
+            <h1>{pi.data.name}, Ph.D.</h1>
+            <p class="profile-lines">
+              {pi.data.title}<br />
+              Department of Civil and Environmental Engineering<br />
+              School of Engineering, Tufts University
+            </p>
+            <IconLinks name={pi.data.name} scholar={pi.data.scholar} website={CEE_PROFILE_URL} email={pi.data.email} />
+          </div>
+        </div>
+      )}
 
-      <h2>Challenge</h2>
-      <p>
-        Drought, flooding, and wildfire change soil moisture and temperature, and with them soil
-        strength and deformation. These changes can reduce the stability of slopes, dams, and
-        levees. Compound and cascading hazards, in which events overlap or follow one another, add
-        to this risk. When these structures fail, the consequences reach the communities that
-        depend on them.
-      </p>
+      <div class="profile-bio">
+        <p>
+          Farshid Vahedifard is Professor and Louis Berger Chair in Civil and Environmental
+          Engineering at Tufts University. His research connects geotechnical engineering with
+          climate change and environmental justice, with a focus on how extreme events affect
+          infrastructure and disadvantaged communities.
+        </p>
+        <p>
+          See his <a href={CEE_PROFILE_URL}>Tufts CEE profile</a>,
+          <a href={FACULTY_PROFILE_URL}>Tufts faculty profile</a>, or
+          <a href={SCHOLAR_URL}>Google Scholar</a> for more.
+        </p>
+      </div>
 
-      <h2>Contribution</h2>
-      <p>
-        Our work focuses on critical infrastructure such as levees and dams: how it withstands
-        extreme events in a changing climate, and how it can be adapted. We pair geotechnical
-        engineering with environmental justice, paying particular attention to the risks facing
-        disadvantaged communities.
-      </p>
-
-      <h2>Approach</h2>
-      <p>
-        We use analytical and numerical methods to study water flow, heat transfer, and stress
-        in variably saturated soils. We apply these models to slopes, dams, and levees under
-        changing climate conditions. Much of this work is collaborative, drawing on climate
-        science, hydrology, geosciences, social science, remote sensing, and data science.
-      </p>
-
-      <h2>Principal investigator</h2>
-      <p>
-        Farshid Vahedifard is Professor and Louis Berger Chair in Civil and Environmental
-        Engineering. His full biography is available on his{' '}
-        <a href={CEE_PROFILE_URL}>Tufts CEE profile</a> and{' '}
-        <a href={FACULTY_PROFILE_URL}>Tufts faculty profile</a>.
-      </p>
-      {pi && <PersonCard person={pi} />}
+      <h2>Teaching</h2>
+      {courses.length === 0 ? (
+        <p class="empty">Course information is not yet available.</p>
+      ) : (
+        <ul class="course-list">
+          {courses.map((course) => (
+            <li>
+              <strong>{course.data.code ? `${course.data.code}: ${course.data.title}` : course.data.title}</strong>
+              {(course.data.term || course.data.year) && <> ({[course.data.term, course.data.year].filter(Boolean).join(' ')})</>}
+              {course.data.description && <p>{course.data.description}</p>}
+            </li>
+          ))}
+        </ul>
+      )}
 
       <p class="about-actions">
-        Our <a href={sitePath('/projects')}>projects</a> and
+        Read more <a href={sitePath('/lab')}>about our lab</a>. Our
+        <a href={sitePath('/projects')}>projects</a> and
         <a href={sitePath('/publications')}>publications</a> describe this work in more detail, and
-        we welcome <a href={sitePath('/contact')}>inquiries</a>.
+        we welcome <a href={sitePath('/join')}>inquiries</a>.
       </p>
     </div>
   </section>

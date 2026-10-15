@@ -2,14 +2,17 @@
 import { ClientRouter } from 'astro:transitions';
 import { sitePath, localPath } from '../lib/paths';
 import '../styles/global.css';
+import '../styles/editorial.css';
 import {
   CEE_URL,
   EMAIL,
+  FOOTER_NAV,
   LAB_NAME,
   LAB_SHORT,
+  MAPS_EMBED_URL,
   MAPS_URL,
+  PI_NAME,
   PRIMARY_NAV,
-  SCHOLAR_URL,
   TUFTS_URL,
   isCurrentPath,
 } from '../lib/site';
@@ -107,41 +110,37 @@ const pageAnimation = {
           >
             <img src={sitePath('/brand/tufts-white.png')} alt="Tufts University" width="394" height="169" />
           </a>
-          <p class="footer-lab">
-            {LAB_NAME}<br />
-            Department of Civil and Environmental Engineering
+          <p class="footer-lab-name">{LAB_NAME}</p>
+          <p class="footer-unit">School of Engineering | Department of Civil and Environmental Engineering</p>
+        </div>
+        <div class="footer-visit">
+          <h2 class="footer-heading">Visit Us</h2>
+          <iframe
+            class="footer-map-frame"
+            src={MAPS_EMBED_URL}
+            title="Map of Tufts University School of Engineering, Medford"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+          <p class="footer-map-caption">
+            200 College Avenue, Medford, MA 02155 · <a class="footer-map" href={MAPS_URL}>Open in Google Maps</a>
           </p>
         </div>
         <div>
-          <h2 class="footer-heading">Visit Us</h2>
-          <address class="footer-address">
-            School of Engineering<br />
-            200 College Avenue<br />
-            Medford, MA 02155<br />
-            United States
-          </address>
-          <a class="footer-map" href={MAPS_URL}>Campus Map</a>
-        </div>
-        <nav aria-label="Footer">
-          <h2 class="footer-heading">Explore</h2>
-          <ul class="footer-list">
-            {
-              PRIMARY_NAV.filter((item) => item.href !== '/').map((item) => (
-                <li>
-                  <a href={sitePath(item.href)}>{item.label}</a>
-                </li>
-              ))
-            }
-          </ul>
-        </nav>
-        <div>
-          <h2 class="footer-heading">Connect</h2>
-          <ul class="footer-list">
-            <li><a href={sitePath('/join')}>Opportunities</a></li>
-            <li><a href={sitePath('/contact')}>Contact</a></li>
-            <li><a href={SCHOLAR_URL}>Google Scholar</a></li>
-            <li><a href={`mailto:${EMAIL}`}>Email</a></li>
-          </ul>
+          <p class="footer-pi">Prof. {PI_NAME}</p>
+          <a class="footer-email" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <nav aria-label="Footer">
+            <h2 class="footer-heading">Explore</h2>
+            <ul class="footer-list">
+              {
+                FOOTER_NAV.map((item) => (
+                  <li>
+                    <a href={sitePath(item.href)}>{item.label}</a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
         </div>
       </div>
       <div class="wrap footer-bottom">
@@ -169,7 +168,7 @@ const pageAnimation = {
 <script>
   // Scroll reveal with stagger. Content is visible without JS; `js-reveal` gates the hidden state.
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const TARGETS = '.section > .wrap > h1, .section > .wrap > h2, .section > .wrap > .lede, .grid > *, .project-cards > *, .highlight-tabs';
+  const TARGETS = '.section > .wrap > h1, .section > .wrap > h2, .section > .wrap > .lede, .grid > *, .area-grid > *, .project-cards > *, .highlight-tabs';
 
   function reveal(el: Element) {
     el.classList.add('is-visible');
@@ -204,7 +203,7 @@ const pageAnimation = {
         // Above-the-fold content already animates with the page transition; never hide it.
         if (el.getBoundingClientRect().top < window.innerHeight * 0.92) return;
         const siblings = el.parentElement ? Array.from(el.parentElement.children) : [];
-        const isGridItem = el.parentElement?.matches('.grid, .project-cards');
+        const isGridItem = el.parentElement?.matches('.grid, .area-grid, .project-cards');
         el.setAttribute('data-reveal', '');
         if (isGridItem) (el as HTMLElement).style.setProperty('--i', String(siblings.indexOf(el) % 4));
         observer.observe(el);

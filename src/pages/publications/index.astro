@@ -2,10 +2,14 @@
 import { getCollection } from 'astro:content';
 import PubItem from '../../components/PubItem.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { SCHOLAR_URL } from '../../lib/site';
+import { PUB_TOPICS, SCHOLAR_URL } from '../../lib/site';
 
-const pubs = (await getCollection('publications')).sort((a, b) => b.data.year - a.data.year);
+const pubs = (await getCollection('publications')).sort(
+  (a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title),
+);
 const years = [...new Set(pubs.map((p) => p.data.year))];
+// A paper appears under every topic it carries (primary first in `topics`).
+const topics = PUB_TOPICS.map((t) => ({ ...t, pubs: pubs.filter((p) => p.data.topics.includes(t.key)) }));
 ---
 
 <BaseLayout
@@ -16,31 +20,85 @@ const years = [...new Set(pubs.map((p) => p.data.year))];
     <div class="wrap">
       <h1>Publications</h1>
       <p class="lede">
-        Journal articles and selected conference papers, most recent first. The work spans
-        geotechnical engineering, climate hazards, and infrastructure equity.
+        Lab members are shown in <span class="author-ingroup">blue</span>. For a complete list,
+        see <a href={SCHOLAR_URL}>Google Scholar</a>.
       </p>
-      <p class="pub-count">{pubs.length} publications</p>
-      {
-        pubs.length === 0 ? (
-          <p class="empty">
-            A full list of Farshid Vahedifard’s publications is available on{' '}
-            <a href={SCHOLAR_URL}>Google Scholar</a>.
-          </p>
-        ) : (
-          years.map((year) => (
-            <section aria-labelledby={`year-${year}`}>
-              <h2 class="year-heading" id={`year-${year}`}>
-                {year}
-              </h2>
-              {pubs
-                .filter((p) => p.data.year === year)
-                .map((pub) => (
-                  <PubItem pub={pub} />
-                ))}
-            </section>
-          ))
-        )
-      }
+
+      <div class="pub-views" data-tabs>
+        <div class="tab-list tab-list-switch" role="tablist" aria-label="Group publications">
+          <button type="button" role="tab" id="view-year-tab" aria-controls="view-year" aria-selected="true">By Year</button>
+          <button type="button" role="tab" id="view-topic-tab" aria-controls="view-topic" aria-selected="false" tabindex="-1">By Topic</button>
+          <span class="tab-indicator" aria-hidden="true"></span>
+        </div>
+
+        <div class="tab-panel" role="tabpanel" id="view-year" aria-labelledby="view-year-tab">
+          <div class="pub-timeline">
+            <nav aria-label="Jump to year">
+              <ol class="year-rail" data-year-rail>
+                {years.map((year) => <li><a href={`#y${year}`}>{year}</a></li>)}
+              </ol>
+            </nav>
+            <div>
+              {years.map((year) => (
+                <section class="year-block" id={`y${year}`} aria-labelledby={`y${year}-h`}>
+                  <h2 id={`y${year}-h`}>{year}</h2>
+                  {pubs.filter((p) => p.data.year === year).map((pub) => <PubItem pub={pub} />)}
+                </section>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" role="tabpanel" id="view-topic" aria-labelledby="view-topic-tab" hidden>
+          <div data-tabs>
+            <div class="tab-list tab-list-topics" role="tablist" aria-label="Research topics">
+              {topics.map((t, i) => (
+                <button
+                  type="button"
+                  role="tab"
+                  id={`topic-${t.key}-tab`}
+                  aria-controls={`topic-${t.key}`}
+                  aria-selected={i === 0 ? 'true' : 'false'}
+                  tabindex={i === 0 ? 0 : -1}
+                >
+                  {t.label}
+                </button>
+              ))}
+              <span class="tab-indicator" aria-hidden="true"></span>
+            </div>
+            {topics.map((t, i) => (
+              <div class="tab-panel topic-panel" role="tabpanel" id={`topic-${t.key}`} aria-labelledby={`topic-${t.key}-tab`} hidden={i !== 0}>
+                <h2>{t.full}</h2>
+                {t.pubs.length === 0 ? (
+                  <p class="empty">Topic assignments are being prepared.</p>
+                ) : (
+                  t.pubs.map((pub) => <PubItem pub={pub} />)
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  import '../../scripts/tabs';
+
+  // Highlight the year whose section is in view.
+  function initYearRail() {
+    const rail = document.querySelector<HTMLElement>('[data-year-rail]');
+    if (!rail) return;
+    const links = new Map(Array.from(rail.querySelectorAll('a')).map((a) => [a.getAttribute('href')!.slice(1), a]));
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        links.forEach((a, id) => a.setAttribute('aria-current', String(id === entry.target.id)));
+      }
+    }, { rootMargin: '-15% 0px -75% 0px' });
+    document.querySelectorAll('.year-block').forEach((el) => observer.observe(el));
+  }
+
+  document.addEventListener('astro:page-load', initYearRail);
+</script>

@@ -1,17 +1,20 @@
 ---
 import { getCollection } from 'astro:content';
+import { sitePath } from '../../lib/paths';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import snapshotData from '../../data/snapshots.json';
 
 const items = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Lab meeting and conference photos: files in /public/snapshots, listed in src/data/snapshots.json.
+type Snapshot = { src: string; alt: string; caption?: string };
+const snapshots = snapshotData as Snapshot[];
 ---
 
-<BaseLayout title="News" description="News from the Climate Resilient and Equitable Infrastructure Lab.">
+<BaseLayout title="News" description="News and media features from the Climate Resilient and Equitable Infrastructure Lab.">
   <section class="section">
     <div class="wrap">
-      <h1>News</h1>
-      <p class="lede">
-        News about the lab’s research, including coverage from Tufts and other outlets.
-      </p>
+      <h1>News &amp; Media Features</h1>
       {
         items.length === 0 ? (
           <p class="empty">No news items yet.</p>
@@ -29,6 +32,22 @@ const items = (await getCollection('news')).sort((a, b) => b.data.date.valueOf()
           ))
         )
       }
+
+      {snapshots.length > 0 && (
+        <section class="people-group" aria-labelledby="snapshots-heading">
+          <h2 id="snapshots-heading">Snapshots from Lab Meetings and Conferences</h2>
+          <ul class="snapshot-grid">
+            {snapshots.map((shot) => (
+              <li>
+                <figure>
+                  <img src={sitePath(shot.src)} alt={shot.alt} width="800" height="600" loading="lazy" decoding="async" />
+                  {shot.caption && <figcaption>{shot.caption}</figcaption>}
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </div>
   </section>
 </BaseLayout>

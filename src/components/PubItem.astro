@@ -1,45 +1,25 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { isInGroupAuthor } from '../lib/site';
+import { authorSeparator, natureAuthor } from '../lib/cite';
+import { labAuthorMatcher } from '../lib/lab-authors';
 
 interface Props {
   pub: CollectionEntry<'publications'>;
 }
 
+// One Nature-style reference: Authors. Title. *Journal* **vol**, pages (year).
+// Kept on single lines on purpose: JSX newlines would render as stray spaces before commas.
 const { pub } = Astro.props;
-const { title, authors, year, venue, doi, pdf, code } = pub.data;
-
-function authorClass(name: string) {
-  return isInGroupAuthor(name) ? 'author-ingroup' : undefined;
-}
+const { title, authors, year, venue, volume, pages, doi, pdf, code } = pub.data;
+const cleanTitle = title.replace(/\.$/, '');
+const isInGroupAuthor = await labAuthorMatcher();
 ---
 
 <article class="pub-item">
-  <h3>{title}</h3>
-  <p class="pub-meta">
-    {
-      authors.map((name, i) => (
-        <>
-          {i > 0 && ', '}
-          <span class={authorClass(name)}>{name}</span>
-        </>
-      ))
-    }
-    {' '}({year}). <em>{venue}</em>
-  </p>
-  <p>
+  <p class="pub-ref">
+    {authors.map((name, i) => <>{authorSeparator(i, authors.length)}<span class={isInGroupAuthor(name) ? 'author-ingroup' : undefined}>{natureAuthor(name)}</span></>)}{' '}<span class="pub-title">{cleanTitle}.</span>{' '}<em>{venue}</em>{volume && <>{' '}<b>{volume}</b></>}{pages && <>, {pages}</>}{` (${year}).`}
     {doi && <a href={`https://doi.org/${doi}`} aria-label={`DOI for ${title}`}>DOI</a>}
-    {pdf && (
-      <>
-        {' '}
-        <a href={pdf} aria-label={`PDF of ${title}`}>PDF</a>
-      </>
-    )}
-    {code && (
-      <>
-        {' '}
-        <a href={code} aria-label={`Code for ${title}`}>Code</a>
-      </>
-    )}
+    {pdf && <a href={pdf} aria-label={`PDF of ${title}`}>PDF</a>}
+    {code && <a href={code} aria-label={`Code for ${title}`}>Code</a>}
   </p>
 </article>

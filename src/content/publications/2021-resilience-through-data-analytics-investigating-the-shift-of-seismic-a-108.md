@@ -1,8 +1,9 @@
 ---
 title: "Resilience through Data Analytics: Investigating the Shift of Seismic Activities in Oklahoma"
-authors: [A Amirlatifi, KC Bijay, E Ghazanfari, F Vahedifard, M Kosarian]
+authors: ["Amirlatifi, Amin", "Bijay, K.-C.", "Ghazanfari, Ehsan", "Vahedifard, Farshid", "Kosarian, Minoo"]
 year: 2021
 venue: Geo-Extreme 2021
+pages: "415-425"
 doi: 10.1061/9780784483695.041
 url: "https://doi.org/10.1061/9780784483695.041"
 type: conference

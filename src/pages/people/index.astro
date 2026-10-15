@@ -1,5 +1,4 @@
 ---
-import { sitePath } from '../../lib/paths';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import PersonCard from '../../components/PersonCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -7,14 +6,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 type Person = CollectionEntry<'people'>;
 type Group = NonNullable<Person['data']['group']>;
 
-// Section order follows HuMNet: PI, students, then visiting faculty, collaborators, alumni.
-const SECTIONS: { group: Group; heading: string }[] = [
-  { group: 'pi', heading: 'Principal investigator' },
-  { group: 'phd', heading: 'Ph.D. students' },
-  { group: 'masters', heading: 'Master’s students' },
-  { group: 'visiting', heading: 'Visiting faculty' },
+// Order per Joy (2026-10-15): PI, visiting faculty, postdocs, students, visiting researchers.
+const CURRENT: { group: Group; heading: string }[] = [
+  { group: 'pi', heading: 'Principal Investigator' },
+  { group: 'visiting', heading: 'Visiting Faculty' },
+  { group: 'postdoc', heading: 'Postdoctoral Associates' },
+  { group: 'phd', heading: 'Ph.D. Students' },
+  { group: 'masters', heading: 'Master’s Students' },
+  { group: 'visiting-researcher', heading: 'Visiting Researchers' },
   { group: 'collaborator', heading: 'Collaborators' },
-  { group: 'alumni', heading: 'Alumni' },
 ];
 
 const ROLE_FALLBACK: Record<Person['data']['role'], Group> = {
@@ -32,38 +32,40 @@ const bySeniority = (a: Person, b: Person) =>
   (a.data.since ?? 9999) - (b.data.since ?? 9999) || a.data.order - b.data.order;
 
 const people = await getCollection('people');
-const sections = SECTIONS.map((s) => ({
-  ...s,
-  members: people.filter((p) => groupOf(p) === s.group).sort(bySeniority),
-})).filter((s) => s.members.length > 0);
+const membersOf = (group: Group) => people.filter((p) => groupOf(p) === group).sort(bySeniority);
+const current = CURRENT.map((s) => ({ ...s, members: membersOf(s.group) })).filter((s) => s.members.length > 0);
+const alumni = membersOf('alumni');
 ---
 
 <BaseLayout title="People" description="Members of the Climate Resilient and Equitable Infrastructure Lab at Tufts University.">
   <section class="section">
     <div class="wrap">
       <h1>People</h1>
-      <p class="lede">
-        Farshid Vahedifard leads the lab in the Department of Civil and Environmental Engineering
-        at Tufts University.
-      </p>
 
-      {sections.map((s) => (
-        <section class="people-section" aria-labelledby={`people-${s.group}`}>
-          <h2 id={`people-${s.group}`}>{s.heading}</h2>
+      <section class="people-group" aria-labelledby="people-current">
+        <h2 id="people-current">Current Members</h2>
+        {current.map((s) => (
+          <section class="people-subgroup" aria-labelledby={`people-${s.group}`}>
+            <h3 id={`people-${s.group}`}>{s.heading}</h3>
+            {s.group === 'pi' ? (
+              s.members.map((person) => <PersonCard person={person} wide />)
+            ) : (
+              <div class="grid grid-people">
+                {s.members.map((person) => <PersonCard person={person} />)}
+              </div>
+            )}
+          </section>
+        ))}
+      </section>
+
+      {alumni.length > 0 && (
+        <section class="people-group" aria-labelledby="people-alumni">
+          <h2 id="people-alumni">Alumni</h2>
           <div class="grid grid-people">
-            {s.members.map((person) => <PersonCard person={person} />)}
+            {alumni.map((person) => <PersonCard person={person} />)}
           </div>
         </section>
-      ))}
-
-      <p>
-        Information for prospective students and researchers is on the
-        <a href={sitePath('/join')}>Opportunities</a> page.
-      </p>
+      )}
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .people-section + .people-section { margin-top: var(--space-6); }
-</style>

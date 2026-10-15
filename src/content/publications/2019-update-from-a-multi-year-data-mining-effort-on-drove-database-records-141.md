@@ -1,6 +1,6 @@
 ---
 title: "Update from a Multi-Year Data Mining Effort on Drove: Database Records for off-Road Vehicle Environments"
-authors: [F Vahedifard, I Howard, A Borazjani, G Mason, J Priddy]
+authors: ["Vahedifard, F", "Howard, I", "Borazjani, A", "Mason, G", "Priddy, J"]
 year: 2019
 venue: "15th ISTVS European-African Regional Conference, Prague, Czech Republic …"
 url: "https://easychair.org/publications/preprint_open/R72F"

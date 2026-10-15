@@ -16,41 +16,56 @@ export const FACULTY_PROFILE_URL = 'https://facultyprofiles.tufts.edu/farshid-va
 export const HOME_SUBTITLE =
   'The resilience and adaptation of critical infrastructure to extreme events in a changing climate.';
 
+/** Teaching folded into About and Opportunities kept in the footer (Joy, 2026-10-15). */
 export const PRIMARY_NAV = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/people', label: 'People' },
   { href: '/projects', label: 'Projects' },
   { href: '/publications', label: 'Publications' },
-  { href: '/teaching', label: 'Teaching' },
   { href: '/news', label: 'News' },
 ] as const;
 
-/** Set B (Joy, 2026-09-10): four cards, equity + extremes. Mechanics folded into card 4. */
+export const FOOTER_NAV = [
+  { href: '/about', label: 'About' },
+  { href: '/people', label: 'People' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/news', label: 'News' },
+  { href: '/join', label: 'Opportunities' },
+] as const;
+
+/** Keyless Google Maps embed for the footer; same pin as MAPS_URL. */
+export const MAPS_EMBED_URL =
+  'https://www.google.com/maps?q=Tufts+University+School+of+Engineering,+200+College+Ave,+Medford,+MA+02155&z=15&output=embed';
+
+/**
+ * Home research areas (Joy, 2026-10-15). Equal weight, so no ordinals.
+ * `texture` picks the line-drawing strip in AreaCard.
+ */
 export const RESEARCH_AREAS = [
   {
     title: 'Climate Extremes',
-    hover: 'Drought, flooding, wildfire, and cascading hazards.',
-    body: 'We study how drought, flooding, and wildfire affect earthen infrastructure and the communities that depend on it. When hazards overlap or follow one another, one event can change the impact of the next, so we also examine compound and cascading hazards.',
-    chips: ['drought', 'flood', 'wildfire', 'cascading hazards'],
-  },
-  {
-    title: 'Earthen Infrastructure',
-    hover: 'Slopes, dams, and levees in a changing climate.',
-    body: 'We analyze how changes in soil moisture and temperature affect the performance of slopes, dams, and levees. The results inform how these structures are assessed and adapted as climate conditions change.',
-    chips: ['slopes', 'dams', 'levees', 'climate adaptation'],
+    body: 'We study how drought, flooding, and wildfire affect earthen infrastructure, including how overlapping or successive hazards alter risks to the communities that depend on it.',
+    chips: ['Compound Hazards', 'Drought', 'Wildfire & Flood'],
+    texture: 'contours',
   },
   {
     title: 'Equitable Infrastructure',
-    hover: 'Infrastructure risk and environmental justice.',
-    body: 'We examine how infrastructure risks affect disadvantaged communities, including who is exposed to hazards and who benefits when infrastructure is protected. This work treats climate adaptation as a question of environmental justice.',
-    chips: ['environmental justice', 'equity', 'disadvantaged communities'],
+    body: 'We examine who is exposed to infrastructure hazards and who benefits from adaptation, with a focus on disadvantaged communities and environmental justice.',
+    chips: ['Environmental Justice', 'Social Vulnerability'],
+    texture: 'blocks',
   },
   {
-    title: 'Unsaturated Mechanics',
-    hover: 'Water, heat, and stress in unsaturated soils.',
-    body: 'Water flow, heat transfer, and stress jointly influence soil behavior and the stability of earthen structures. We study these coupled processes in unsaturated soils using analytical and numerical methods.',
-    chips: ['unsaturated soils', 'multi-physics', 'analytical methods'],
+    title: 'Coastal Resilience',
+    body: 'We study how coastal landscapes respond to sea level rise, wave action, rainfall, and vegetation change. We work alongside local and Indigenous communities throughout the process.',
+    chips: ['Sea Level Rise', 'Coastal Bluffs', 'Community Partnership'],
+    texture: 'waves',
+  },
+  {
+    title: 'Earthen Infrastructure',
+    body: 'We investigate how changing soil moisture and temperature influence slopes, dams, and levees, informing their assessment and adaptation in a changing climate.',
+    chips: ['Dams & Levees', 'Slope Stability', 'Unsaturated Soils'],
+    texture: 'mesh',
   },
 ] as const;
 
@@ -60,25 +75,68 @@ export const RESEARCH_AREAS = [
  */
 // `image`: first-page render in /public/papers (from Joy's Zotero PDFs); tabs without one
 // fall back to the typographic cover.
-export const HIGHLIGHT_TABS: readonly { area: string; pub: string; image?: string }[] = [
-  { area: 'Climate Extremes', pub: '2016-compound-hazards-yield-louisiana-flood-182' },
+/**
+ * Home "Highlighted Publications", hand-picked by Joy (2026-10-15). Independent of projects,
+ * so commentaries and perspectives that no single grant covers can still be featured.
+ * Entries whose publication file is missing are skipped.
+ */
+export const HIGHLIGHT_PUBS: readonly {
+  label: string;
+  pub: string;
+  image: string;
+  imageAlt: string;
+  width: number;
+  height: number;
+}[] = [
   {
-    area: 'Earthen Infrastructure',
+    label: 'Ageing Water Infrastructure',
     pub: '2026-to-fix-ageing-water-infrastructure-we-must-plan-for-an-ageing-population',
-    image: '/papers/ageing-water-infrastructure.webp',
+    image: '/highlights/ageing-water-infrastructure.webp',
+    imageAlt: 'Figure relating ageing water infrastructure to demographic ageing.',
+    width: 1065,
+    height: 1345,
   },
   {
-    area: 'Equitable Infrastructure',
+    label: 'Equitable Superfund Cleanup',
     pub: '2025-equitable-cleanup-of-superfund-sites-leaving-no-u-s-community-behind-030',
-    image: '/papers/superfund-equitable-cleanup.webp',
+    image: '/highlights/superfund-equitable-cleanup.webp',
+    imageAlt: 'Composition of communities near Superfund sites, grouped by cleanup status.',
+    width: 1200,
+    height: 1087,
   },
-  { area: 'Unsaturated Mechanics', pub: '2026-from-particle-gradation-to-soil-water-retention-and-suction-stress-cha-009' },
+  {
+    label: 'Extreme Wildfires',
+    pub: '2026-accounting-for-extremes-in-modeling-the-size-and-likelihood-of-large-f-002',
+    image: '/highlights/large-fires-extremes.webp',
+    imageAlt: 'Figure from the study of large wildfire size and likelihood in the United States.',
+    width: 1200,
+    height: 1211,
+  },
+  {
+    label: 'Levee Seepage Calibration',
+    pub: '2026-a-hybrid-model-calibration-framework-for-transient-seepage-prediction-in-levees',
+    image: '/highlights/levee-seepage-calibration.webp',
+    imageAlt: 'Figure from the hybrid model calibration framework for transient levee seepage.',
+    width: 1200,
+    height: 422,
+  },
 ];
 
-export function isInGroupAuthor(name: string) {
-  const n = name.replace(/\./g, '').replace(/\s+/g, ' ').trim().toLowerCase();
-  return n === 'farshid vahedifard' || n === 'f vahedifard';
-}
+/**
+ * Publications "By Topic" tabs: Farshid's Areas of Interest (CEE profile).
+ * `label` is the short tab text; `full` is the heading inside the panel.
+ */
+export const PUB_TOPICS = [
+  { key: 'resilient-equitable', label: 'Resilient & Equitable', full: 'Resilient and equitable infrastructure' },
+  { key: 'extreme-events', label: 'Extreme Events', full: 'Impacts of extreme events (e.g., drought, flood, wildfire) in a changing climate on infrastructure and communities' },
+  { key: 'climate-adaptation', label: 'Climate Adaptation', full: 'Climate adaptation of infrastructure' },
+  { key: 'slopes-dams-levees', label: 'Slopes, Dams & Levees', full: 'Slopes, dams, and levees' },
+  { key: 'unsaturated', label: 'Unsaturated Soils', full: 'Unsaturated soil mechanics' },
+  { key: 'multiphysics', label: 'Multi-physics', full: 'Multi-physics (e.g., hydro-mechanical, thermo-hydro-mechanical) processes in soils' },
+  { key: 'methods', label: 'Analytical & Numerical', full: 'Analytical and numerical methods in geotechnical engineering' },
+] as const;
+
+// Blue lab-author highlighting is derived from the people collection: see lib/lab-authors.ts.
 
 export function isCurrentPath(pathname: string, href: string) {
   if (href === '/') return pathname === '/';

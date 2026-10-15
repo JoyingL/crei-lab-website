@@ -1,8 +1,11 @@
 ---
 title: "Vertical Land Motion and Coastal Cities: Bridging Global Science and Policy for Resilient Communities"
-authors: [Manoochehr Shirzaei, Leonard O. Ohenhen, Carmen A. Atkins, SHUBHAM AWASTHI, Grace Carlson, O. Dasho, Ntambila Daud, Guangcai Feng, Haibo Jiang, Mohammad Khorrami, Jonathan Lucy, Mahmoud Reshadati, N. Sadhasivam, Sonam Sherpa, Guang Zhai, Wen Zhong, Claire Becker, Clayton Wise, William Etzler, Ibrahim Isiaka, Nivedita Priyadarshini Kamaraj, Florence Onyike, Esther O. Oyedele, Sarah N. Wilson, A. AghaKouchak, Anamaria Bukvic, Roland Bürgmann, Jeffrey T. Freymueller, Nadine Heck, Robert J. Nicholls, Julius Oelsmann, Siddharth Narayan, Pietro Teatini, Farshid Vahedifard, Michelle Jaramillo, Susanna Werth]
+authors: ["Shirzaei, Manoochehr", "Ohenhen, Leonard", "Atkins, Carmen", "Awasthi, Shubham", "Carlson, Grace", "Dasho, Oluwaseyi", "Daud, Ntambila", "Feng, Guangcai", "Jiang, Hongbo", "Khorrami, Mohammad", "Lucy, Jonathan", "Reshadati, Mahmoud", "Sadhasivam, Nitheshnirmal", "Sherpa, Sonam F.", "Zhai, Guang", "Zhong, Wen", "Becker, Claire", "Wise, Clayton", "Etzler, William", "Isiaka, Ibrahim O.", "Kamaraj, Nivedita P.", "Onyike, Florence", "Oyedele, Esther O.", "Wilson, Sarah", "AghaKouchak, Amir", "Bukvic, Anamaria", "Bürgmann, Roland", "Freymueller, Jeffrey", "Heck, Nadine", "Nicholls, Robert J.", "Oelsmann, Julius", "Narayan, Siddharth", "Teatini, Pietro", "Vahedifard, Farshid", "Jaramillo, Michelle", "Werth, Susanna"]
 year: 2026
 venue: Annual Review of Earth and Planetary Sciences
+volume: "54"
+issue: "1"
+pages: "301-332"
 doi: 10.1146/annurev-earth-032524-120845
 url: "https://doi.org/10.1146/annurev-earth-032524-120845"
 type: journal

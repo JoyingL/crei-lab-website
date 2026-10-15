@@ -2,24 +2,91 @@
 interface Props {
   title: string;
   body: string;
-  hover?: string;
   chips?: readonly string[];
+  texture?: 'contours' | 'blocks' | 'waves' | 'mesh';
 }
 
-const { title, body, hover, chips = [] } = Astro.props;
+const { title, body, chips = [], texture = 'contours' } = Astro.props;
+
+// Decorative line drawings (topography, exposure dots, waves, FEM mesh) generated at build time.
+const W = 320;
+const H = 88;
+const hash = (x: number, y: number) => {
+  const s = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
+  return s - Math.floor(s);
+};
+const f = (n: number) => n.toFixed(1);
+
+function contours() {
+  return Array.from({ length: 9 }, (_, k) => {
+    const base = 14 + k * 17;
+    const pts = Array.from({ length: 73 }, (_, i) => {
+      const t = (i / 72) * Math.PI * 2;
+      const r = base * (1 + 0.09 * Math.sin(3 * t + k * 0.7) + 0.05 * Math.sin(5 * t + k));
+      return `${f(232 + r * 1.6 * Math.cos(t))},${f(70 + r * 0.75 * Math.sin(t))}`;
+    });
+    return `M${pts.join('L')}Z`;
+  });
+}
+
+function waves() {
+  return Array.from({ length: 8 }, (_, k) => {
+    const pts = Array.from({ length: 81 }, (_, i) => {
+      const x = (i / 80) * W;
+      const y = 8 + k * 10.5 + 3.2 * Math.sin(x / 15 + k * 1.1) + 1.4 * Math.sin(x / 6.5 + k);
+      return `${f(x)},${f(y)}`;
+    });
+    return `M${pts.join('L')}`;
+  });
+}
+
+function mesh() {
+  const cols = 11;
+  const rows = 4;
+  const p = (i: number, j: number) => {
+    const edge = i === 0 || j === 0 || i === cols || j === rows;
+    const jx = edge ? 0 : (hash(i, j) - 0.5) * 14;
+    const jy = edge ? 0 : (hash(j, i) - 0.5) * 9;
+    return `${f((i / cols) * W + jx)},${f((j / rows) * H + jy)}`;
+  };
+  const paths: string[] = [];
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      paths.push(`M${p(i, j)}L${p(i + 1, j)}L${p(i + 1, j + 1)}L${p(i, j + 1)}Z`);
+      paths.push((i + j) % 2 ? `M${p(i, j)}L${p(i + 1, j + 1)}` : `M${p(i + 1, j)}L${p(i, j + 1)}`);
+    }
+  }
+  return paths;
+}
+
+function dots() {
+  const out: { cx: string; cy: string; r: string }[] = [];
+  for (let x = 6; x < W; x += 11) {
+    for (let y = 6; y < H; y += 11) {
+      const field = 0.5 + 0.5 * Math.sin(x / 46) * Math.cos(y / 30 - 0.6);
+      const r = 0.5 + 2.6 * field * (0.65 + 0.35 * hash(x, y));
+      out.push({ cx: f(x), cy: f(y), r: f(r) });
+    }
+  }
+  return out;
+}
+
+const lines = texture === 'contours' ? contours() : texture === 'waves' ? waves() : texture === 'mesh' ? mesh() : [];
+const circles = texture === 'blocks' ? dots() : [];
 ---
 
-<article class="card">
-  {hover && <p class="kicker">{hover}</p>}
+<article class="area-cell">
+  <svg class="area-texture" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+    {lines.map((d) => <path d={d} />)}
+    {circles.map((c) => <circle cx={c.cx} cy={c.cy} r={c.r} />)}
+  </svg>
   <h3>{title}</h3>
   <p>{body}</p>
   {
     chips.length > 0 && (
-      <p class="chips">
-        {chips.map((chip) => (
-          <span class="chip">{chip}</span>
-        ))}
-      </p>
+      <ul class="area-tags" aria-label={`${title} topics`}>
+        {chips.map((chip) => <li>{chip}</li>)}
+      </ul>
     )
   }
 </article>

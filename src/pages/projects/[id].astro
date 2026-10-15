@@ -1,0 +1,50 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import PubItem from '../../components/PubItem.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sitePath } from '../../lib/paths';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, summary, status, year, funder, url, cover, coverAlt, coverWidth, coverHeight, pubs: pubIds } = project.data;
+const allPubs = await getCollection('publications');
+const pubs = pubIds
+  .map((id) => allPubs.find((p) => p.id === id))
+  .filter((p): p is CollectionEntry<'publications'> => Boolean(p))
+  .sort((a, b) => b.data.year - a.data.year);
+const meta = [funder, year ? `${status === 'current' ? 'Since' : 'Started'} ${year}` : undefined, status === 'current' ? 'Current' : 'Completed']
+  .filter(Boolean)
+  .join(' · ');
+---
+
+<BaseLayout title={project.data.short ?? title} description={summary}>
+  <section class="section">
+    <div class="wrap" style="max-width: 56rem;">
+      <p class="kicker"><a href={sitePath('/projects')}>Projects</a></p>
+      <h1>{title}</h1>
+      <p class="project-detail-meta">{meta}</p>
+      {cover && (
+        <figure class="project-detail-figure">
+          <img src={sitePath(cover)} alt={coverAlt ?? ''} width={coverWidth ?? 1200} height={coverHeight ?? 800} />
+        </figure>
+      )}
+      <p>{summary}</p>
+      {url && <p><a href={url}>Award or project page</a></p>}
+
+      <h2>Related Publications</h2>
+      {pubs.length === 0 ? (
+        <p class="empty">Publications from this project will be listed here.</p>
+      ) : (
+        pubs.map((pub) => <PubItem pub={pub} />)
+      )}
+    </div>
+  </section>
+</BaseLayout>
