@@ -13,3 +13,7 @@ CLAUDE.md
 findings.md
 progress.md
 task_plan.md
+
+# Joy's draft copies and local tool settings stay out of the public repo.
+src-Joyy/
+.claude/
