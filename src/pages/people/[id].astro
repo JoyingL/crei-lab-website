@@ -17,7 +17,7 @@ interface Props {
 }
 
 const { person } = Astro.props;
-const { name, title, affiliation, email, scholar, linkedin, website, photo, years, current } = person.data;
+const { name, title, affiliation, email, scholar, linkedin, website, photo, years, current, keywords } = person.data;
 const isAlumni = groupOf(person) === 'alumni';
 const formerRole = person.data.formerGroup ? ROLE_LABEL[person.data.formerGroup] : undefined;
 // File bodies are public bios only; sourcing notes live in YAML comments.
@@ -59,6 +59,11 @@ const bio = person.body?.trim();
           )}
           <IconLinks name={name} scholar={scholar} website={website} linkedin={linkedin} email={email} />
           {bio && <div class="profile-bio"><p>{bio}</p></div>}
+          {keywords.length > 0 && (
+            <ul class="chips profile-keywords" aria-label="Research keywords">
+              {keywords.map((k) => <li class="chip">{k}</li>)}
+            </ul>
+          )}
         </div>
       </header>
 
@@ -126,6 +131,12 @@ const bio = person.body?.trim();
   .profile-text :global(.icon-links a) {
     width: 2rem;
     height: 2rem;
+  }
+
+  .profile-keywords {
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    list-style: none;
   }
 
   .profile-bio {

@@ -8,7 +8,7 @@ pages: "106624"
 doi: 10.1016/j.scs.2025.106624
 url: "https://doi.org/10.1016/j.scs.2025.106624"
 topic: climate
-topics: [resilient-equitable, extreme-events]
+topics: [climate-resilient-equitable]
 type: journal
 listed: true
 highlight: false

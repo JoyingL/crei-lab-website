@@ -9,7 +9,7 @@ pages: "50-57"
 doi: 10.1061/geosek.0000410
 url: "https://doi.org/10.1061/geosek.0000410"
 topic: infrastructure
-topics: [resilient-equitable]
+topics: [climate-resilient-equitable]
 type: journal
 listed: true
 highlight: false

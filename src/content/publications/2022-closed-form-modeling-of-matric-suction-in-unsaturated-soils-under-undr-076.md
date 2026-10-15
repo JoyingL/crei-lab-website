@@ -8,7 +8,7 @@ pages: "100370"
 doi: 10.1016/j.gete.2022.100370
 url: "https://doi.org/10.1016/j.gete.2022.100370"
 topic: unsaturated soils
-topics: [unsaturated, multiphysics]
+topics: [unsaturated]
 type: journal
 listed: true
 highlight: false

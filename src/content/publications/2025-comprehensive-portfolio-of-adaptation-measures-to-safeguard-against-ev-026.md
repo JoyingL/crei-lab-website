@@ -9,7 +9,7 @@ pages: "824"
 doi: 10.1038/s43247-025-02779-z
 url: "https://doi.org/10.1038/s43247-025-02779-z"
 topic: flood
-topics: [climate-adaptation, extreme-events]
+topics: [climate-resilient-equitable]
 type: journal
 listed: true
 highlight: false

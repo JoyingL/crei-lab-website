@@ -9,7 +9,7 @@ const pubs = (await getCollection('publications'))
   .filter(isListedPub)
   .sort((a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title));
 const years = [...new Set(pubs.map((p) => p.data.year))];
-// A paper appears under every topic it carries (primary first in `topics`).
+// Each paper carries at most one topic; papers with no topic (early work) appear only in By Year.
 const topics = PUB_TOPICS.map((t) => ({ ...t, pubs: pubs.filter((p) => p.data.topics.includes(t.key)) }));
 ---
 
@@ -69,11 +69,11 @@ const topics = PUB_TOPICS.map((t) => ({ ...t, pubs: pubs.filter((p) => p.data.to
             </div>
             {topics.map((t, i) => (
               <div class="tab-panel topic-panel" role="tabpanel" id={`topic-${t.key}`} aria-labelledby={`topic-${t.key}-tab`} hidden={i !== 0}>
-                <h2>{t.full}</h2>
+                <h2>{t.full} <span class="topic-count">({t.pubs.length})</span></h2>
                 {t.pubs.length === 0 ? (
                   <p class="empty">Topic assignments are being prepared.</p>
                 ) : (
-                  t.pubs.map((pub) => <PubItem pub={pub} />)
+                  <ol class="topic-list">{t.pubs.map((pub) => <li><PubItem pub={pub} /></li>)}</ol>
                 )}
               </div>
             ))}

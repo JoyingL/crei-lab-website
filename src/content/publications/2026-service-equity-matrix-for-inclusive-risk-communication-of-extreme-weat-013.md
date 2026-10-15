@@ -9,7 +9,7 @@ pages: "64"
 doi: 10.1038/s44304-026-00222-7
 url: "https://doi.org/10.1038/s44304-026-00222-7"
 topic: climate
-topics: [resilient-equitable, extreme-events]
+topics: [climate-resilient-equitable]
 type: journal
 listed: true
 highlight: false

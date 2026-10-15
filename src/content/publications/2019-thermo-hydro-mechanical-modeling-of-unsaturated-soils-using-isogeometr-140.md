@@ -9,7 +9,7 @@ pages: "261-292"
 doi: 10.1002/nag.3015
 url: "https://doi.org/10.1002/nag.3015"
 topic: unsaturated soils
-topics: [multiphysics, unsaturated]
+topics: [unsaturated]
 type: journal
 listed: true
 highlight: false

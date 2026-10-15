@@ -8,7 +8,7 @@ pages: "45-56"
 doi: 10.1016/j.trgeo.2016.02.002
 url: "https://doi.org/10.1016/j.trgeo.2016.02.002"
 topic: unsaturated soils
-topics: [unsaturated, slopes-dams-levees]
+topics: [slopes-dams-levees]
 type: journal
 listed: true
 highlight: false

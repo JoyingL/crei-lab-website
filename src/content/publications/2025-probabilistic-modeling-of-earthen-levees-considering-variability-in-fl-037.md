@@ -7,7 +7,7 @@ pages: "94-104"
 doi: 10.1061/9780784485965.009
 url: "https://doi.org/10.1061/9780784485965.009"
 topic: flood
-topics: [slopes-dams-levees, extreme-events, unsaturated]
+topics: [slopes-dams-levees]
 type: conference
 listed: true
 highlight: false

@@ -7,7 +7,7 @@ volume: "98"
 pages: "111-120"
 doi: 10.1016/j.ijrmms.2017.07.007
 url: "https://doi.org/10.1016/j.ijrmms.2017.07.007"
-topics: [multiphysics]
+topics: [unsaturated]
 type: journal
 listed: true
 highlight: false

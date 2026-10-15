@@ -9,7 +9,7 @@ pages: "799-799"
 doi: 10.1126/science.349.6250.799-a
 url: "https://doi.org/10.1126/science.349.6250.799-a"
 topic: drought
-topics: [extreme-events, slopes-dams-levees]
+topics: [slopes-dams-levees]
 type: journal
 listed: true
 highlight: false

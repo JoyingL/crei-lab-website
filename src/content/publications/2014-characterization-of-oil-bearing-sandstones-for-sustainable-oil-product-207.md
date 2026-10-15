@@ -6,7 +6,7 @@ venue: Geo-Congress 2014 Technical Papers
 pages: "515-523"
 doi: 10.1061/9780784413272.049
 url: "https://doi.org/10.1061/9780784413272.049"
-topics: [multiphysics]
+topics: []
 type: conference
 listed: true
 highlight: false

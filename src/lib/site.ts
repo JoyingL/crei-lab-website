@@ -9,6 +9,8 @@ export const EMAIL = 'farshid.vahedifard@tufts.edu';
 export const SCHOLAR_URL = 'https://scholar.google.com/citations?user=dc3G9EoAAAAJ';
 export const TUFTS_URL = 'https://www.tufts.edu';
 export const CEE_URL = 'https://engineering.tufts.edu/cee';
+export const SOE_URL = 'https://engineering.tufts.edu';
+export const PI_LINKEDIN_URL = 'https://www.linkedin.com/in/farshid-vahedifard-0b27a522/';
 export const CEE_PROFILE_URL = 'https://engineering.tufts.edu/cee/people/faculty/farshid-vahedifard';
 export const FACULTY_PROFILE_URL = 'https://facultyprofiles.tufts.edu/farshid-vahedifard';
 
@@ -128,12 +130,10 @@ export const HIGHLIGHT_PUBS: readonly {
  * `label` is the short tab text; `full` is the heading inside the panel.
  */
 export const PUB_TOPICS = [
-  { key: 'resilient-equitable', label: 'Resilient & Equitable', full: 'Resilient and equitable infrastructure' },
-  { key: 'extreme-events', label: 'Extreme Events', full: 'Impacts of extreme events (e.g., drought, flood, wildfire) in a changing climate on infrastructure and communities' },
-  { key: 'climate-adaptation', label: 'Climate Adaptation', full: 'Climate adaptation of infrastructure' },
-  { key: 'slopes-dams-levees', label: 'Slopes, Dams & Levees', full: 'Slopes, dams, and levees' },
-  { key: 'unsaturated', label: 'Unsaturated Soils', full: 'Unsaturated soil mechanics' },
-  { key: 'multiphysics', label: 'Multi-physics', full: 'Multi-physics (e.g., hydro-mechanical, thermo-hydro-mechanical) processes in soils' },
+  { key: 'unsaturated', label: 'Unsaturated Soils & Multi-physics', full: 'Unsaturated soil mechanics and multi-physics (e.g., hydro-mechanical, thermo-hydro-mechanical) processes in soils' },
+  { key: 'slopes-dams-levees', label: 'Slopes, Dams & Levees', full: 'Slopes, dams, levees, and earth-retaining structures' },
+  { key: 'climate-resilient-equitable', label: 'Resilient & Equitable Infrastructure', full: 'Climate-resilient and equitable infrastructure' },
+  { key: 'extreme-events', label: 'Extreme Events & Hazards', full: 'Extreme events and natural hazards (e.g., drought, flood, wildfire) in a changing climate' },
 ] as const;
 
 // Blue lab-author highlighting is derived from the people collection: see lib/lab-authors.ts.

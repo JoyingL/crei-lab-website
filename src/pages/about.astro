@@ -3,7 +3,7 @@ import { sitePath } from '../lib/paths';
 import { getCollection } from 'astro:content';
 import IconLinks from '../components/IconLinks.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { CEE_PROFILE_URL, FACULTY_PROFILE_URL } from '../lib/site';
+import { CEE_URL, FACULTY_PROFILE_URL, PI_LINKEDIN_URL, SOE_URL, TUFTS_URL } from '../lib/site';
 
 // About = the PI (Joy, 2026-10-15). Lab overview moved to /lab; Teaching folded in here.
 // Bio text: Joy's draft (设计网站.md, 2026-10-15), fact-checked; mirrored in docs/about_pi_draft.md.
@@ -11,6 +11,18 @@ const pi = (await getCollection('people')).find((p) => p.data.role === 'pi');
 const courses = (await getCollection('teaching')).sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
 
 const doi = (id: string) => `https://doi.org/${id}`;
+// Institutions and bodies named in the bio link to their official sites (first mention only; Joy, 2026-10-15).
+const LINKS = {
+  unu: 'https://unu.edu/inweh',
+  asce: 'https://www.asce.org',
+  reportCard: 'https://infrastructurereportcard.org',
+  normanMedal: 'https://www.asce.org/career-growth/awards-and-honors/norman-medal',
+  wampanoag: 'https://wampanoagtribe-nsn.gov',
+  msstate: 'https://www.msstate.edu',
+  udel: 'https://www.udel.edu',
+  basu: 'https://en.basu.ac.ir',
+  kntu: 'https://en.kntu.ac.ir',
+};
 ---
 
 <BaseLayout title="About" description="Farshid Vahedifard, Professor and Louis Berger Chair in Civil and Environmental Engineering at Tufts University.">
@@ -23,12 +35,12 @@ const doi = (id: string) => `https://doi.org/${id}`;
             <h1>{pi.data.name}, Ph.D.</h1>
             <p class="profile-lines">
               {pi.data.title}<br />
-              Department of Civil and Environmental Engineering<br />
-              School of Engineering, Tufts University
+              <a href={CEE_URL}>Department of Civil and Environmental Engineering</a><br />
+              <a href={SOE_URL}>School of Engineering</a>, <a href={TUFTS_URL}>Tufts University</a>
             </p>
-            <IconLinks name={pi.data.name} scholar={pi.data.scholar} website={CEE_PROFILE_URL} email={pi.data.email} />
+            <IconLinks name={pi.data.name} scholar={pi.data.scholar} linkedin={PI_LINKEDIN_URL} email={pi.data.email} />
             <p class="profile-more">
-              <a href={FACULTY_PROFILE_URL}>Tufts Faculty Profile</a> (CV and full publication list)
+              <a href={FACULTY_PROFILE_URL}>Tufts Faculty Profile</a>
             </p>
           </div>
         </div>
@@ -36,9 +48,10 @@ const doi = (id: string) => `https://doi.org/${id}`;
 
       <div class="profile-bio pi-bio">
         <p>
-          <strong>Farshid Vahedifard</strong> is Professor and Louis Berger Chair in Civil and Environmental
-          Engineering at Tufts University. He also serves as the Lead for Resilient and Equitable
-          Infrastructure at the United Nations University Institute for Water, Environment and Health
+          <strong>Farshid Vahedifard</strong> is Professor and Louis Berger Chair in
+          <a href={CEE_URL}>Civil and Environmental Engineering</a> at <a href={TUFTS_URL}>Tufts University</a>.
+          He also serves as the Lead for Resilient and Equitable Infrastructure at the
+          <a href={LINKS.unu}>United Nations University Institute for Water, Environment and Health</a>
           (UNU-INWEH). His work connects geotechnical engineering with climate adaptation and
           environmental justice, addressing how infrastructure and communities can better prepare for
           changing environmental conditions and extreme events.
@@ -63,22 +76,23 @@ const doi = (id: string) => `https://doi.org/${id}`;
           infrastructure assessment beyond physical performance to consider whom infrastructure serves
           and how investment decisions can address unequal risks and needs. His group is also developing
           NSF-supported hybrid digital twins for levee monitoring and risk assessment, and working with
-          the Wampanoag Tribe to understand erosion at the Aquinnah Cliffs on Martha’s Vineyard. These
+          the <a href={LINKS.wampanoag}>Wampanoag Tribe</a> to understand erosion at the Aquinnah Cliffs on Martha’s Vineyard. These
           projects combine modeling and environmental observations with practical decision-making and
           community collaboration.
         </p>
         <p>
-          Farshid contributes to infrastructure policy through ASCE’s Committee on America’s
+          Farshid contributes to infrastructure policy through <a href={LINKS.asce}>ASCE</a>’s Committee on America’s
           Infrastructure, including work on the dams and levees chapters of the
-          <cite>2025 Report Card for America’s Infrastructure</cite>. Before joining Tufts in 2023, he spent
-          more than a decade at Mississippi State University, where he held the CEE Advisory Board
-          Endowed Professorship. He is a Fellow of ASCE and received its Norman Medal in 2022 for
+          <a href={LINKS.reportCard}><cite>2025 Report Card for America’s Infrastructure</cite></a>. Before joining Tufts in 2023, he spent
+          more than a decade at <a href={LINKS.msstate}>Mississippi State University</a>, where he held the CEE Advisory Board
+          Endowed Professorship. He is a Fellow of ASCE and received its <a href={LINKS.normanMedal}>Norman Medal</a> in 2022 for
           research on levee fragility under projected future flooding. He was also among the recipients
           of the 2026 ASCE State-of-the-Art of Civil Engineering Award for the book
           <cite>Effects of Climate Change on Life-Cycle Performance of Structures and Infrastructure Systems:
-          Safety, Reliability, and Risk</cite>. He earned his Ph.D. in Civil Engineering from the University
-          of Delaware in 2011, following master’s degrees from the University of Delaware and Bu-Ali Sina
-          University, and a bachelor’s degree from K.N. Toosi University of Technology.
+          Safety, Reliability, and Risk</cite>. He earned his Ph.D. in Civil Engineering from the <a href={LINKS.udel}>University
+          of Delaware</a> in 2011, following master’s degrees from the University of Delaware and
+          <a href={LINKS.basu}>Bu-Ali Sina University</a>, and a bachelor’s degree from
+          <a href={LINKS.kntu}>K.N. Toosi University of Technology</a>.
         </p>
         <p>
           To learn more, visit our <a href={sitePath('/projects')}>Projects</a> and

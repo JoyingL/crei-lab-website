@@ -9,7 +9,7 @@ pages: "1139-1140"
 doi: 10.1126/science.aan0171
 url: "https://doi.org/10.1126/science.aan0171"
 topic: slopes/dams/levees
-topics: [slopes-dams-levees, extreme-events]
+topics: [slopes-dams-levees]
 type: journal
 listed: true
 highlight: false

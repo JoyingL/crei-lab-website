@@ -9,7 +9,7 @@ pages: "257-271"
 doi: 10.1080/17499518.2017.1293272
 url: "https://doi.org/10.1080/17499518.2017.1293272"
 topic: slopes/dams/levees
-topics: [slopes-dams-levees, extreme-events]
+topics: [slopes-dams-levees]
 type: journal
 listed: true
 highlight: false

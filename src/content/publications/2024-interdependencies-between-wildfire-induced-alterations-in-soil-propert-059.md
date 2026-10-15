@@ -9,7 +9,7 @@ pages: "e2023EA003498"
 doi: 10.1029/2023ea003498
 url: "https://doi.org/10.1029/2023ea003498"
 topic: wildfire
-topics: [extreme-events]
+topics: [unsaturated]
 type: journal
 listed: true
 highlight: false

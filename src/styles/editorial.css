@@ -324,6 +324,12 @@
 .year-block .pub-item:first-of-type { border-top: 0; }
 
 .topic-panel > h2 { margin: var(--space-5) 0 var(--space-2); font-size: 1.2rem; line-height: 1.35; }
+.topic-count { color: var(--color-text-muted); font-weight: 400; }
+/* Numbered so the size of each topic is visible at a glance (Joy, 2026-10-15). */
+.topic-list { margin: 0; padding-left: 2.25rem; }
+.topic-list > li { padding-left: 0.25rem; }
+.topic-list > li::marker { color: var(--color-text-muted); font-family: var(--font-ui); font-size: 0.8125rem; font-variant-numeric: tabular-nums; }
+.topic-list > li:first-child .pub-item { border-top: 0; }
 
 @media (max-width: 760px) {
   .pub-timeline { grid-template-columns: minmax(0, 1fr); }

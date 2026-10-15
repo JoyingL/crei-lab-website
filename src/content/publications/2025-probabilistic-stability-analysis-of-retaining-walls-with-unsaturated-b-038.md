@@ -9,7 +9,7 @@ pages: "04025295"
 doi: 10.1061/ijgnai.gmeng-11393
 url: "https://doi.org/10.1061/ijgnai.gmeng-11393"
 topic: unsaturated soils
-topics: [unsaturated]
+topics: [slopes-dams-levees]
 type: journal
 listed: true
 highlight: false

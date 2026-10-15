@@ -9,7 +9,7 @@ pages: "04025074"
 doi: 10.1061/ijgnai.gmeng-10667
 url: "https://doi.org/10.1061/ijgnai.gmeng-10667"
 topic: unsaturated soils
-topics: [multiphysics, unsaturated]
+topics: [unsaturated]
 type: journal
 listed: true
 highlight: false

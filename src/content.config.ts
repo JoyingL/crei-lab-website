@@ -29,6 +29,8 @@ const people = defineCollection({
     website: z.string().url().optional(),
     orcid: z.string().optional(),
     photo: z.string().optional(),
+    /** Research keywords shown as chips on the profile page. */
+    keywords: z.array(z.string()).default([]),
     order: z.number().default(99),
     highlight: z.boolean().default(false),
   }),

@@ -7,7 +7,7 @@ volume: "29"
 pages: "100214"
 doi: 10.1016/j.wasec.2026.100214
 url: "https://doi.org/10.1016/j.wasec.2026.100214"
-topics: [climate-adaptation, slopes-dams-levees]
+topics: [climate-resilient-equitable]
 type: journal
 listed: true
 highlight: true

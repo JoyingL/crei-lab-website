@@ -8,7 +8,7 @@ issue: "2"
 pages: "411-424"
 doi: 10.1007/s10706-015-9859-7
 url: "https://doi.org/10.1007/s10706-015-9859-7"
-topics: [multiphysics]
+topics: [slopes-dams-levees]
 type: journal
 listed: true
 highlight: false
