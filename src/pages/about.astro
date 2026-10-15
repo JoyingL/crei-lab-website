@@ -3,7 +3,7 @@ import { sitePath } from '../lib/paths';
 import { getCollection } from 'astro:content';
 import IconLinks from '../components/IconLinks.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { CEE_PROFILE_URL, FACULTY_PROFILE_URL, SCHOLAR_URL } from '../lib/site';
+import { CEE_PROFILE_URL, FACULTY_PROFILE_URL } from '../lib/site';
 
 // About = the PI (Joy, 2026-10-15). Lab overview moved to /lab; Teaching folded in here.
 // Bio text: Joy's draft (设计网站.md, 2026-10-15), fact-checked; mirrored in docs/about_pi_draft.md.
@@ -15,7 +15,7 @@ const doi = (id: string) => `https://doi.org/${id}`;
 
 <BaseLayout title="About" description="Farshid Vahedifard, Professor and Louis Berger Chair in Civil and Environmental Engineering at Tufts University.">
   <section class="section">
-    <div class="wrap" style="max-width: 56rem;">
+    <div class="wrap">
       {pi && (
         <div class="profile-head">
           {pi.data.photo && <img src={sitePath(pi.data.photo)} alt={pi.data.name} width="480" height="600" />}
@@ -27,6 +27,9 @@ const doi = (id: string) => `https://doi.org/${id}`;
               School of Engineering, Tufts University
             </p>
             <IconLinks name={pi.data.name} scholar={pi.data.scholar} website={CEE_PROFILE_URL} email={pi.data.email} />
+            <p class="profile-more">
+              <a href={FACULTY_PROFILE_URL}>Tufts Faculty Profile</a> (CV and full publication list)
+            </p>
           </div>
         </div>
       )}
@@ -78,10 +81,8 @@ const doi = (id: string) => `https://doi.org/${id}`;
           University, and a bachelor’s degree from K.N. Toosi University of Technology.
         </p>
         <p>
-          To learn more, visit our <a href={sitePath('/projects')}>Projects</a> and
-          <a href={sitePath('/publications')}>Publications</a> pages, the
-          <a href={FACULTY_PROFILE_URL}>Tufts faculty profile</a>, or
-          <a href={SCHOLAR_URL}>Google Scholar</a>.
+          Please visit our <a href={sitePath('/projects')}>Projects</a> and
+          <a href={sitePath('/publications')}>Publications</a> pages to learn more about our work.
         </p>
       </div>
 
@@ -111,8 +112,12 @@ const doi = (id: string) => `https://doi.org/${id}`;
 <style>
   /* Readable measure for the long-form bio; spacing between paragraphs rather than indents. */
   .pi-bio {
-    max-width: 34em;
     margin-top: var(--space-6);
+  }
+  .profile-more {
+    margin: var(--space-4) 0 0;
+    font-family: var(--font-ui);
+    font-size: 0.875rem;
   }
   .pi-bio p {
     margin: 0 0 1.15em;

@@ -88,48 +88,38 @@ export const RESEARCH_AREAS = [
 export const HIGHLIGHT_PUBS: readonly {
   label: string;
   pub: string;
+  /** First page of the article PDF (Zotero library), 900 px wide. */
   image: string;
-  imageAlt: string;
   width: number;
   height: number;
-  /** Optional news story about the paper, shown under the citation. */
-  coverage?: { label: string; url: string };
 }[] = [
   {
     label: 'Ageing Water Infrastructure',
     pub: '2026-to-fix-ageing-water-infrastructure-we-must-plan-for-an-ageing-population',
-    image: '/highlights/ageing-water-infrastructure.webp',
-    imageAlt: 'Figure relating ageing water infrastructure to demographic ageing.',
-    width: 1065,
-    height: 1345,
+    image: '/highlights/ageing-water-p1.webp',
+    width: 900,
+    height: 1196,
   },
   {
     label: 'Equitable Superfund Cleanup',
     pub: '2025-equitable-cleanup-of-superfund-sites-leaving-no-u-s-community-behind-030',
-    image: '/highlights/superfund-equitable-cleanup.webp',
-    imageAlt: 'Composition of communities near Superfund sites, grouped by cleanup status.',
-    width: 1200,
-    height: 1087,
+    image: '/highlights/superfund-p1.webp',
+    width: 900,
+    height: 1196,
   },
   {
     label: 'Extreme Wildfires',
     pub: '2026-accounting-for-extremes-in-modeling-the-size-and-likelihood-of-large-f-002',
-    image: '/highlights/large-fires-extremes.webp',
-    imageAlt: 'Figure from the study of large wildfire size and likelihood in the United States.',
-    width: 1200,
-    height: 1211,
-    coverage: {
-      label: 'Characterizing Extreme Wildfire Statistics to Improve Risk Assessment and Resilience (Tufts School of Engineering)',
-      url: 'https://engineering.tufts.edu/news-events/news/characterizing-extreme-wildfire-statistics-improve-risk-assessment-and-resilience',
-    },
+    image: '/highlights/large-fires-p1.webp',
+    width: 900,
+    height: 1181,
   },
   {
     label: 'Levee Seepage Calibration',
     pub: '2026-a-hybrid-model-calibration-framework-for-transient-seepage-prediction-in-levees',
-    image: '/highlights/levee-seepage-calibration.webp',
-    imageAlt: 'Figure from the hybrid model calibration framework for transient levee seepage.',
-    width: 1200,
-    height: 422,
+    image: '/highlights/levee-seepage-p1.webp',
+    width: 900,
+    height: 1200,
   },
 ];
 
@@ -144,7 +134,6 @@ export const PUB_TOPICS = [
   { key: 'slopes-dams-levees', label: 'Slopes, Dams & Levees', full: 'Slopes, dams, and levees' },
   { key: 'unsaturated', label: 'Unsaturated Soils', full: 'Unsaturated soil mechanics' },
   { key: 'multiphysics', label: 'Multi-physics', full: 'Multi-physics (e.g., hydro-mechanical, thermo-hydro-mechanical) processes in soils' },
-  { key: 'methods', label: 'Analytical & Numerical', full: 'Analytical and numerical methods in geotechnical engineering' },
 ] as const;
 
 // Blue lab-author highlighting is derived from the people collection: see lib/lab-authors.ts.

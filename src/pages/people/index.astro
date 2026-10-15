@@ -33,6 +33,9 @@ const bySeniority = (a: Person, b: Person) =>
 const people = await getCollection('people');
 const membersOf = (group: Group) => people.filter((p) => groupOf(p) === group).sort(bySeniority);
 const current = CURRENT.map((s) => ({ ...s, members: membersOf(s.group) })).filter((s) => s.members.length > 0);
+const isFaculty = (g: Group) => g === 'pi' || g === 'visiting';
+const faculty = current.filter((s) => isFaculty(s.group));
+const others = current.filter((s) => !isFaculty(s.group));
 const alumni = membersOf('alumni');
 const alumniGroups = ALUMNI.map((g) => ({
   ...g,
@@ -54,16 +57,25 @@ const featured = shots.length === 3 && shots.filter(isPortrait).length === 1;
 
       <section class="people-group" aria-labelledby="people-current">
         <h2 id="people-current">Current Members</h2>
-        {current.map((s) => (
+        {/* PI and visiting faculty share one row (Joy, 2026-10-15). */}
+        {faculty.length > 0 && (
+          <div class="people-faculty">
+            {faculty.map((s) => (
+              <section class="people-subgroup" aria-labelledby={`people-${s.group}`}>
+                <h3 id={`people-${s.group}`}>{s.heading}</h3>
+                <div class="faculty-cards">
+                  {s.members.map((person) => <PersonCard person={person} pi={s.group === 'pi'} />)}
+                </div>
+              </section>
+            ))}
+          </div>
+        )}
+        {others.map((s) => (
           <section class="people-subgroup" aria-labelledby={`people-${s.group}`}>
             <h3 id={`people-${s.group}`}>{s.heading}</h3>
-            {s.group === 'pi' ? (
-              s.members.map((person) => <PersonCard person={person} wide />)
-            ) : (
-              <div class="people-grid">
-                {s.members.map((person) => <PersonCard person={person} />)}
-              </div>
-            )}
+            <div class="people-grid">
+              {s.members.map((person) => <PersonCard person={person} />)}
+            </div>
           </section>
         ))}
       </section>
@@ -110,6 +122,25 @@ const featured = shots.length === 3 && shots.filter(isPortrait).length === 1;
 </BaseLayout>
 
 <style>
+  /* Faculty: PI and visiting side by side, each card the width of a grid card plus a bit. */
+  .people-faculty {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-5) var(--space-7);
+    margin-bottom: var(--space-5);
+  }
+
+  .people-faculty .people-subgroup + .people-subgroup { margin-top: 0; }
+
+  .faculty-cards {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 14rem;
+    gap: var(--space-5);
+  }
+
+  .people-faculty :global(.person) { max-width: none; }
+
   /* Photo-forward grid: fixed-width tracks so a lone member does not stretch across the row. */
   .people-grid {
     display: grid;
@@ -167,6 +198,7 @@ const featured = shots.length === 3 && shots.filter(isPortrait).length === 1;
    * Any other mix falls back to a masonry column flow that keeps each photo's own ratio.
    */
   .snapshot-mosaic {
+    max-width: 50rem;
     margin: 0;
     padding: 0;
     list-style: none;

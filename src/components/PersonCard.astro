@@ -6,60 +6,45 @@ import IconLinks from './IconLinks.astro';
 
 interface Props {
   person: CollectionEntry<'people'>;
-  /** Wide Principal Investigator row with bio (People page). */
-  wide?: boolean;
+  /** Principal Investigator: name links to About. */
+  pi?: boolean;
 }
 
-const { person, wide = false } = Astro.props;
-const { name, title, affiliation, email, scholar, linkedin, website, photo } = person.data;
+const { person, pi = false } = Astro.props;
+const { name, title, email, scholar, linkedin, website, photo } = person.data;
 const initials = initialsOf(name);
-// Only the PI file body is public bio text; other files keep sourcing notes as YAML comments.
-const bio = wide ? person.body?.trim() : undefined;
 // PI links to About; postdocs and Ph.D. students to their profile; others to an external page if any.
-const nameHref = wide ? sitePath('/about') : hasProfile(person) ? sitePath(profilePath(person)) : website;
+const nameHref = pi ? sitePath('/about') : hasProfile(person) ? sitePath(profilePath(person)) : website;
 ---
 
-{
-  wide ? (
-    <article class="pi-card">
-      {photo ? (
-        <img class="member-photo" src={sitePath(photo)} alt="" width="400" height="560" loading="lazy" />
-      ) : (
-        <div class="member-photo member-initials" aria-hidden="true">{initials}</div>
-      )}
-      <p class="pi-title">{title}</p>
-      <div>
-        <h4 class="member-name"><a href={nameHref}>{name}</a></h4>
-      </div>
-      <IconLinks name={name} scholar={scholar} website={website} linkedin={linkedin} email={email} />
-      {bio && <p class="pi-bio">{bio}</p>}
-    </article>
+<article class="person">
+  {photo ? (
+    // Decorative: the name follows as text, so screen readers do not hear it twice.
+    <img class="person-photo" src={sitePath(photo)} alt="" width="400" height="500" loading="lazy" />
   ) : (
-    <article class="person">
-      {photo ? (
-        // Decorative: the name follows as text, so screen readers do not hear it twice.
-        <img class="person-photo" src={sitePath(photo)} alt="" width="400" height="500" loading="lazy" />
-      ) : (
-        <div class="person-photo person-initials" aria-hidden="true">{initials}</div>
-      )}
-      <h4 class="person-name">{nameHref ? <a href={nameHref}>{name}</a> : name}</h4>
-      <p class="person-title">{title}</p>
-      <p class="person-affil">{affiliation}</p>
-      <IconLinks name={name} scholar={scholar} website={website} linkedin={linkedin} email={email} />
-    </article>
-  )
-}
+    <div class="person-photo person-initials" aria-hidden="true">{initials}</div>
+  )}
+  {/* Name, then small contact icons pushed to the right edge (Joy, 2026-10-15). */}
+  <div class="person-head">
+    <h4 class="person-name">{nameHref ? <a href={nameHref}>{name}</a> : name}</h4>
+    <IconLinks name={name} scholar={scholar} website={website} linkedin={linkedin} email={email} />
+  </div>
+  <p class="person-title">{title}</p>
+</article>
 
 <style>
+  /* Card is as wide as the photo, so the icons line up with its right edge. */
   .person {
     display: flex;
     flex-direction: column;
     min-width: 0;
+    max-width: 12rem;
   }
 
   .person-photo {
     display: block;
     width: 100%;
+    max-width: none;
     height: auto;
     aspect-ratio: 4 / 5;
     margin-bottom: 0.875rem;
@@ -79,6 +64,7 @@ const nameHref = wide ? sitePath('/about') : hasProfile(person) ? sitePath(profi
   }
 
   .person-name {
+    min-width: 0;
     margin: 0;
     font-family: var(--font-display);
     font-size: 1.125rem;
@@ -98,32 +84,34 @@ const nameHref = wide ? sitePath('/about') : hasProfile(person) ? sitePath(profi
     text-underline-offset: 0.18em;
   }
 
-  .person-title,
-  .person-affil {
-    margin: 0.2rem 0 0;
+  .person-head {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.25rem 0.5rem;
+  }
+
+  .person-title {
+    margin: 0.25rem 0 0;
     color: var(--color-text-muted);
     font-size: 0.875rem;
     line-height: 1.4;
   }
 
-  .person-affil {
-    margin-top: 0.1rem;
-    font-size: 0.8125rem;
-  }
-
   .person :global(.icon-links) {
-    margin-top: 0.625rem;
+    flex: none;
+    gap: 0.25rem;
   }
 
-  .pi-card .member-name a {
-    color: inherit;
-    text-decoration: none;
+  .person :global(.icon-links a) {
+    width: 1.375rem;
+    height: 1.375rem;
   }
 
-  .pi-card .member-name a:hover,
-  .pi-card .member-name a:focus-visible {
-    color: var(--color-link);
-    text-decoration: underline;
-    text-underline-offset: 0.18em;
+  .person :global(.icon-links svg) {
+    width: 0.75rem;
+    height: 0.75rem;
   }
+
 </style>
