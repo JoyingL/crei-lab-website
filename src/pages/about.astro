@@ -11,17 +11,14 @@ const pi = (await getCollection('people')).find((p) => p.data.role === 'pi');
 const courses = (await getCollection('teaching')).sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
 
 const doi = (id: string) => `https://doi.org/${id}`;
-// Institutions and bodies named in the bio link to their official sites (first mention only; Joy, 2026-10-15).
+// Institutions and bodies named in the bio link out (first mention only). Universities in the
+// career and education sentences stay unlinked (Joy, 2026-10-15).
 const LINKS = {
-  unu: 'https://unu.edu/inweh',
-  asce: 'https://www.asce.org',
+  unu: 'https://unu.edu/inweh/about/expert/farshid-vahedifard',
+  asce: 'https://www.asce.org/education-and-events/explore-education/instructors/farshid-vahedifard/',
   reportCard: 'https://infrastructurereportcard.org',
   normanMedal: 'https://www.asce.org/career-growth/awards-and-honors/norman-medal',
   wampanoag: 'https://wampanoagtribe-nsn.gov',
-  msstate: 'https://www.msstate.edu',
-  udel: 'https://www.udel.edu',
-  basu: 'https://en.basu.ac.ir',
-  kntu: 'https://en.kntu.ac.ir',
 };
 ---
 
@@ -54,7 +51,7 @@ const LINKS = {
           <a href={LINKS.unu}>United Nations University Institute for Water, Environment and Health</a>
           (UNU-INWEH). His work connects geotechnical engineering with climate adaptation and
           environmental justice, addressing how infrastructure and communities can better prepare for
-          changing environmental conditions and extreme events.
+          increasingly frequent extreme events.
         </p>
         <p>
           Farshid’s research spans the physical processes that govern infrastructure performance and the
@@ -84,15 +81,15 @@ const LINKS = {
           Farshid contributes to infrastructure policy through <a href={LINKS.asce}>ASCE</a>’s Committee on America’s
           Infrastructure, including work on the dams and levees chapters of the
           <a href={LINKS.reportCard}><cite>2025 Report Card for America’s Infrastructure</cite></a>. Before joining Tufts in 2023, he spent
-          more than a decade at <a href={LINKS.msstate}>Mississippi State University</a>, where he held the CEE Advisory Board
+          more than a decade at Mississippi State University, where he held the CEE Advisory Board
           Endowed Professorship. He is a Fellow of ASCE and received its <a href={LINKS.normanMedal}>Norman Medal</a> in 2022 for
           research on levee fragility under projected future flooding. He was also among the recipients
           of the 2026 ASCE State-of-the-Art of Civil Engineering Award for the book
           <cite>Effects of Climate Change on Life-Cycle Performance of Structures and Infrastructure Systems:
-          Safety, Reliability, and Risk</cite>. He earned his Ph.D. in Civil Engineering from the <a href={LINKS.udel}>University
-          of Delaware</a> in 2011, following master’s degrees from the University of Delaware and
-          <a href={LINKS.basu}>Bu-Ali Sina University</a>, and a bachelor’s degree from
-          <a href={LINKS.kntu}>K.N. Toosi University of Technology</a>.
+          Safety, Reliability, and Risk</cite>. He earned his Ph.D. in Civil Engineering from the University
+          of Delaware in 2011, following master’s degrees from the University of Delaware and
+          Bu-Ali Sina University, and a bachelor’s degree from
+          K.N. Toosi University of Technology.
         </p>
         <p>
           To learn more, visit our <a href={sitePath('/projects')}>Projects</a> and

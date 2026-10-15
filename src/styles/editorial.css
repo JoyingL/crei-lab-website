@@ -202,13 +202,16 @@
 
 .people-group + .people-group { margin-top: var(--space-6); }
 .people-group > h2 { margin-bottom: var(--space-4); font-size: clamp(1.5rem, 2.6vw, 1.9rem); }
-.people-subgroup + .people-subgroup { margin-top: var(--space-5); }
+.people-subgroup + .people-subgroup { margin-top: var(--space-6); }
 
+/* Role headings: display font in primary blue over a hairline, so each group reads as its own block (Joy, 2026-10-15). */
 .people-subgroup > h3 {
-  margin: 0 0 var(--space-3);
-  color: var(--color-secondary);
-  font-family: var(--font-ui);
-  font-size: 1.0625rem;
+  margin: 0 0 var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2vw, 1.45rem);
   font-weight: 600;
 }
 /* Footer: brand | Visit Us map | PI contact + Explore. */

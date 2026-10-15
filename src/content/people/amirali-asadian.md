@@ -2,7 +2,7 @@
 name: Amirali Asadian
 role: student
 group: phd
-title: Ph.D. Student
+title: Ph.D. Candidate
 affiliation: Civil and Environmental Engineering, Tufts University
 email: amirali.asadian@tufts.edu
 scholar: https://scholar.google.com/citations?user=iDXGtxUAAAAJ
