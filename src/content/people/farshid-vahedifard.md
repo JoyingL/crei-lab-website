@@ -11,4 +11,4 @@ order: 1
 highlight: true
 ---
 
-Farshid Vahedifard is Professor and Louis Berger Chair in Civil and Environmental Engineering at Tufts University and Lead for Resilient and Equitable Infrastructure at UNU-INWEH. His work connects geotechnical engineering with climate adaptation and environmental justice, addressing how infrastructure and communities can better prepare for changing environmental conditions and extreme events.
+Farshid Vahedifard is Professor and Louis Berger Chair in Civil and Environmental Engineering at Tufts University and Lead for Resilient and Equitable Infrastructure at UNU-INWEH. The research connects geotechnical engineering with climate adaptation and environmental justice, addressing how infrastructure and communities can better prepare for changing environmental conditions and extreme events.
