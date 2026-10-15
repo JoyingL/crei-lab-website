@@ -10,7 +10,7 @@ linkedin: https://www.linkedin.com/in/amirali-asadian/
 photo: /people/amirali-asadian.jpg
 since: 2023
 keywords: [Wildfire extremes, Extreme value theory, Soil desiccation cracking, Non-stationarity, Climate hazards]
-order: 1
+order: 2
 # Internal note (not rendered):
 # All fields from Amirali's member profile form (figures/_profiles/Lab Website Member Profile Collection.csv, 2026-10-15): joined Fall 2023; bio is the submitted text, unedited. Photo from Joy's screenshot in figures/_profiles, cropped 4:5.
 ---

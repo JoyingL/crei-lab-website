@@ -6,30 +6,27 @@ import snapshots from '../../data/snapshots.json';
 import { sitePath } from '../../lib/paths';
 import { groupOf, hasProfile, profilePath, ROLE_LABEL, type Group, type Person } from '../../lib/people';
 
-// Order per Joy (2026-10-15): PI, visiting faculty, postdocs, students, visiting researchers.
-const CURRENT: { group: Group; heading: string }[] = [
-  { group: 'pi', heading: 'Principal Investigator' },
-  { group: 'visiting', heading: 'Visiting Faculty' },
-  { group: 'postdoc', heading: 'Postdoctoral Associates' },
-  { group: 'phd', heading: 'Ph.D. Students' },
-  { group: 'masters', heading: 'Master’s Students' },
-  { group: 'visiting-researcher', heading: 'Visiting Researchers' },
-  { group: 'collaborator', heading: 'Collaborators' },
-];
+// Current members in one list, no role sub-headings (each card already shows the role; Joy, 2026-10-15).
+// Order: faculty row, then postdocs, Ph.D. candidates, Ph.D. students, master's, visiting researchers.
+const RANK: Record<string, number> = { postdoc: 0, phdCandidate: 1, phd: 2, masters: 3, 'visiting-researcher': 4, collaborator: 5 };
+const rankOf = (p: Person) => {
+  const g = groupOf(p);
+  return RANK[g === 'phd' && /candidate/i.test(p.data.title) ? 'phdCandidate' : g] ?? 9;
+};
 
 // Alumni in one list without sub-headings (Joy, 2026-10-15), ordered by former role; unknown role last.
 const ALUMNI_ORDER = ['postdoc', 'phd', 'masters', 'visiting-researcher', 'other'];
 
-// Longest-serving members first; `order` breaks ties and covers entries without a join year.
-const bySeniority = (a: Person, b: Person) =>
-  (a.data.since ?? 9999) - (b.data.since ?? 9999) || a.data.order - b.data.order;
+// Within a rank, `order` (set in each person's file) decides; join year breaks ties.
+const byOrder = (a: Person, b: Person) =>
+  a.data.order - b.data.order || (a.data.since ?? 9999) - (b.data.since ?? 9999);
 
 const people = await getCollection('people');
-const membersOf = (group: Group) => people.filter((p) => groupOf(p) === group).sort(bySeniority);
-const current = CURRENT.map((s) => ({ ...s, members: membersOf(s.group) })).filter((s) => s.members.length > 0);
-const isFaculty = (g: Group) => g === 'pi' || g === 'visiting';
-const faculty = current.filter((s) => isFaculty(s.group));
-const others = current.filter((s) => !isFaculty(s.group));
+const membersOf = (group: Group) => people.filter((p) => groupOf(p) === group).sort(byOrder);
+// Faculty row: PI first, then visiting faculty.
+const faculty = [...membersOf('pi'), ...membersOf('visiting')];
+const isCurrentMember = (p: Person) => !['pi', 'visiting', 'alumni'].includes(groupOf(p));
+const members = people.filter(isCurrentMember).sort((a, b) => rankOf(a) - rankOf(b) || byOrder(a, b));
 const alumni = membersOf('alumni');
 const alumniRank = (p: Person) => ALUMNI_ORDER.indexOf(p.data.formerGroup ?? 'other');
 const alumniList = [...alumni].sort((a, b) => alumniRank(a) - alumniRank(b));
@@ -47,27 +44,17 @@ const featured = shots.length === 3 && shots.filter(isPortrait).length === 1;
 
       <section class="people-group" aria-labelledby="people-current">
         <h2 id="people-current">Current Members</h2>
-        {/* PI and visiting faculty share one row (Joy, 2026-10-15). */}
+        {/* PI and visiting faculty share the first row (Joy, 2026-10-15). */}
         {faculty.length > 0 && (
           <div class="people-faculty">
-            {faculty.map((s) => (
-              <section class="people-subgroup" aria-labelledby={`people-${s.group}`}>
-                <h3 id={`people-${s.group}`}>{s.heading}</h3>
-                <div class="faculty-cards">
-                  {s.members.map((person) => <PersonCard person={person} pi={s.group === 'pi'} />)}
-                </div>
-              </section>
-            ))}
+            {faculty.map((person) => <PersonCard person={person} pi={groupOf(person) === 'pi'} />)}
           </div>
         )}
-        {others.map((s) => (
-          <section class="people-subgroup" aria-labelledby={`people-${s.group}`}>
-            <h3 id={`people-${s.group}`}>{s.heading}</h3>
-            <div class="people-grid">
-              {s.members.map((person) => <PersonCard person={person} />)}
-            </div>
-          </section>
-        ))}
+        {members.length > 0 && (
+          <div class="people-grid">
+            {members.map((person) => <PersonCard person={person} />)}
+          </div>
+        )}
       </section>
 
       {alumni.length > 0 && (
@@ -107,29 +94,20 @@ const featured = shots.length === 3 && shots.filter(isPortrait).length === 1;
 </BaseLayout>
 
 <style>
-  /* Faculty: PI and visiting side by side, each card the width of a grid card plus a bit. */
+  /* Faculty row: PI and visiting side by side, wider than member cards, with generous space between. */
   .people-faculty {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-5) var(--space-7);
-    margin-bottom: var(--space-5);
-  }
-
-  .people-faculty .people-subgroup + .people-subgroup { margin-top: 0; }
-
-  .faculty-cards {
     display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 14rem;
-    gap: var(--space-5);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 18rem));
+    gap: var(--space-6) var(--space-8);
+    margin-bottom: var(--space-7);
   }
 
   .people-faculty :global(.person) { max-width: none; }
 
-  /* Photo-forward grid: fixed-width tracks so a lone member does not stretch across the row. */
+  /* Photo-forward grid: cards fill their columns (4 across at full width), narrow gutters. */
   .people-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 12.5rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
     gap: var(--space-6) var(--space-5);
     margin-bottom: var(--space-5);
   }

@@ -18,3 +18,4 @@ dist/
 # Joy's draft copies and local tool settings stay out of the public repo.
 /src-Joyy/
 /.claude/
+/Q&A.md

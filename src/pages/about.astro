@@ -3,7 +3,7 @@ import { sitePath } from '../lib/paths';
 import { getCollection } from 'astro:content';
 import IconLinks from '../components/IconLinks.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { CEE_URL, FACULTY_PROFILE_URL, PI_LINKEDIN_URL, SOE_URL, TUFTS_URL } from '../lib/site';
+import { CEE_URL, FACULTY_PROFILE_URL, PI_LINKEDIN_URL, TUFTS_URL } from '../lib/site';
 
 // About = the PI (Joy, 2026-10-15). Lab overview moved to /lab; Teaching folded in here.
 // Bio text: Joy's draft (设计网站.md, 2026-10-15), fact-checked; mirrored in docs/about_pi_draft.md.
@@ -32,8 +32,8 @@ const LINKS = {
             <h1>{pi.data.name}, Ph.D.</h1>
             <p class="profile-lines">
               {pi.data.title}<br />
-              <a href={CEE_URL}>Department of Civil and Environmental Engineering</a><br />
-              <a href={SOE_URL}>School of Engineering</a>, <a href={TUFTS_URL}>Tufts University</a>
+              Department of Civil and Environmental Engineering<br />
+              School of Engineering, Tufts University
             </p>
             <IconLinks name={pi.data.name} scholar={pi.data.scholar} linkedin={PI_LINKEDIN_URL} email={pi.data.email} />
             <p class="profile-more">
