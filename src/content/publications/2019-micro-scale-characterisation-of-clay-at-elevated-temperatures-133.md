@@ -10,5 +10,6 @@ doi: 10.1680/jgele.19.00026
 url: "https://doi.org/10.1680/jgele.19.00026"
 topics: [multiphysics]
 type: journal
+listed: true
 highlight: false
 ---

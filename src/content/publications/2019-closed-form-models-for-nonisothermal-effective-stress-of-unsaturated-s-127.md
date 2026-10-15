@@ -9,7 +9,8 @@ pages: "04019053"
 doi: 10.1061/(asce)gt.1943-5606.0002094
 url: "https://doi.org/10.1061/(asce)gt.1943-5606.0002094"
 topic: unsaturated soils
-topics: [multiphysics, unsaturated, methods]
+topics: [multiphysics, unsaturated]
 type: journal
+listed: true
 highlight: false
 ---

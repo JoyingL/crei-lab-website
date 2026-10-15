@@ -6,7 +6,8 @@ venue: Geo-Congress 2013
 pages: "1158-1167"
 doi: 10.1061/9780784412787.117
 url: "https://doi.org/10.1061/9780784412787.117"
-topics: [methods]
+topics: [slopes-dams-levees]
 type: conference
+listed: true
 highlight: false
 ---

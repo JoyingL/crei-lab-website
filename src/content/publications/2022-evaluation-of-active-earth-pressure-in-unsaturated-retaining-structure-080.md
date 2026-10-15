@@ -7,7 +7,8 @@ pages: "395-405"
 doi: 10.1061/9780784484029.040
 url: "https://doi.org/10.1061/9780784484029.040"
 topic: unsaturated soils
-topics: [unsaturated, methods]
+topics: [unsaturated]
 type: conference
+listed: false
 highlight: false
 ---

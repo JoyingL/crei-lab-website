@@ -6,7 +6,8 @@ venue: Geotechnical Frontiers 2017
 pages: "353-362"
 doi: 10.1061/9780784480458.035
 url: "https://doi.org/10.1061/9780784480458.035"
-topics: [extreme-events, slopes-dams-levees, methods]
+topics: [slopes-dams-levees, extreme-events]
 type: conference
+listed: true
 highlight: false
 ---

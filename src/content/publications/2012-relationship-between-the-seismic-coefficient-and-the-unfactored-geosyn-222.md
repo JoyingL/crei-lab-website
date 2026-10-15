@@ -8,7 +8,8 @@ issue: "10"
 pages: "1209-1221"
 doi: 10.1061/(asce)gt.1943-5606.0000701
 url: "https://doi.org/10.1061/(asce)gt.1943-5606.0000701"
-topics: [methods]
+topics: [slopes-dams-levees]
 type: journal
+listed: true
 highlight: false
 ---

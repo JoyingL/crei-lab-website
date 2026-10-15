@@ -10,5 +10,6 @@ doi: 10.1680/jgrim.17.00059
 url: "https://doi.org/10.1680/jgrim.17.00059"
 topics: [resilient-equitable]
 type: journal
+listed: false
 highlight: false
 ---

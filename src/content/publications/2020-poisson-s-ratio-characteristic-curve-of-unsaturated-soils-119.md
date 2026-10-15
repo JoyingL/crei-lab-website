@@ -9,7 +9,8 @@ pages: "04020149"
 doi: 10.1061/(asce)gt.1943-5606.0002424
 url: "https://doi.org/10.1061/(asce)gt.1943-5606.0002424"
 topic: unsaturated soils
-topics: [unsaturated, methods]
+topics: [unsaturated]
 type: journal
+listed: true
 highlight: false
 ---

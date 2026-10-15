@@ -11,5 +11,6 @@ url: "https://doi.org/10.1061/ijgnai.gmeng-10667"
 topic: unsaturated soils
 topics: [multiphysics, unsaturated]
 type: journal
+listed: true
 highlight: false
 ---

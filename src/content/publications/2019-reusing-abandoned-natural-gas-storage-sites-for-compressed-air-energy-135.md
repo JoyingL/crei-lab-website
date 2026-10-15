@@ -10,5 +10,6 @@ doi: 10.1680/jenge.18.00035
 url: "https://doi.org/10.1680/jenge.18.00035"
 topics: [resilient-equitable]
 type: journal
+listed: false
 highlight: false
 ---

@@ -6,7 +6,8 @@ venue: Geo-Frontiers 2011
 pages: "3245-3254"
 doi: 10.1061/41165(397)332
 url: "https://doi.org/10.1061/41165(397)332"
-topics: [slopes-dams-levees, methods]
+topics: [slopes-dams-levees]
 type: conference
+listed: true
 highlight: false
 ---

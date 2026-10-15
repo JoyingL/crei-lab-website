@@ -8,7 +8,8 @@ pages: "1-22"
 doi: 10.1139/cgj-2026-0155
 url: "https://doi.org/10.1139/cgj-2026-0155"
 topic: climate
-topics: [climate-adaptation, multiphysics, methods]
+topics: [climate-adaptation, multiphysics, unsaturated]
 type: journal
+listed: true
 highlight: false
 ---

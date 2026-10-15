@@ -9,7 +9,8 @@ pages: "997-1005"
 doi: 10.1007/s10346-015-0610-5
 url: "https://doi.org/10.1007/s10346-015-0610-5"
 topic: slopes/dams/levees
-topics: [slopes-dams-levees, methods]
+topics: [slopes-dams-levees]
 type: journal
+listed: false
 highlight: false
 ---

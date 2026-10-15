@@ -9,7 +9,8 @@ pages: "1185-1188"
 doi: 10.1002/nag.950
 url: "https://doi.org/10.1002/nag.950"
 topic: slopes/dams/levees
-topics: [methods]
+topics: [slopes-dams-levees]
 type: journal
+listed: true
 highlight: false
 ---

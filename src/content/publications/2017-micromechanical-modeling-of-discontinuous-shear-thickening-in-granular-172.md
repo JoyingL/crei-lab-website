@@ -8,7 +8,8 @@ issue: "2"
 pages: "265-277"
 doi: 10.1122/1.4975027
 url: "https://doi.org/10.1122/1.4975027"
-topics: [multiphysics, methods]
+topics: [multiphysics]
 type: journal
+listed: false
 highlight: false
 ---

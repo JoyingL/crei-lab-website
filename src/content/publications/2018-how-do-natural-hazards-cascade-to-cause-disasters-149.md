@@ -8,7 +8,8 @@ issue: "7724"
 pages: "458-460"
 doi: 10.1038/d41586-018-06783-6
 url: "https://doi.org/10.1038/d41586-018-06783-6"
-topics: [extreme-events, resilient-equitable]
+topics: [extreme-events]
 type: journal
+listed: true
 highlight: false
 ---

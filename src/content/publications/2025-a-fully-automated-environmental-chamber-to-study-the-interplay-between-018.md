@@ -10,5 +10,6 @@ doi: 10.1520/GTJ20230388
 url: "https://doi.org/10.1520/GTJ20230388"
 topics: [multiphysics, unsaturated]
 type: journal
+listed: true
 highlight: false
 ---

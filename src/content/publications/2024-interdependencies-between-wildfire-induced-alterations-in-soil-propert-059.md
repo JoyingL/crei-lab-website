@@ -11,5 +11,6 @@ url: "https://doi.org/10.1029/2023ea003498"
 topic: wildfire
 topics: [extreme-events]
 type: journal
+listed: true
 highlight: false
 ---

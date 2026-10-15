@@ -8,7 +8,8 @@ issue: "7"
 pages: "1479-1490"
 doi: 10.1016/j.camwa.2016.02.020
 url: "https://doi.org/10.1016/j.camwa.2016.02.020"
-topics: [methods]
+topics: []
 type: journal
+listed: false
 highlight: false
 ---

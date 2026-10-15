@@ -8,7 +8,8 @@ issue: "3"
 pages: "04024001"
 doi: 10.1061/ijgnai.gmeng-9084
 url: "https://doi.org/10.1061/ijgnai.gmeng-9084"
-topics: [methods, unsaturated]
+topics: [unsaturated]
 type: journal
+listed: true
 highlight: false
 ---

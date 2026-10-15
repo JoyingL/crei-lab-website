@@ -9,7 +9,8 @@ pages: "2-12"
 doi: 10.1080/19375247.2017.1376369
 url: "https://doi.org/10.1080/19375247.2017.1376369"
 topic: slopes/dams/levees
-topics: [slopes-dams-levees, methods]
+topics: [slopes-dams-levees]
 type: journal
+listed: false
 highlight: false
 ---

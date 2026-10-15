@@ -10,5 +10,6 @@ doi: 10.1038/s44284-025-00296-w
 url: "https://doi.org/10.1038/s44284-025-00296-w"
 topics: [extreme-events, climate-adaptation]
 type: journal
+listed: true
 highlight: false
 ---

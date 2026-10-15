@@ -9,7 +9,8 @@ pages: "06024002"
 doi: 10.1061/jggefk.gteng-12069
 url: "https://doi.org/10.1061/jggefk.gteng-12069"
 topic: unsaturated soils
-topics: [methods, unsaturated]
+topics: [unsaturated]
 type: journal
+listed: false
 highlight: false
 ---

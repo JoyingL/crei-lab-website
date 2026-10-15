@@ -5,7 +5,8 @@ year: 2026
 venue: "Communications Earth & Environment"
 doi: 10.1038/s43247-026-03810-7
 url: "https://doi.org/10.1038/s43247-026-03810-7"
-topics: [unsaturated, extreme-events]
+topics: [unsaturated]
 type: journal
+listed: true
 highlight: false
 ---

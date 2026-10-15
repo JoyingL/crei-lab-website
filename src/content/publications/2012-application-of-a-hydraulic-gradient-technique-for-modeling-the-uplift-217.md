@@ -8,7 +8,8 @@ issue: "3"
 pages: "400-408"
 doi: 10.1520/gtj103850
 url: "https://doi.org/10.1520/gtj103850"
-topics: [methods]
+topics: []
 type: journal
+listed: false
 highlight: false
 ---

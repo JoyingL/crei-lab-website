@@ -10,5 +10,6 @@ url: "https://doi.org/10.1016/j.scs.2025.106624"
 topic: climate
 topics: [resilient-equitable, extreme-events]
 type: journal
+listed: true
 highlight: false
 ---

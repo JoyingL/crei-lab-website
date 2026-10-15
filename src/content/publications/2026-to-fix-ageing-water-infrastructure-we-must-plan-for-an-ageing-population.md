@@ -11,5 +11,6 @@ abstract: "Addressing ageing water infrastructure requires more than engineering
 url: "https://doi.org/10.1038/s44221-026-00711-z"
 topics: [resilient-equitable]
 type: journal
+listed: true
 highlight: true
 ---

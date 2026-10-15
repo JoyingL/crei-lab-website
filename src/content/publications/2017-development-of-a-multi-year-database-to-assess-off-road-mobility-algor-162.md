@@ -8,7 +8,8 @@ issue: "1"
 pages: "3"
 doi: 10.1504/ijvp.2017.081259
 url: "https://doi.org/10.1504/ijvp.2017.081259"
-topics: [methods]
+topics: []
 type: journal
+listed: true
 highlight: false
 ---

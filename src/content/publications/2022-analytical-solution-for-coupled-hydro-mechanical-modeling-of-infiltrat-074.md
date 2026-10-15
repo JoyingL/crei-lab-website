@@ -8,7 +8,8 @@ pages: "128198"
 doi: 10.1016/j.jhydrol.2022.128198
 url: "https://doi.org/10.1016/j.jhydrol.2022.128198"
 topic: unsaturated soils
-topics: [methods, unsaturated, multiphysics]
+topics: [unsaturated, multiphysics]
 type: journal
+listed: true
 highlight: false
 ---

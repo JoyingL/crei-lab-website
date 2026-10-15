@@ -10,5 +10,6 @@ doi: 10.1029/2023ef003619
 url: "https://doi.org/10.1029/2023ef003619"
 topics: [resilient-equitable, slopes-dams-levees]
 type: journal
+listed: true
 highlight: true
 ---

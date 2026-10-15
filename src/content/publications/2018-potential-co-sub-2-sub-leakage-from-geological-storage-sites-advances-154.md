@@ -10,5 +10,6 @@ doi: 10.1680/jenge.18.00041
 url: "https://doi.org/10.1680/jenge.18.00041"
 topics: [multiphysics]
 type: journal
+listed: true
 highlight: false
 ---

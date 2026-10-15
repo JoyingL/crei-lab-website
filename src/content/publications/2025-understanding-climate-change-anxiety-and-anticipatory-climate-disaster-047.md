@@ -11,5 +11,6 @@ url: "https://doi.org/10.1136/bmjment-2024-301331"
 topic: wildfire
 topics: [extreme-events, resilient-equitable]
 type: journal
+listed: false
 highlight: false
 ---

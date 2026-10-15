@@ -8,5 +8,6 @@ doi: 10.1061/9780784480168.052
 url: "https://doi.org/10.1061/9780784480168.052"
 topics: [resilient-equitable]
 type: conference
+listed: false
 highlight: false
 ---

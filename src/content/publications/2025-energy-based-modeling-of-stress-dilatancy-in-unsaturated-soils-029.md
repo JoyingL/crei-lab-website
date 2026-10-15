@@ -9,7 +9,8 @@ pages: "1383-1396"
 doi: 10.1002/nag.70173
 url: "https://doi.org/10.1002/nag.70173"
 topic: unsaturated soils
-topics: [methods, unsaturated]
+topics: [unsaturated]
 type: journal
+listed: true
 highlight: false
 ---

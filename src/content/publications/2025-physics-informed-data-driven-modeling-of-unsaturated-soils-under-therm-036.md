@@ -9,7 +9,8 @@ pages: "04025108"
 doi: 10.1061/jggefk.gteng-13239
 url: "https://doi.org/10.1061/jggefk.gteng-13239"
 topic: unsaturated soils
-topics: [multiphysics, unsaturated, methods]
+topics: [multiphysics, unsaturated]
 type: journal
+listed: false
 highlight: false
 ---

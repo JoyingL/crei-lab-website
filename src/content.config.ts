@@ -56,6 +56,8 @@ const publications = defineCollection({
     topic: z.string().optional(),
     type: z.enum(['journal', 'conference', 'report', 'other']).optional(),
     highlight: z.boolean().default(false),
+    /** Default Publications list (findings.md §7). */
+    listed: z.boolean().default(false),
   }),
 });
 

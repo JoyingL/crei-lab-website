@@ -6,5 +6,6 @@ venue: American Society of Civil Engineers
 url: "http://cedb.asce.org/CEDBsearch/record.jsp?dockey=0318550"
 topics: [resilient-equitable]
 type: journal
+listed: false
 highlight: false
 ---

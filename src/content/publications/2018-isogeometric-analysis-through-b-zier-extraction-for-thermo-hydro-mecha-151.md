@@ -7,7 +7,8 @@ volume: "107"
 pages: "176-188"
 doi: 10.1016/j.compgeo.2018.11.012
 url: "https://doi.org/10.1016/j.compgeo.2018.11.012"
-topics: [methods, multiphysics]
+topics: [multiphysics]
 type: journal
+listed: true
 highlight: false
 ---

@@ -11,5 +11,6 @@ abstract: "Superfund sites are recognized as the most contaminated locations acr
 url: "https://doi.org/10.1038/s41467-025-63607-8"
 topics: [resilient-equitable]
 type: journal
+listed: true
 highlight: true
 ---

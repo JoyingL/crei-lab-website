@@ -2,11 +2,12 @@
 import { getCollection } from 'astro:content';
 import PubItem from '../../components/PubItem.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { isListedPub } from '../../lib/pub-filter';
 import { PUB_TOPICS, SCHOLAR_URL } from '../../lib/site';
 
-const pubs = (await getCollection('publications')).sort(
-  (a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title),
-);
+const pubs = (await getCollection('publications'))
+  .filter(isListedPub)
+  .sort((a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title));
 const years = [...new Set(pubs.map((p) => p.data.year))];
 // A paper appears under every topic it carries (primary first in `topics`).
 const topics = PUB_TOPICS.map((t) => ({ ...t, pubs: pubs.filter((p) => p.data.topics.includes(t.key)) }));

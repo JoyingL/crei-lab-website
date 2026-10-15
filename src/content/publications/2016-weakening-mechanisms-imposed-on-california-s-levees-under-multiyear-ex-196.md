@@ -11,5 +11,6 @@ url: "https://doi.org/10.1007/s10584-016-1649-6"
 topic: drought
 topics: [extreme-events, slopes-dams-levees]
 type: journal
+listed: true
 highlight: false
 ---

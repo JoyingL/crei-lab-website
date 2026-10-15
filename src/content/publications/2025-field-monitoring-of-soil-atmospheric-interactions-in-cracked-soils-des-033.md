@@ -9,5 +9,6 @@ doi: 10.1016/j.enggeo.2025.108419
 url: "https://doi.org/10.1016/j.enggeo.2025.108419"
 topics: [multiphysics, unsaturated]
 type: journal
+listed: false
 highlight: false
 ---

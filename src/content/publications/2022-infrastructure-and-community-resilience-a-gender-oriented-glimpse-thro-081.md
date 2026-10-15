@@ -11,5 +11,6 @@ url: "https://doi.org/10.1061/geosek.0000410"
 topic: infrastructure
 topics: [resilient-equitable]
 type: journal
+listed: true
 highlight: false
 ---

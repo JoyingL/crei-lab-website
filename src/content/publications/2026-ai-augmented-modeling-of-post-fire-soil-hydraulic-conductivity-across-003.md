@@ -8,7 +8,8 @@ pages: "112486"
 doi: 10.1016/j.ress.2026.112486
 url: "https://doi.org/10.1016/j.ress.2026.112486"
 topic: wildfire
-topics: [extreme-events, methods, unsaturated]
+topics: [extreme-events, unsaturated]
 type: journal
+listed: true
 highlight: false
 ---

@@ -3,6 +3,7 @@ import { sitePath } from '../lib/paths';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { hasProfile, profilePath } from '../lib/people';
+import { isListedPub } from '../lib/pub-filter';
 import { RESEARCH_AREAS } from '../lib/site';
 
 const [people, publications, news, teaching] = await Promise.all([
@@ -33,7 +34,7 @@ const index = [
     kind: 'People',
     text: `${p.data.title} ${p.data.affiliation}`,
   })),
-  ...publications.map((p) => ({
+  ...publications.filter(isListedPub).map((p) => ({
     href: sitePath('/publications'),
     title: p.data.title,
     kind: 'Publications',

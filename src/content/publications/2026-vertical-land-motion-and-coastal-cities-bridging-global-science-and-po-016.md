@@ -10,5 +10,6 @@ doi: 10.1146/annurev-earth-032524-120845
 url: "https://doi.org/10.1146/annurev-earth-032524-120845"
 topics: [resilient-equitable, climate-adaptation]
 type: journal
+listed: false
 highlight: false
 ---
