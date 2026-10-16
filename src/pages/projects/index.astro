@@ -35,7 +35,7 @@ const list = [...projects].sort(
 
       {list.length > 0 && (
         <section class="projects-block" aria-labelledby="all-projects">
-          <h2 id="all-projects">Selected List of All Projects</h2>
+          <h2 id="all-projects">Selected List of Projects</h2>
           <ul class="project-list">
             {list.map((project) => {
               const { title, funder, year, status } = project.data;
